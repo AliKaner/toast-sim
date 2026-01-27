@@ -5,6 +5,7 @@ import FormItemWrapper from '../components/ui/FormItemWrapper.vue'
 import Button from '../components/ui/Button.vue'
 import TextArea from '../components/ui/TextArea.vue'
 import Segment from '../components/ui/Segment.vue'
+import Checkbox from '../components/ui/Checkbox.vue'
 
 
 const username = ref('')
@@ -31,6 +32,10 @@ const viewModeOptions = [
   { text: 'Hafta', value: 'week' },
   { text: 'Ay', value: 'month' }
 ]
+
+const termsAccepted = ref(false)
+const newsletter = ref(true)
+const disabledCheck = ref(false)
 </script>
 
 <template>
@@ -113,6 +118,38 @@ const viewModeOptions = [
             <Segment 
               v-model="segmentValue" 
               :options="segmentOptions" 
+              disabled
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>Checkbox Variants</h2>
+        
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>Default</h3>
+            <Checkbox 
+              v-model="termsAccepted" 
+              label="Şartları kabul ediyorum" 
+            />
+            <p class="demo-value">Değer: {{ termsAccepted }}</p>
+          </div>
+
+          <div class="demo-card">
+            <h3>Checked</h3>
+            <Checkbox 
+              v-model="newsletter" 
+              label="Bültene abone ol" 
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>Disabled</h3>
+            <Checkbox 
+              v-model="disabledCheck" 
+              label="Devre dışı checkbox" 
               disabled
             />
           </div>
