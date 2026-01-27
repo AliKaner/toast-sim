@@ -1,0 +1,116 @@
+<script setup lang="ts">
+import { computed, useId } from 'vue';
+
+interface Props {
+  modelValue?: string;
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  placeholder?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  error?: string;
+  ariaLabel?: string;
+  ariaDescribedBy?: string;
+  autocomplete?: string;
+  maxlength?: number;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
+  type: 'text',
+  placeholder: '',
+  disabled: false,
+  readonly: false,
+});
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void;
+  (e: 'focus', event: FocusEvent): void;
+  (e: 'blur', event: FocusEvent): void;
+}>();
+
+const inputId = useId();
+const errorId = computed(() => props.error ? `${inputId}-error` : undefined);
+
+const inputClasses = computed(() => ({
+  'base-input': true,
+  'base-input--error': !!props.error,
+  'base-input--disabled': props.disabled,
+}));
+
+const handleInput = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  emit('update:modelValue', target.value);
+};
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event);
+};
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event);
+};
+</script>
+
+<template>
+  <input
+    :id="inputId"
+    :type="type"
+    :value="modelValue"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    :readonly="readonly"
+    :class="inputClasses"
+    :aria-label="ariaLabel"
+    :aria-invalid="!!error"
+    :aria-describedby="error ? errorId : ariaDescribedBy"
+    :autocomplete="autocomplete"
+    :maxlength="maxlength"
+    @input="handleInput"
+    @focus="handleFocus"
+    @blur="handleBlur"
+  />
+</template>
+
+<style scoped>
+.base-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background-color: var(--color-input-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.base-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.base-input:hover:not(:disabled) {
+  border-color: var(--color-primary);
+}
+
+.base-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+.base-input--error {
+  border-color: var(--color-error);
+  background-color: var(--color-error-soft);
+}
+
+.base-input--error:focus {
+  box-shadow: 0 0 0 3px var(--color-error-soft);
+}
+
+.base-input--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--color-secondary);
+}
+</style>
