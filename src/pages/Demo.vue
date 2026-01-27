@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import FormItemWrapper from '../../components/ui/FormItemWrapper.vue'
-import BaseInput from '../../components/ui/BaseInput.vue'
+import BaseInput from '../components/ui/BaseInput.vue'
+import FormItemWrapper from '../components/ui/FormItemWrapper.vue'
+
 
 const username = ref('')
 const email = ref('')
@@ -20,7 +21,6 @@ const errorEmail = ref('test@')
     </header>
 
     <main class="demo-content">
-      <!-- BaseInput Variants -->
       <section class="demo-section">
         <h2>BaseInput Variants</h2>
         
@@ -80,7 +80,6 @@ const errorEmail = ref('test@')
         </div>
       </section>
 
-      <!-- FormItemWrapper Variants -->
       <section class="demo-section">
         <h2>FormItemWrapper Variants</h2>
         
@@ -115,7 +114,6 @@ const errorEmail = ref('test@')
         </div>
       </section>
 
-      <!-- Full Form Example -->
       <section class="demo-section">
         <h2>Tam Form Örneği</h2>
         

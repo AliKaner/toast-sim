@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import DemoPage from '../pages/Demo.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -6,7 +7,7 @@ const router = createRouter({
     {
       path: '/demo',
       name: 'demo',
-      component: () => import('../pages/demo/DemoPage.vue'),
+      component: DemoPage,
     },
   ],
 })
