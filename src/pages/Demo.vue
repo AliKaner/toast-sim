@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import BaseInput from '../components/ui/BaseInput.vue'
 import FormItemWrapper from '../components/ui/FormItemWrapper.vue'
 import Button from '../components/ui/Button.vue'
+import TextArea from '../components/ui/TextArea.vue'
 
 
 const username = ref('')
@@ -12,6 +13,9 @@ const phone = ref('')
 const search = ref('')
 const disabledValue = ref('Bu alan devre dışı')
 const errorEmail = ref('test@')
+const bio = ref('')
+const disabledBio = ref('Bu alan devre dışı')
+const errorBio = ref('Çok kısa metin')
 </script>
 
 <template>
@@ -121,6 +125,63 @@ const errorEmail = ref('test@')
               v-model="errorEmail" 
               type="email"
               error="Geçerli bir e-posta giriniz" 
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>TextArea Variants</h2>
+        
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>Default</h3>
+            <TextArea 
+              v-model="bio" 
+              placeholder="Mesajınızı yazınız..." 
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>Custom Rows</h3>
+            <TextArea 
+              v-model="bio" 
+              placeholder="6 satır yüksekliğinde..." 
+              :rows="6"
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>No Resize</h3>
+            <TextArea 
+              v-model="bio" 
+              placeholder="Boyutu değiştirilemez..." 
+              resize="none"
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>Disabled</h3>
+            <TextArea 
+              v-model="disabledBio" 
+              disabled 
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>With Error</h3>
+            <TextArea 
+              v-model="errorBio" 
+              error="En az 10 karakter girilmelidir" 
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>With Max Length</h3>
+            <TextArea 
+              v-model="bio" 
+              placeholder="Maksimum 100 karakter..." 
+              :maxlength="100"
             />
           </div>
         </div>

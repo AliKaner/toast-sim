@@ -1,0 +1,122 @@
+<script setup lang="ts">
+import { computed, useId } from 'vue';
+
+interface Props {
+  modelValue?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  error?: string;
+  ariaLabel?: string;
+  ariaDescribedBy?: string;
+  maxlength?: number;
+  rows?: number;
+  resize?: 'none' | 'vertical' | 'horizontal' | 'both';
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
+  placeholder: '',
+  disabled: false,
+  readonly: false,
+  rows: 4,
+  resize: 'vertical',
+});
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void;
+  (e: 'focus', event: FocusEvent): void;
+  (e: 'blur', event: FocusEvent): void;
+}>();
+
+const textareaId = useId();
+const errorId = computed(() => props.error ? `${textareaId}-error` : undefined);
+
+const textareaClasses = computed(() => ({
+  'base-textarea': true,
+  'base-textarea--error': !!props.error,
+  'base-textarea--disabled': props.disabled,
+}));
+
+const textareaStyle = computed(() => ({
+  resize: props.resize,
+}));
+
+const handleInput = (event: Event) => {
+  const target = event.target as HTMLTextAreaElement;
+  emit('update:modelValue', target.value);
+};
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event);
+};
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event);
+};
+</script>
+
+<template>
+  <textarea
+    :id="textareaId"
+    :value="modelValue"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    :readonly="readonly"
+    :class="textareaClasses"
+    :style="textareaStyle"
+    :aria-label="ariaLabel"
+    :aria-invalid="!!error"
+    :aria-describedby="error ? errorId : ariaDescribedBy"
+    :maxlength="maxlength"
+    :rows="rows"
+    @input="handleInput"
+    @focus="handleFocus"
+    @blur="handleBlur"
+  />
+</template>
+
+<style scoped>
+.base-textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background-color: var(--color-input-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  outline: none;
+  transition: all 0.2s ease;
+  min-height: 100px;
+}
+
+.base-textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.base-textarea:hover:not(:disabled) {
+  border-color: var(--color-primary);
+}
+
+.base-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+.base-textarea--error {
+  border-color: var(--color-error);
+  background-color: var(--color-error-soft);
+}
+
+.base-textarea--error:focus {
+  box-shadow: 0 0 0 3px var(--color-error-soft);
+}
+
+.base-textarea--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--color-secondary);
+}
+</style>
