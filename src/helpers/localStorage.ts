@@ -1,7 +1,7 @@
-export function storage<T = unknown>(key: string) {
+export function localStorage<T = unknown>(key: string) {
   const get = (): T | null => {
     try {
-      const item = localStorage.getItem(key);
+      const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : null;
     } catch (error) {
       console.error(`Error getting item from localStorage [${key}]:`, error);
@@ -11,7 +11,7 @@ export function storage<T = unknown>(key: string) {
 
   const set = (value: T): void => {
     try {
-      localStorage.setItem(key, JSON.stringify(value));
+      window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       console.error(`Error setting item in localStorage [${key}]:`, error);
     }
@@ -19,7 +19,7 @@ export function storage<T = unknown>(key: string) {
 
   const remove = (): void => {
     try {
-      localStorage.removeItem(key);
+      window.localStorage.removeItem(key);
     } catch (error) {
       console.error(`Error removing item from localStorage [${key}]:`, error);
     }
@@ -27,14 +27,14 @@ export function storage<T = unknown>(key: string) {
 
   const clear = (): void => {
     try {
-      localStorage.clear();
+      window.localStorage.clear();
     } catch (error) {
       console.error('Error clearing localStorage:', error);
     }
   };
 
   const exists = (): boolean => {
-    return localStorage.getItem(key) !== null;
+    return window.localStorage.getItem(key) !== null;
   };
 
   const update = (updater: (currentValue: T | null) => T): void => {
