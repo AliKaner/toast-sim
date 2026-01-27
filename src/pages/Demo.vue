@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import BaseInput from '../components/ui/BaseInput.vue'
 import FormItemWrapper from '../components/ui/FormItemWrapper.vue'
+import Button from '../components/ui/Button.vue'
 
 
 const username = ref('')
@@ -21,6 +22,51 @@ const errorEmail = ref('test@')
     </header>
 
     <main class="demo-content">
+      <section class="demo-section">
+        <h2>Button Variants</h2>
+        
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>Full Width</h3>
+            <Button 
+              id="btn-full-width" 
+              name="fullWidthButton" 
+              text="Tam Genişlik Button"
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>120px Container</h3>
+            <div class="button-container-120">
+              <Button 
+                id="btn-120px" 
+                name="smallContainerButton" 
+                text="120px"
+              />
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <h3>Loading</h3>
+            <Button 
+              id="btn-loading" 
+              name="loadingButton" 
+              :loading="true"
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>Disabled</h3>
+            <Button 
+              id="btn-disabled" 
+              name="disabledButton" 
+              text="Devre Dışı"
+              :disabled="true"
+            />
+          </div>
+        </div>
+      </section>
+
       <section class="demo-section">
         <h2>BaseInput Variants</h2>
         
@@ -233,5 +279,9 @@ const errorEmail = ref('test@')
 
 .demo-button:active {
   transform: translateY(0);
+}
+
+.button-container-120 {
+  width: 120px;
 }
 </style>
