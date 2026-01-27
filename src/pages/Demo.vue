@@ -4,6 +4,7 @@ import BaseInput from '../components/ui/BaseInput.vue'
 import FormItemWrapper from '../components/ui/FormItemWrapper.vue'
 import Button from '../components/ui/Button.vue'
 import TextArea from '../components/ui/TextArea.vue'
+import Segment from '../components/ui/Segment.vue'
 
 
 const username = ref('')
@@ -16,6 +17,20 @@ const errorEmail = ref('test@')
 const bio = ref('')
 const disabledBio = ref('Bu alan devre dışı')
 const errorBio = ref('Çok kısa metin')
+
+const segmentValue = ref('list')
+const segmentOptions = [
+  { text: 'Liste', icon: '📋', value: 'list' },
+  { text: 'Kart', icon: '🃏', value: 'card' },
+  { text: 'Tablo', icon: '📊', value: 'table' }
+]
+
+const viewModeValue = ref('day')
+const viewModeOptions = [
+  { text: 'Gün', value: 'day' },
+  { text: 'Hafta', value: 'week' },
+  { text: 'Ay', value: 'month' }
+]
 </script>
 
 <template>
@@ -66,6 +81,39 @@ const errorBio = ref('Çok kısa metin')
               name="disabledButton" 
               text="Devre Dışı"
               :disabled="true"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>Segment Variants</h2>
+        
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>With Icons</h3>
+            <Segment 
+              v-model="segmentValue" 
+              :options="segmentOptions" 
+            />
+            <p class="demo-value">Seçili: {{ segmentValue }}</p>
+          </div>
+
+          <div class="demo-card">
+            <h3>Without Icons</h3>
+            <Segment 
+              v-model="viewModeValue" 
+              :options="viewModeOptions" 
+            />
+            <p class="demo-value">Seçili: {{ viewModeValue }}</p>
+          </div>
+
+          <div class="demo-card">
+            <h3>Disabled</h3>
+            <Segment 
+              v-model="segmentValue" 
+              :options="segmentOptions" 
+              disabled
             />
           </div>
         </div>
@@ -344,5 +392,11 @@ const errorBio = ref('Çok kısa metin')
 
 .button-container-120 {
   width: 120px;
+}
+
+.demo-value {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
 }
 </style>
