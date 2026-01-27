@@ -6,6 +6,9 @@ import Button from '../components/ui/Button.vue'
 import TextArea from '../components/ui/TextArea.vue'
 import Segment from '../components/ui/Segment.vue'
 import Checkbox from '../components/ui/Checkbox.vue'
+import Header from '../components/layout/Header.vue'
+import Body from '../components/layout/Body.vue'
+import Footer from '../components/layout/Footer.vue'
 
 
 const username = ref('')
@@ -40,12 +43,21 @@ const disabledCheck = ref(false)
 
 <template>
   <div class="demo-page">
-    <header class="demo-header">
-      <h1>🎨 Component Demo</h1>
-      <p>BaseInput ve FormItemWrapper bileşenlerinin farklı durumları</p>
-    </header>
+    <Header>
+      <h1 class="logo">🚀 Insider JS Case</h1>
+      <nav class="nav-links">
+        <router-link to="/" class="nav-link">Anasayfa</router-link>
+        <router-link to="/demo" class="nav-link">Demo</router-link>
+      </nav>
+    </Header>
 
-    <main class="demo-content">
+    <Body>
+      <div class="demo-header-content">
+        <h1>🎨 Component Demo</h1>
+        <p>BaseInput ve FormItemWrapper bileşenlerinin farklı durumları</p>
+      </div>
+
+      <div class="demo-content">
       <section class="demo-section">
         <h2>Button Variants</h2>
         
@@ -329,22 +341,53 @@ const disabledCheck = ref(false)
           <button class="demo-button">Kaydet</button>
         </div>
       </section>
-    </main>
+      </div>
+    </Body>
+
+    <Footer>
+      <p>© 2026 Insider JS Case. Tüm hakları saklıdır.</p>
+    </Footer>
   </div>
 </template>
 
 <style scoped>
 .demo-page {
   min-height: 100vh;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.demo-header {
+.logo {
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.router-link-active {
+  color: var(--color-primary);
+}
+
+.demo-header-content {
   text-align: center;
   margin-bottom: 3rem;
 }
 
-.demo-header h1 {
+.demo-header-content h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   background: linear-gradient(135deg, var(--color-primary) 0%, #34d399 100%);
@@ -353,7 +396,7 @@ const disabledCheck = ref(false)
   background-clip: text;
 }
 
-.demo-header p {
+.demo-header-content p {
   color: var(--color-text-muted);
   font-size: 1.1rem;
 }
