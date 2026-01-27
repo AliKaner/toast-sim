@@ -6,6 +6,8 @@ import Button from '../components/ui/Button.vue'
 import TextArea from '../components/ui/TextArea.vue'
 import Segment from '../components/ui/Segment.vue'
 import Checkbox from '../components/ui/Checkbox.vue'
+import ProgresSelect from '../components/ui/ProgresSelect.vue'
+import Toggle from '../components/ui/Toggle.vue'
 import Header from '../components/layout/Header.vue'
 import Body from '../components/layout/Body.vue'
 import Footer from '../components/layout/Footer.vue'
@@ -39,6 +41,12 @@ const viewModeOptions = [
 const termsAccepted = ref(false)
 const newsletter = ref(true)
 const disabledCheck = ref(false)
+
+const progressValue = ref(25)
+const progressValue2 = ref(50)
+const progressDisabled = ref(30)
+
+const toggleValue = ref(false)
 </script>
 
 <template>
@@ -99,6 +107,55 @@ const disabledCheck = ref(false)
               text="Devre Dışı"
               :disabled="true"
             />
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>ProgresSelect Variants</h2>
+        
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>Default (0-100)</h3>
+            <ProgresSelect 
+              v-model="progressValue" 
+              :min="0" 
+              :max="100" 
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>Custom Range (0-50)</h3>
+            <ProgresSelect 
+              v-model="progressValue2" 
+              :min="0" 
+              :max="50" 
+            />
+          </div>
+
+          <div class="demo-card">
+            <h3>Disabled</h3>
+            <ProgresSelect 
+              v-model="progressDisabled" 
+              :min="0" 
+              :max="100" 
+              disabled
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>Toggle</h2>
+        
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>Default</h3>
+            <Toggle 
+              v-model="toggleValue" 
+              label="Bildirimleri aç"
+            />
+            <p class="demo-value">Durum: {{ toggleValue ? 'Açık' : 'Kapalı' }}</p>
           </div>
         </div>
       </section>
