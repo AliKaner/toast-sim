@@ -8,6 +8,7 @@ import Segment from '../components/ui/Segment.vue'
 import Checkbox from '../components/ui/Checkbox.vue'
 import ProgresSelect from '../components/ui/ProgresSelect.vue'
 import Toggle from '../components/ui/Toggle.vue'
+import ColorPicker from '../components/ui/ColorPicker.vue'
 import Header from '../components/layout/Header.vue'
 import Body from '../components/layout/Body.vue'
 import Footer from '../components/layout/Footer.vue'
@@ -47,6 +48,7 @@ const progressValue2 = ref(50)
 const progressDisabled = ref(30)
 
 const toggleValue = ref(false)
+const colorValue = ref('42b883')
 </script>
 
 <template>
@@ -156,6 +158,18 @@ const toggleValue = ref(false)
               label="Bildirimleri aç"
             />
             <p class="demo-value">Durum: {{ toggleValue ? 'Açık' : 'Kapalı' }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>ColorPicker</h2>
+        
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>Default</h3>
+            <ColorPicker v-model="colorValue" />
+            <p class="demo-value">Renk: #{{ colorValue }}</p>
           </div>
         </div>
       </section>
