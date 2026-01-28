@@ -10,10 +10,13 @@ import ProgresSelect from '../components/ui/ProgresSelect.vue'
 import Toggle from '../components/ui/Toggle.vue'
 import ColorPicker from '../components/ui/ColorPicker.vue'
 import PresetCard from '../components/ui/PresetCard.vue'
+import ToastPreview from '../components/ui/ToastPreview.vue'
+import ToastList from '../components/ui/ToastList.vue'
 import Header from '../components/layout/Header.vue'
 import Body from '../components/layout/Body.vue'
 import Footer from '../components/layout/Footer.vue'
-import type { Preset } from '../types/notification'
+import { useToastStore } from '../composables/useToastStore'
+import type { Preset, NotificationConfig } from '../types/notification'
 
 
 const username = ref('')
@@ -51,6 +54,28 @@ const progressDisabled = ref(30)
 
 const toggleValue = ref(false)
 const colorValue = ref('42b883')
+
+// Toast Preview Config
+const toastStore = useToastStore()
+const toastConfig = ref<NotificationConfig>({
+  id: 'preview-toast',
+  type: 'success',
+  title: 'Success!',
+  message: 'Your changes have been saved successfully.',
+  duration: 5000,
+  position: 'top-right',
+  backgroundColor: '#22c55e',
+  textColor: '#ffffff',
+  showIcon: true,
+  showCloseButton: true
+})
+
+function handleShowNotification() {
+  toastStore.addNotification({
+    ...toastConfig.value,
+    id: `toast-${Date.now()}`
+  })
+}
 
 const mockPresets = ref<Preset[]>([
   {
@@ -114,6 +139,12 @@ function handleDeletePreset(preset: Preset) {
 
 <template>
   <div class="demo-page">
+    <!-- Toast containers for all positions -->
+    <ToastList position="top-right" />
+    <ToastList position="top-left" />
+    <ToastList position="bottom-right" />
+    <ToastList position="bottom-left" />
+    
     <Header>
       <h1 class="logo">🚀 Insider JS Case</h1>
       <nav class="nav-links">
@@ -129,6 +160,17 @@ function handleDeletePreset(preset: Preset) {
       </div>
 
       <div class="demo-content">
+      <section class="demo-section">
+        <h2>Toast Preview</h2>
+        
+        <div class="demo-card toast-preview-card">
+          <ToastPreview 
+            :config="toastConfig"
+            @showNotification="handleShowNotification"
+          />
+        </div>
+      </section>
+
       <section class="demo-section">
         <h2>Button Variants</h2>
         
@@ -637,5 +679,9 @@ function handleDeletePreset(preset: Preset) {
   border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
+}
+
+.toast-preview-card {
+  max-width: 500px;
 }
 </style>

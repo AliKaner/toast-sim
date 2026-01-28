@@ -17,6 +17,7 @@ export interface NotificationConfig {
   textColor: string
   showIcon: boolean
   showCloseButton: boolean
+  customIcon?: string // Optional custom icon
 }
 
 export interface Preset {
