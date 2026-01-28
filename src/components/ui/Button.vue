@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface ButtonProps {
-    id: string;
-    name: string;
+    id?: string;
+    name?: string;
     ariaLabel?: string;
     testId?: string;
     type?: 'button' | 'submit' | 'reset';

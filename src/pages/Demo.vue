@@ -9,9 +9,11 @@ import Checkbox from '../components/ui/Checkbox.vue'
 import ProgresSelect from '../components/ui/ProgresSelect.vue'
 import Toggle from '../components/ui/Toggle.vue'
 import ColorPicker from '../components/ui/ColorPicker.vue'
+import PresetCard from '../components/ui/PresetCard.vue'
 import Header from '../components/layout/Header.vue'
 import Body from '../components/layout/Body.vue'
 import Footer from '../components/layout/Footer.vue'
+import type { Preset } from '../types/notification'
 
 
 const username = ref('')
@@ -49,6 +51,65 @@ const progressDisabled = ref(30)
 
 const toggleValue = ref(false)
 const colorValue = ref('42b883')
+
+const mockPresets = ref<Preset[]>([
+  {
+    id: '1',
+    name: 'Success Notification',
+    config: {
+      type: 'success',
+      title: 'İşlem Başarılı',
+      message: 'Kayıt başarıyla oluşturuldu.',
+      duration: 5000,
+      position: 'top-right',
+      backgroundColor: '#22c55e',
+      textColor: '#ffffff',
+      showIcon: true,
+      showCloseButton: true
+    },
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: '2',
+    name: 'Error Alert',
+    config: {
+      type: 'error',
+      title: 'Hata Oluştu',
+      message: 'Bir sorun oluştu, lütfen tekrar deneyin.',
+      duration: 0,
+      position: 'top-left',
+      backgroundColor: '#ef4444',
+      textColor: '#ffffff',
+      showIcon: true,
+      showCloseButton: true
+    },
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: '3',
+    name: 'Warning Message',
+    config: {
+      type: 'warning',
+      title: 'Dikkat',
+      message: 'Oturum süreniz dolmak üzere.',
+      duration: 10000,
+      position: 'bottom-right',
+      backgroundColor: '#f59e0b',
+      textColor: '#ffffff',
+      showIcon: true,
+      showCloseButton: false
+    },
+    createdAt: new Date().toISOString()
+  }
+])
+
+function handleLoadPreset(preset: Preset) {
+  console.log('Loaded preset:', preset)
+}
+
+function handleDeletePreset(preset: Preset) {
+  mockPresets.value = mockPresets.value.filter(p => p.id !== preset.id)
+}
 </script>
 
 <template>
@@ -158,6 +219,23 @@ const colorValue = ref('42b883')
               label="Bildirimleri aç"
             />
             <p class="demo-value">Durum: {{ toggleValue ? 'Açık' : 'Kapalı' }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2>PresetCard</h2>
+        
+        <div class="demo-card preset-list-container">
+          <h3>Preset Listesi</h3>
+          <div class="preset-list">
+            <PresetCard
+              v-for="preset in mockPresets"
+              :key="preset.id"
+              :preset="preset"
+              @load="handleLoadPreset"
+              @delete="handleDeletePreset"
+            />
           </div>
         </div>
       </section>
@@ -549,5 +627,15 @@ const colorValue = ref('42b883')
   margin-top: 0.75rem;
   font-size: 0.875rem;
   color: var(--color-text-muted);
+}
+
+.preset-list-container {
+  max-width: 500px;
+}
+
+.preset-list {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
 }
 </style>
