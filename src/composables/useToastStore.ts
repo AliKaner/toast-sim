@@ -8,8 +8,10 @@ export const useToastStore = defineStore('toast', () => {
   const notificationsByPosition = computed(() => {
     const grouped: Record<Position, ActiveNotification[]> = {
       'top-left': [],
+      'top-center': [],
       'top-right': [],
       'bottom-left': [],
+      'bottom-center': [],
       'bottom-right': []
     }
 
@@ -28,7 +30,6 @@ export const useToastStore = defineStore('toast', () => {
 
     notifications.value.push(activeNotification)
 
-    // Auto-remove if not persistent (duration > 0)
     if (config.duration > 0) {
       setTimeout(() => {
         removeNotification(config.id)
