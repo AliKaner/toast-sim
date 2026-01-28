@@ -1,23 +1,30 @@
+export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search'
+
 export type NotificationType = 'success' | 'error' | 'warning' | 'info'
 
 export type Position =
   | 'top-left'
+  | 'top-center'
   | 'top-right'
   | 'bottom-left'
+  | 'bottom-center'
   | 'bottom-right'
+
+export type AnimationType = 'fade' | 'slide' | 'bounce'
 
 export interface NotificationConfig {
   id: string
   type: NotificationType
   title: string
   message: string
-  duration: number // in milliseconds, 0 = persistent
+  duration: number
   position: Position
   backgroundColor: string
   textColor: string
   showIcon: boolean
   showCloseButton: boolean
-  customIcon?: string // Optional custom icon
+  animation: AnimationType
+  customIcon?: string
 }
 
 export interface Preset {
@@ -29,4 +36,20 @@ export interface Preset {
 
 export interface ActiveNotification extends NotificationConfig {
   createdAt: number
+}
+
+export interface FormState {
+  type: NotificationType
+  title: string
+  message: string
+  duration: number
+  isPersistent: boolean
+  position: Position
+  backgroundColor: string
+  textColor: string
+  showIcon: boolean
+  showCloseButton: boolean
+  animation: AnimationType
+  customIcon?: string
+  presetName: string
 }
