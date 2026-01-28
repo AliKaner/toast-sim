@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, useId } from 'vue';
+import type { InputType } from '../../types/notification';
 
 interface Props {
   modelValue?: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  type?: InputType;
   placeholder?: string;
   disabled?: boolean;
   readonly?: boolean;
@@ -74,12 +75,13 @@ const handleBlur = (event: FocusEvent) => {
 <style scoped>
 .base-input {
   width: 100%;
-  padding: 0.875rem 1rem;
-  font-size: 1rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
   font-family: inherit;
   color: var(--color-text);
   background-color: var(--color-input-bg);
-  border: 2px solid var(--color-border);
+  border: 0.0625rem solid var(--color-border);
   border-radius: var(--radius-lg);
   outline: none;
   transition: all 0.2s ease;
@@ -96,7 +98,7 @@ const handleBlur = (event: FocusEvent) => {
 
 .base-input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-soft);
+  box-shadow: 0 0 0 0.1875rem var(--color-primary-soft);
 }
 
 .base-input--error {
@@ -105,7 +107,7 @@ const handleBlur = (event: FocusEvent) => {
 }
 
 .base-input--error:focus {
-  box-shadow: 0 0 0 3px var(--color-error-soft);
+  box-shadow: 0 0 0 0.1875rem var(--color-error-soft);
 }
 
 .base-input--disabled {
