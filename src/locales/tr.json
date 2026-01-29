@@ -38,7 +38,8 @@
         "read_fail": "Dosya okunamadı.",
         "invalid_file": "Lütfen geçerli bir SVG dosyası yükleyin."
       }
-    }
+    },
+    "cleared_toast": "Form başarıyla temizlendi."
   },
   "preview": {
     "card_title": "Önizleme",
@@ -47,6 +48,8 @@
     "no_presets": "Henüz kayıtlı önayar yok",
     "no_presets_filter": "Bu filtre için kayıt bulunamadı",
     "save": "Kaydet",
+    "saved_toast": "Ön ayar başarıyla kaydedildi!",
+    "copied_toast": "Kod panoya kopyalandı!",
     "code_export_title": "Kod Çıktısı",
     "placeholders": {
       "preset_name": "Önayar adı..."

@@ -38,7 +38,8 @@
         "read_fail": "Failed to read file.",
         "invalid_file": "Please upload a valid SVG file."
       }
-    }
+    },
+    "cleared_toast": "Form cleared successfully."
   },
   "preview": {
     "card_title": "Preview",
@@ -47,6 +48,8 @@
     "no_presets": "No presets saved yet",
     "no_presets_filter": "No presets found for this filter",
     "save": "Save",
+    "saved_toast": "Preset saved successfully!",
+    "copied_toast": "Code copied to clipboard!",
     "code_export_title": "Code Export",
     "placeholders": {
       "preset_name": "Preset name..."

@@ -66,6 +66,20 @@ const clearForm = () => {
     presetName: '',
     customIcon: ''
   })
+
+  toastStore.addNotification({
+    id: crypto.randomUUID(),
+    type: 'success',
+    title: t('defaults.info_title'),
+    message: t('form.cleared_toast', 'Form cleared successfully'),
+    duration: 3000,
+    position: 'top-right',
+    backgroundColor: 'var(--color-info)',
+    textColor: 'var(--color-text)',
+    showIcon: true,
+    showCloseButton: true,
+    animation: 'slide'
+  })
 }
 
 watch(() => props.form.showCloseButton, (newVal) => {
@@ -104,6 +118,15 @@ const handleOptionUpdate = (id: string, value: boolean) => {
 const animationOptions = computed(() => 
   ANIMATION_OPTIONS.map(opt => ({ ...opt, text: t(opt.text) }))
 )
+
+const emit = defineEmits<{
+  (e: 'type-change', type: string): void
+}>()
+
+function handleTypeChange(newType: any) {
+  props.form.type = newType
+  emit('type-change', newType)
+}
 </script>
 
 <template>
@@ -122,9 +145,9 @@ const animationOptions = computed(() =>
           id="notification-type"
           name="type"
           test-id="type-selector"
-          v-model="form.type" 
+          :model-value="form.type"
+          @update:model-value="handleTypeChange" 
           :has-custom-icon="!!form.customIcon" 
-
           :label="t('form.labels.type')"
         />
         <Input 

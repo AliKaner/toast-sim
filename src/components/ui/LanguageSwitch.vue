@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { watch } from 'vue'
 
 const { locale } = useI18n()
+
+watch(locale, (newLocale) => {
+  localStorage.setItem('user-locale', newLocale)
+})
 </script>
 
 <template>

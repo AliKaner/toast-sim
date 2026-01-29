@@ -112,6 +112,8 @@ const onFileUpload = (event: Event) => {
   text-decoration: underline;
   padding: 0;
   opacity: 0.8;
+  display: flex; /* Fix alignment */
+  align-items: center;
 }
 
 .clear-icon-btn {
@@ -135,7 +137,8 @@ const onFileUpload = (event: Event) => {
 }
 
 .file-upload-label {
-  display: inline-block;
+  display: inline-flex; /* Fix alignment */
+  align-items: center;
   font-size: 0.75rem;
   color: var(--color-text);
   cursor: pointer;

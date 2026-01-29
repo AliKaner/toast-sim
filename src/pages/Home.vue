@@ -42,11 +42,14 @@ const form = reactive<FormState>({
   customIcon: ''
 })
 
-watch(() => form.type, (newType) => {
-  const defaults = TYPE_DEFAULTS[newType]
+
+
+function handleTypeChange(newType: any) {
+  const type = newType as import('../types/notification').NotificationType
+  const defaults = TYPE_DEFAULTS[type]
   form.backgroundColor = defaults.bg
   form.textColor = defaults.text
-})
+}
 
 watch(locale, () => {
   if (!form.message || form.message === 'Your changes have been saved successfully.' || form.message === 'Değişiklikleriniz başarıyla kaydedildi.') {
@@ -96,8 +99,24 @@ function handleSavePreset() {
   if (!form.presetName.trim()) return
   const { id, ...configWithoutId } = currentConfig.value
   presetStore.addPreset(form.presetName.trim(), configWithoutId)
+  
+  toastStore.addNotification({
+    id: nanoid(),
+    type: 'success',
+    title: t('defaults.success_title'),
+    message: t('preview.saved_toast', 'Preset saved successfully!'),
+    duration: 3000,
+    position: 'top-right',
+    backgroundColor: 'var(--color-success)',
+    textColor: 'var(--color-text)',
+    showIcon: true,
+    showCloseButton: true,
+    animation: 'slide'
+  })
+  
   form.presetName = ''
 }
+
 
 function handleLoadPreset(preset: Preset) {
   form.type = preset.config.type
@@ -113,8 +132,11 @@ function handleLoadPreset(preset: Preset) {
   }
   
   form.position = preset.config.position
+  
+  // Important: Explicitly set colors from preset
   form.backgroundColor = preset.config.backgroundColor
   form.textColor = preset.config.textColor
+  
   form.showIcon = preset.config.showIcon
   form.showCloseButton = preset.config.showCloseButton
   form.animation = preset.config.animation || 'slide'
@@ -127,6 +149,19 @@ function handleDeletePreset(preset: Preset) {
 
 function handleCopyCode() {
   navigator.clipboard.writeText(codeExport.value)
+  toastStore.addNotification({
+    id: nanoid(),
+    type: 'success',
+    title: t('defaults.success_title'),
+    message: t('preview.copied_toast', 'Code copied to clipboard!'),
+    duration: 3000,
+    position: 'bottom-center',
+    backgroundColor: 'var(--color-surface)',
+    textColor: 'var(--color-text)',
+    showIcon: true,
+    showCloseButton: false,
+    animation: 'fade'
+  })
 }
 </script>
 
@@ -140,7 +175,7 @@ function handleCopyCode() {
 
     <Body>
       <div class="builder-layout">
-        <ToastFormCard :form="form" />
+        <ToastFormCard :form="form" @type-change="handleTypeChange" />
         <ToastPreviewCard
           :preview-notification="previewNotification"
           :highlighted-code="highlightedCode"
@@ -179,17 +214,21 @@ function handleCopyCode() {
   gap: 2rem;
   max-width: 75rem;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 56.25rem) {
   .builder-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 480px) {
   .builder-layout {
     gap: 1rem;
+    width: 100%;
+    margin: 0;
   }
 }
 </style>
