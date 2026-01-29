@@ -3,7 +3,6 @@ import { mount } from '@vue/test-utils';
 import NotificationTypeSelector from '@/components/ui/NotificationTypeSelector.vue';
 import { TYPE_OPTIONS } from '@/constants/notification';
 
-// Mock i18n
 jest.mock('vue-i18n', () => ({
   useI18n: () => ({
     t: (key: string) => key,

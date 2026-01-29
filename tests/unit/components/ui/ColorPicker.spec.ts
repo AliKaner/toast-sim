@@ -18,10 +18,6 @@ describe('ColorPicker.vue', () => {
     const input = wrapper.find('input');
     await input.setValue('00ff00');
     
-    // Check if event is emitted with hash
-    // The component emits update:modelValue (via defineModel in Vue 3.4+)
-    // but test-utils might handle defineModel diffrently depending on version.
-    // If it uses standard 'update:modelValue' emission:
     expect(wrapper.emitted('update:modelValue')).toBeTruthy();
     expect(wrapper.emitted('update:modelValue')![0]).toEqual(['#00ff00']);
   });

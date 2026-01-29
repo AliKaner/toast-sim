@@ -5,9 +5,9 @@ import tr from './locales/tr.json'
 const savedLocale = localStorage.getItem('user-locale') || 'en'
 
 const i18n = createI18n({
-  legacy: false, // Usage of Composition API
+  legacy: false,
   locale: savedLocale,
-  fallbackLocale: 'en', // set fallback locale
+  fallbackLocale: 'en',
   messages: {
     en,
     tr

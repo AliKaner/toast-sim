@@ -45,9 +45,7 @@ describe('Toast.vue', () => {
     expect(wrapper.find('.toast-close').exists()).toBe(false);
   });
   
-  // Note: Testing progress bar interval typically requires jest.useFakeTimers()
-  // Skipping complex timer logic for basic unit test to avoid flakiness, 
-  // or we can test if progress element exists for non-persistent toast.
+
   it('renders progress bar for non-persistent toast', () => {
       const wrapper = mount(Toast, {
       props: { notification: mockNotification }

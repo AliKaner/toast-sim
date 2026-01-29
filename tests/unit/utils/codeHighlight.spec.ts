@@ -44,7 +44,6 @@ describe('utils/codeHighlight', () => {
 
   describe('highlightCode', () => {
      it('returns highlighted html string', () => {
-         // simple check if it returns something different/wrapped
          const code = "const a = 1;";
          const result = highlightCode(code);
          expect(result).not.toBe(code);

@@ -28,7 +28,6 @@ const toastStore = useToastStore()
 const { t } = useI18n()
 
 const isFormDirty = computed(() => {
-  // Check if matches default config
   const isDefault = props.form.title === DEFAULT_CONFIG.title &&
                     props.form.message === DEFAULT_CONFIG.message &&
                     props.form.customIcon === '' &&
@@ -41,7 +40,6 @@ const isFormDirty = computed(() => {
                     props.form.showCloseButton === DEFAULT_CONFIG.showCloseButton &&
                     props.form.animation === DEFAULT_CONFIG.animation
 
-  // Check if matches "cleared" state (empty strings)
   const isCleared = props.form.title === '' &&
                     props.form.message === '' &&
                     props.form.customIcon === '' &&

@@ -16,11 +16,6 @@ describe('CustomIconInput.vue', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  // Since CustomIconInput uses CustomIconActions which emits events, 
-  // we can test if events from child are re-emitted or handled.
-  // But defineModel updates might be tricky to test without mounting the parent.
-  // We can test if it emits update:modelValue when child emits events.
-
   it('emits update:modelValue on clear', async () => {
     const wrapper = mount(CustomIconInput, {
       props: { modelValue: 'some content' }

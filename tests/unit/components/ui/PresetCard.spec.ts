@@ -11,7 +11,7 @@ jest.mock('vue-i18n', () => ({
 describe('PresetCard.vue', () => {
   const mockPreset = {
     id: '1',
-    createdAt: new Date().toISOString(), // Added missing property
+    createdAt: new Date().toISOString(),
     name: 'Test Preset',
     config: {
       type: 'success' as const,
@@ -35,10 +35,8 @@ describe('PresetCard.vue', () => {
     });
 
     expect(wrapper.text()).toContain('Test Preset');
-    expect(wrapper.text()).toContain('3s'); // formatDuration(3000) -> 3s (assuming implementation)
-    // Check type indicator color
+    expect(wrapper.text()).toContain('3s');
     const indicator = wrapper.find('.type-indicator');
-    // We might need to check style or just existence
     expect(indicator.exists()).toBe(true);
   });
 
@@ -49,7 +47,6 @@ describe('PresetCard.vue', () => {
       },
     });
 
-    // Find button with text 'preset_actions.load' (mocked t returns key)
     const buttons = wrapper.findAllComponents({ name: 'Button' });
     const loadButton = buttons.find(b => b.props('text') === 'preset_actions.load');
     

@@ -6,9 +6,6 @@ describe('TextArea.vue', () => {
   it('renders correctly with default props', () => {
     const wrapper = mount(TextArea);
     expect(wrapper.find('textarea').exists()).toBe(true);
-    // expecting wrapper to NOT have base-textarea as it is on the inner textarea 
-    // Looking at TextArea.vue: <FormItemWrapper ...> <textarea :class="textareaClasses" ... />
-    // The classes are on the textarea element.
     const textarea = wrapper.find('textarea');
     expect(textarea.classes()).toContain('base-textarea');
   });
@@ -18,7 +15,6 @@ describe('TextArea.vue', () => {
     const wrapper = mount(TextArea, {
       props: { label }
     });
-    // FormItemWrapper renders the label. We assume FormItemWrapper works or we check for text.
     expect(wrapper.text()).toContain(label);
   });
 
@@ -49,7 +45,7 @@ describe('TextArea.vue', () => {
     const textarea = wrapper.find('textarea');
     expect(textarea.classes()).toContain('base-textarea--error');
     expect(textarea.attributes('aria-invalid')).toBe('true');
-  }); // Note: FormItemWrapper renders the error text.
+  });
 
   it('applies disabled state', () => {
     const wrapper = mount(TextArea, {

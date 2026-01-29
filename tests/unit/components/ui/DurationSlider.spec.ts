@@ -31,7 +31,6 @@ describe('DurationSlider.vue', () => {
     const wrapper = mount(DurationSlider, {
       props: { modelValue: 5 }
     });
-    // Simulate slider emission
     const slider = wrapper.findComponent({ name: 'Slider' });
     await slider.vm.$emit('update:modelValue', 10);
     expect(wrapper.emitted('update:modelValue')).toBeTruthy();
