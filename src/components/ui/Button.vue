@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import Spinner from './Spinner.vue';
+
 interface ButtonProps {
     id?: string;
     name?: string;
@@ -10,34 +13,49 @@ interface ButtonProps {
     text?: string;
     onClick?: () => void;
     className?: string;
+    variant?: 'base' | 'outline';
+    size?: 'default' | 'small';
 }
-const props = defineProps<ButtonProps>();
+const props = withDefaults(defineProps<ButtonProps>(), {
+    variant: 'base',
+    size: 'default'
+});
 
 const emit = defineEmits<{
     (e: 'click', event: MouseEvent): void;
 }>();
 
 const handleClick = (event: MouseEvent) => {
-    emit('click', event);
-    props.onClick?.();
+    if (props.onClick) {
+        props.onClick();
+    } else {
+        emit('click', event);
+    }
 };
 
+const computedClasses = computed(() => {
+    return [
+        'button',
+        `button--${props.variant}`,
+        `button--${props.size}`,
+        props.className
+    ].filter(Boolean).join(' ');
+});
 </script>
 
 <template>
     <button
-    class="button"
+        :class="computedClasses"
         :id="id"
         :name="name"
         :aria-label="ariaLabel"
         :data-testid="testId"
         :type="type"
         :disabled="disabled"
-        :class="className"
         @click="handleClick"
     >
         <span v-if="loading" class="button-loading">
-            <span class="button-loading-spinner"></span>
+            <Spinner size="small" />
         </span>
         <span v-else-if="text">{{ text }}</span>
         <slot v-else></slot>
@@ -47,25 +65,56 @@ const handleClick = (event: MouseEvent) => {
 <style scoped>
 .button {
     width: 100%;
-    padding: 0.875rem 1rem;
-    font-size: 1rem;
     font-family: inherit;
-    color: var(--color-text);
-    background-color: var(--color-primary);
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     outline: none;
     transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.button:hover:not(:disabled) {
-    background-color: var(--color-primary-hover);
-    border-color: var(--color-primary-hover);
+.button--default {
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 0.875rem;
 }
 
-.button:active:not(:disabled) {
-    background-color: var(--color-primary-active);
-    border-color: var(--color-primary-active);
+.button--small {
+    height: 1.75rem;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+    border-radius: var(--radius-sm);
+}
+
+.button--base {
+    color: var(--color-button-text, #fff);
+    background-color: var(--color-primary);
+    border: 0.0625rem solid var(--color-primary);
+}
+
+.button--base:hover:not(:disabled) {
+    background-color: var(--color-primary-hover, var(--color-primary));
+    opacity: 0.9;
+}
+
+.button--base:active:not(:disabled) {
+    opacity: 0.8;
+}
+
+.button--outline {
+    color: var(--color-text);
+    background-color: transparent;
+    border: 0.0625rem solid var(--color-border);
+}
+
+.button--outline:hover:not(:disabled) {
+    border-color: var(--color-text);
+}
+
+.button--outline:active:not(:disabled) {
+    background-color: var(--color-surface);
 }
 
 .button:disabled {
@@ -81,20 +130,5 @@ const handleClick = (event: MouseEvent) => {
     justify-content: center;
     width: 100%;
     height: 100%;
-}
-
-.button-loading-spinner {
-    width: 1rem;
-    height: 1rem;
-    border: 2px solid var(--color-text);
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: button-loading-spinner 0.5s linear infinite;
-}
-
-@keyframes button-loading-spinner {
-    to {
-        transform: rotate(360deg);
-    }
 }
 </style>
