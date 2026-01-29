@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import NotificationIcon from './NotificationIcon.vue'
 import type { ActiveNotification } from '../../types/notification'
 
 interface ToastProps {
@@ -16,22 +17,6 @@ const progress = ref(100)
 let progressInterval: ReturnType<typeof setInterval> | null = null
 
 const isPersistent = computed(() => props.notification.duration === 0)
-
-const typeIcon = computed(() => {
-  // If custom icon exists and showIcon is true, use custom icon
-  if (props.notification.customIcon && props.notification.showIcon) {
-    return props.notification.customIcon
-  }
-  
-  // Otherwise use type-based icons
-  const icons: Record<string, string> = {
-    success: '✓',
-    error: '✕',
-    warning: '⚠',
-    info: 'ⓘ'
-  }
-  return icons[props.notification.type] || 'ⓘ'
-})
 
 const containerStyle = computed(() => ({
   backgroundColor: props.notification.backgroundColor,
@@ -51,7 +36,7 @@ function startProgressBar() {
   if (isPersistent.value) return
 
   const duration = props.notification.duration
-  const intervalTime = 10 // Update every 10ms for smooth animation
+  const intervalTime = 10
   const decrement = (100 / duration) * intervalTime
 
   progressInterval = setInterval(() => {
@@ -79,7 +64,12 @@ onBeforeUnmount(() => {
 <template>
   <div class="toast" :style="containerStyle">
     <div class="toast-content">
-      <span v-if="notification.showIcon" class="toast-icon">{{ typeIcon }}</span>
+      <div v-if="notification.showIcon" class="toast-icon">
+        <NotificationIcon 
+          :type="notification.type" 
+          :custom-icon="notification.customIcon" 
+        />
+      </div>
       <div class="toast-text">
         <strong class="toast-title">{{ notification.title }}</strong>
         <p class="toast-message">{{ notification.message }}</p>
@@ -94,7 +84,6 @@ onBeforeUnmount(() => {
       </button>
     </div>
     
-    <!-- Progress bar - only show if not persistent -->
     <div v-if="!isPersistent" class="toast-progress-container">
       <div class="toast-progress" :style="progressStyle"></div>
     </div>
@@ -104,40 +93,32 @@ onBeforeUnmount(() => {
 <style scoped>
 .toast {
   position: relative;
-  min-width: 280px;
-  max-width: 380px;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  min-width: 17.5rem;
+  max-width: 23.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 1.25rem var(--color-shadow, rgba(0, 0, 0, 0.25));
   overflow: hidden;
-  animation: toast-slide-in 0.3s ease-out;
-}
-
-@keyframes toast-slide-in {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 .toast-content {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 16px;
+  gap: 0.75rem;
+  padding: 1rem;
 }
 
 .toast-icon {
-  font-size: 1.25rem;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.toast-icon :deep(svg) {
+  width: 100%;
+  height: 100%;
 }
 
 .toast-text {
@@ -149,7 +130,7 @@ onBeforeUnmount(() => {
   display: block;
   font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 
 .toast-message {
@@ -165,7 +146,7 @@ onBeforeUnmount(() => {
   color: inherit;
   font-size: 1rem;
   cursor: pointer;
-  padding: 4px;
+  padding: 0.25rem;
   opacity: 0.7;
   transition: opacity 0.2s ease;
   flex-shrink: 0;
@@ -180,8 +161,8 @@ onBeforeUnmount(() => {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background-color: rgba(0, 0, 0, 0.1);
+  height: 0.25rem;
+  background-color: var(--color-progress-track, rgba(0, 0, 0, 0.1));
 }
 
 .toast-progress {

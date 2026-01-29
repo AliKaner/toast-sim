@@ -1,40 +1,32 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import Toast from './Toast.vue'
 import { useToastStore } from '../../composables/useToastStore'
+import { POSITION_OPTIONS } from '../../constants/notification'
 import type { Position } from '../../types/notification'
-
-interface ToastListProps {
-  position?: Position
-}
-
-const props = withDefaults(defineProps<ToastListProps>(), {
-  position: 'top-right'
-})
 
 const toastStore = useToastStore()
 
-const notifications = computed(() => {
-  return toastStore.notificationsByPosition[props.position]
-})
+const positions = POSITION_OPTIONS.map(p => p.value) as Position[]
 
-const positionClasses = computed(() => {
+function getPositionClasses(position: Position): string {
   const classes = ['toast-list']
   
-  if (props.position.includes('top')) {
+  if (position.includes('top')) {
     classes.push('toast-list--top')
   } else {
     classes.push('toast-list--bottom')
   }
   
-  if (props.position.includes('left')) {
+  if (position.includes('center')) {
+    classes.push('toast-list--center')
+  } else if (position.includes('left')) {
     classes.push('toast-list--left')
   } else {
     classes.push('toast-list--right')
   }
   
   return classes.join(' ')
-})
+}
 
 function handleClose(id: string) {
   toastStore.removeNotification(id)
@@ -43,12 +35,21 @@ function handleClose(id: string) {
 
 <template>
   <Teleport to="body">
-    <div :class="positionClasses">
-      <TransitionGroup name="toast">
+    <div
+      v-for="position in positions"
+      :key="position"
+      :class="getPositionClasses(position)"
+    >
+      <TransitionGroup name="toast-anim">
         <Toast
-          v-for="notification in notifications"
+          v-for="notification in toastStore.notificationsByPosition[position]"
           :key="notification.id"
           :notification="notification"
+          :class="[
+            'toast-item', 
+            `toast-item--${position.includes('left') ? 'left' : position.includes('center') ? 'center' : 'right'}`,
+            `anim-${notification.animation}`
+          ]"
           @close="handleClose"
         />
       </TransitionGroup>
@@ -89,69 +90,74 @@ function handleClose(id: string) {
   right: 0;
 }
 
-/* Transition animations */
-.toast-enter-active {
-  animation: toast-enter 0.3s ease-out;
+.toast-list--center {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.toast-leave-active {
-  animation: toast-leave 0.3s ease-in;
+
+.toast-anim-enter-active,
+.toast-anim-leave-active {
+  transition: all 0.4s ease;
 }
 
-.toast-move {
-  transition: transform 0.3s ease;
+
+.anim-fade.toast-anim-enter-from,
+.anim-fade.toast-anim-leave-to {
+  opacity: 0;
 }
 
-@keyframes toast-enter {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+
+.anim-bounce.toast-anim-enter-active {
+  animation: bounce-in 0.5s;
+}
+.anim-bounce.toast-anim-leave-active {
+  animation: bounce-in 0.5s reverse;
 }
 
-@keyframes toast-leave {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(100%);
-  }
+
+.toast-item--right.anim-slide.toast-anim-enter-active {
+  animation: slide-in-right 0.4s ease-out;
+}
+.toast-item--right.anim-slide.toast-anim-leave-active {
+  animation: slide-in-right 0.4s ease-in reverse;
 }
 
-/* Left position animations */
-.toast-list--left .toast-enter-active {
-  animation: toast-enter-left 0.3s ease-out;
+
+.toast-item--left.anim-slide.toast-anim-enter-active {
+  animation: slide-in-left 0.4s ease-out;
 }
 
-.toast-list--left .toast-leave-active {
-  animation: toast-leave-left 0.3s ease-in;
+.toast-item--left.anim-slide.toast-anim-leave-active {
+  animation: slide-in-left 0.4s ease-in reverse;
 }
 
-@keyframes toast-enter-left {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.toast-item--center.anim-slide.toast-anim-enter-active {
+  animation: slide-in-top 0.4s ease-out;
+}
+.toast-item--center.anim-slide.toast-anim-leave-active {
+  animation: slide-in-top 0.4s ease-in reverse;
 }
 
-@keyframes toast-leave-left {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
+
+@keyframes bounce-in {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-top {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 </style>
