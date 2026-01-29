@@ -1,12 +1,19 @@
 <script setup lang="ts">
-defineProps<{
+interface CardProps {
   label?: string
-}>()
+}
+
+defineProps<CardProps>()
 </script>
 
 <template>
   <div class="card">
-    <span v-if="label" class="card-label">{{ label }}</span>
+    <div v-if="label || $slots.header" class="card-header">
+      <div v-if="label" class="card-label">{{ label }}</div>
+      <div class="card-header-actions">
+        <slot name="header" />
+      </div>
+    </div>
     <slot />
   </div>
 </template>
@@ -15,19 +22,29 @@ defineProps<{
 .card {
   position: relative;
   background: var(--color-surface);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-  border-radius: 8px;
-  padding: 24px;
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .card-label {
-  position: absolute;
-  top: -10px;
-  left: 12px;
-  background: var(--color-surface);
-  padding: 0 8px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--color-text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 </style>
