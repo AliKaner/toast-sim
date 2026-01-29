@@ -181,8 +181,10 @@ const filteredPresets = computed(() => {
 }
 
 .empty-presets {
-  padding: 1.5rem;
-  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-text-muted);
   font-size: 0.875rem;
 }
