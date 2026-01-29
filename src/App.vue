@@ -32,6 +32,7 @@ useTheme()
   --color-border: #334155;
   --color-input-bg: #1e293b;
   --color-preview-bg: #16213e;
+  --color-surface-hover: rgba(255, 255, 255, 0.05);
 
   --radius-xxl: 16px;
   --radius-xl: 14px;
@@ -55,6 +56,7 @@ useTheme()
   --color-border: #e0e0e1;
   --color-input-bg: #ffffff;
   --color-preview-bg: #f7f8fa;
+  --color-surface-hover: #f7f8fa;
 
   --bg-gradient-start: #f0f1f5;
   --bg-gradient-end: #f0f1f5;
