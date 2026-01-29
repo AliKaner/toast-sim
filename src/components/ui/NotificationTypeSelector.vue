@@ -129,4 +129,15 @@ const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
   font-size: 0.75rem;
   font-weight: 500;
 }
+
+@media (max-width: 480px) {
+  .type-text {
+    display: none;
+  }
+  
+  .type-btn {
+    padding: 0.5rem;
+    gap: 0;
+  }
+}
 </style>

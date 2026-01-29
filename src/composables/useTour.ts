@@ -21,11 +21,10 @@ export function useTour() {
         },
         steps: [
           { 
-            element: '#app', 
             popover: { 
               title: t('tour.welcome.title'), 
               description: t('tour.welcome.description'),
-              side: 'left', 
+              side: 'bottom', 
               align: 'start' 
             } 
           },

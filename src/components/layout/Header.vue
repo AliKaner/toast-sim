@@ -74,11 +74,21 @@ defineEmits<{
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
+    height: auto;
+    position: relative;
+  }
+
+  .header-left {
+    position: static;
+    transform: none;
+    width: 100%;
+    justify-content: center;
+    pointer-events: auto;
   }
 
   .header-actions {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
   }
 }
 </style>
