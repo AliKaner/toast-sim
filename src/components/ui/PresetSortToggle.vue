@@ -8,6 +8,9 @@ defineProps<Props>()
 const emit = defineEmits<{
   (e: 'update:isDescending', value: boolean): void
 }>()
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <template>
@@ -19,7 +22,7 @@ const emit = defineEmits<{
     <span class="sort-icon" :class="{ 'is-desc': isDescending }">
       ↓
     </span>
-    Sort
+    {{ t('preview.sort') }}
   </button>
 </template>
 

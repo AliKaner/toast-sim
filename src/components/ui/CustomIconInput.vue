@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TextArea from './TextArea.vue';
 import CustomIconActions from './CustomIconActions.vue';
+import FormItemWrapper from './FormItemWrapper.vue';
 
 interface Props {
   modelValue?: string;
@@ -45,30 +46,34 @@ const handleError = (message: string) => {
 </script>
 
 <template>
-  <div class="custom-icon-input">
-    <TextArea 
-      :id="id"
-      :name="name"
-      :label="label"
-      :model-value="modelValue"
-      @update:model-value="emit('update:modelValue', $event)"
-      :placeholder="placeholder"
-      :rows="rows"
-      :maxlength="maxlength"
-      :data-testid="testId ? `${testId}-textarea` : undefined"
-      :tabindex="tabindex"
-    />
-    
-    <CustomIconActions 
-      :has-custom-icon="!!modelValue"
-      :test-id="testId ? `${testId}-actions` : undefined"
-      :tabindex="tabindex"
-      @auto-fill="handleAutoFill"
-      @clear="handleClear"
-      @upload="handleUpload"
-      @error="handleError"
-    />
-  </div>
+  <FormItemWrapper 
+    :label="label" 
+    :for="id"
+  >
+    <div class="custom-icon-input">
+      <TextArea 
+        :id="id"
+        :name="name"
+        :model-value="modelValue"
+        @update:model-value="emit('update:modelValue', $event)"
+        :placeholder="placeholder"
+        :rows="rows"
+        :maxlength="maxlength"
+        :data-testid="testId ? `${testId}-textarea` : undefined"
+        :tabindex="tabindex"
+      />
+      
+      <CustomIconActions 
+        :has-custom-icon="!!modelValue"
+        :test-id="testId ? `${testId}-actions` : undefined"
+        :tabindex="tabindex"
+        @auto-fill="handleAutoFill"
+        @clear="handleClear"
+        @upload="handleUpload"
+        @error="handleError"
+      />
+    </div>
+  </FormItemWrapper>
 </template>
 
 <style scoped>

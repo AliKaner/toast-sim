@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ThemeSwitch from '@/components/ui/ThemeSwitch.vue'
+import LanguageSwitch from '@/components/ui/LanguageSwitch.vue'
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import ThemeSwitch from '@/components/ui/ThemeSwitch.vue'
       <slot />
     </div>
     <div class="header-actions">
+      <LanguageSwitch />
       <ThemeSwitch />
     </div>
   </header>
@@ -23,5 +25,11 @@ import ThemeSwitch from '@/components/ui/ThemeSwitch.vue'
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 </style>

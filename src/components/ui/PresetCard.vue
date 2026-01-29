@@ -3,6 +3,9 @@ import type { Preset } from '../../types/notification'
 import { TYPE_DEFAULTS } from '../../constants/notification'
 import { formatDuration, formatPosition } from '../../utils/format'
 import Button from './Button.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface PresetCardProps {
   preset: Preset
@@ -37,13 +40,13 @@ const CUSTOM_COLOR = '#ec4899'
     </div>
     <div class="preset-actions">
       <Button 
-        text="Load" 
+        :text="t('preset_actions.load')" 
         variant="outline"
         size="small"
         @click="$emit('load', preset)"
       />
       <Button 
-        text="Delete" 
+        :text="t('preset_actions.delete')" 
         variant="outline"
         size="small"
         @click="$emit('delete', preset)"

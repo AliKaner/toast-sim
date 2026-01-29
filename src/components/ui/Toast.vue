@@ -131,6 +131,7 @@ onBeforeUnmount(() => {
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
+  word-break: break-all;
 }
 
 .toast-message {
@@ -138,6 +139,7 @@ onBeforeUnmount(() => {
   margin: 0;
   opacity: 0.9;
   line-height: 1.4;
+  word-break: break-all;
 }
 
 .toast-close {

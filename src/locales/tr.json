@@ -1,0 +1,87 @@
+{
+  "home": {
+    "title": "Toast Bildirim Oluşturucu",
+    "copyright": "© 2026 Toast Bildirim Oluşturucu"
+  },
+  "form": {
+    "card_title": "Konfigürasyon",
+    "clear": "Temizle",
+    "error_title": "Hata",
+    "labels": {
+      "type": "Tip",
+      "title": "Başlık",
+      "message": "Mesaj",
+      "duration": "Süre",
+      "persistent": "Kalıcı (oto-kapanma yok)",
+      "position": "Pozisyon",
+      "options": "Seçenekler",
+      "background": "Arkaplan",
+      "text_color": "Yazı Rengi",
+      "custom_icon": "Özel İkon (SVG)",
+      "animation": "Animasyon"
+    },
+    "placeholders": {
+      "title": "Bildirim başlığı",
+      "message": "Bildirim mesajı",
+      "custom_icon": "SVG kodunu buraya yapıştırın..."
+    },
+    "options": {
+      "show_icon": "İkon Göster",
+      "show_close": "Kapat Butonu Göster"
+    },
+    "style_section_title": "Stil",
+    "custom_icon_actions": {
+      "auto_fill": "❤️ Otomatik Doldur",
+      "upload_svg": "Veya SVG dosyası yükle",
+      "errors": {
+        "file_size": "SVG dosya boyutu 1MB limitini aşıyor.",
+        "read_fail": "Dosya okunamadı.",
+        "invalid_file": "Lütfen geçerli bir SVG dosyası yükleyin."
+      }
+    }
+  },
+  "preview": {
+    "card_title": "Önizleme",
+    "show_notification": "Bildirimi Göster",
+    "saved_presets_title": "Kayıtlı Önayarlar",
+    "no_presets": "Henüz kayıtlı önayar yok",
+    "no_presets_filter": "Bu filtre için kayıt bulunamadı",
+    "save": "Kaydet",
+    "code_export_title": "Kod Çıktısı",
+    "placeholders": {
+      "preset_name": "Önayar adı..."
+    },
+    "sort": "Sırala"
+  },
+  "types": {
+    "success": "Başarılı",
+    "error": "Hata",
+    "warning": "Uyarı",
+    "info": "Bilgi"
+  },
+  "defaults": {
+    "success_title": "Başarılı!",
+    "error_title": "Hata!",
+    "warning_title": "Uyarı!",
+    "info_title": "Bilgi",
+    "item_title": "Varsayılan Başlık",
+    "message": "Değişiklikleriniz başarıyla kaydedildi."
+  },
+  "preset_actions": {
+    "load": "Yükle",
+    "delete": "Sil"
+  },
+  "positions": {
+    "tl": "SÜ",
+    "tc": "SÖ",
+    "tr": "SĞ",
+    "bl": "AÜ",
+    "bc": "AÖ",
+    "br": "AĞ"
+  },
+  "animations": {
+    "fade": "Soluk",
+    "slide": "Kayma",
+    "bounce": "Zıplama"
+  }
+}

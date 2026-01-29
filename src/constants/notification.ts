@@ -1,25 +1,25 @@
 import type { NotificationType, Position, AnimationType } from '../types/notification'
 
 export const TYPE_OPTIONS = [
-  { text: 'Success', icon: '✓', value: 'success' as const },
-  { text: 'Error', icon: '✕', value: 'error' as const },
-  { text: 'Warning', icon: '⚠', value: 'warning' as const },
-  { text: 'Info', icon: 'ⓘ', value: 'info' as const }
+  { text: 'types.success', icon: '✓', value: 'success' as const },
+  { text: 'types.error', icon: '✕', value: 'error' as const },
+  { text: 'types.warning', icon: '⚠', value: 'warning' as const },
+  { text: 'types.info', icon: 'ⓘ', value: 'info' as const }
 ]
 
 export const POSITION_OPTIONS = [
-  { text: 'TL', value: 'top-left' as const },
-  { text: 'TC', value: 'top-center' as const },
-  { text: 'TR', value: 'top-right' as const },
-  { text: 'BL', value: 'bottom-left' as const },
-  { text: 'BC', value: 'bottom-center' as const },
-  { text: 'BR', value: 'bottom-right' as const }
+  { text: 'positions.tl', value: 'top-left' as const },
+  { text: 'positions.tc', value: 'top-center' as const },
+  { text: 'positions.tr', value: 'top-right' as const },
+  { text: 'positions.bl', value: 'bottom-left' as const },
+  { text: 'positions.bc', value: 'bottom-center' as const },
+  { text: 'positions.br', value: 'bottom-right' as const }
 ]
 
 export const ANIMATION_OPTIONS = [
-  { text: 'Fade', value: 'fade' as const },
-  { text: 'Slide', value: 'slide' as const },
-  { text: 'Bounce', value: 'bounce' as const }
+  { text: 'animations.fade', value: 'fade' as const },
+  { text: 'animations.slide', value: 'slide' as const },
+  { text: 'animations.bounce', value: 'bounce' as const }
 ]
 
 export const TYPE_DEFAULTS: Record<NotificationType, { bg: string; text: string }> = {
@@ -30,16 +30,16 @@ export const TYPE_DEFAULTS: Record<NotificationType, { bg: string; text: string 
 }
 
 export const TYPE_TITLES: Record<NotificationType, string> = {
-  success: 'Success!',
-  error: 'Error!',
-  warning: 'Warning!',
-  info: 'Info'
+  success: 'defaults.success_title',
+  error: 'defaults.error_title',
+  warning: 'defaults.warning_title',
+  info: 'defaults.info_title'
 }
 
 export const DEFAULT_CONFIG = {
   type: 'success' as NotificationType,
-  title: 'Success!',
-  message: 'Your changes have been saved successfully.',
+  title: 'defaults.success_title',
+  message: 'defaults.message',
   duration: 3,
   position: 'top-right' as Position,
   backgroundColor: '#5bca4d',

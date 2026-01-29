@@ -12,14 +12,17 @@ import type { NotificationConfig, Preset, ActiveNotification, FormState } from '
 import { nanoid } from 'nanoid'
 import { highlightCode, generateNotificationCode } from '../utils/codeHighlight'
 import { TYPE_DEFAULTS, TYPE_TITLES, DEFAULT_CONFIG } from '../constants/notification'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const toastStore = useToastStore()
 const presetStore = usePresetStore()
 
 const form = reactive<FormState>({
   type: DEFAULT_CONFIG.type,
-  title: DEFAULT_CONFIG.title,
-  message: DEFAULT_CONFIG.message,
+  title: t(DEFAULT_CONFIG.title),
+  message: t(DEFAULT_CONFIG.message),
   duration: DEFAULT_CONFIG.duration,
   isPersistent: false,
   position: DEFAULT_CONFIG.position,
@@ -36,7 +39,22 @@ watch(() => form.type, (newType) => {
   const defaults = TYPE_DEFAULTS[newType]
   form.backgroundColor = defaults.bg
   form.textColor = defaults.text
-  form.title = TYPE_TITLES[newType]
+  form.title = t(TYPE_TITLES[newType])
+})
+
+// Watch for locale changes to update default values
+// Watch for locale changes to update default values
+watch(locale, () => {
+  // Re-apply defaults based on current type
+  if (!form.message || form.message === 'Your changes have been saved successfully.' || form.message === 'Değişiklikleriniz başarıyla kaydedildi.') {
+      form.message = t(DEFAULT_CONFIG.message)
+  }
+
+  // Update title based on current type
+  const typeTitleKey = TYPE_TITLES[form.type]
+  if (typeTitleKey) {
+     form.title = t(typeTitleKey)
+  }
 })
 
 const durationMs = computed(() => form.isPersistent ? 0 : form.duration * 1000)
@@ -115,7 +133,7 @@ function handleCopyCode() {
     <ToastList />
 
     <Header>
-      <h1 class="logo">Toast Notification Builder</h1>
+      <h1 class="logo">{{ t('home.title') }}</h1>
     </Header>
 
     <Body>
@@ -135,7 +153,7 @@ function handleCopyCode() {
     </Body>
 
     <Footer>
-      <p>© 2026 Toast Notification Builder</p>
+      <p>{{ t('home.copyright') }}</p>
     </Footer>
   </div>
 </template>

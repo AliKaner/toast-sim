@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Card from './Card.vue'
 import Button from './Button.vue'
 import Input from './Input.vue'
@@ -52,11 +53,13 @@ const filteredPresets = computed(() => {
   
   return result
 })
+
+const { t } = useI18n()
 </script>
 
 <template>
   <div class="toast-preview-card">
-    <Card label="Preview">
+    <Card :label="t('preview.card_title')">
       <div class="preview-container">
         <Toast
           :notification="previewNotification"
@@ -66,12 +69,12 @@ const filteredPresets = computed(() => {
       <Button
         id="show-notification-btn"
         name="showNotification"
-        text="Show Notification"
+        :text="t('preview.show_notification')"
         @click="emit('show-notification')"
       />
     </Card>
 
-    <Card label="Saved Presets">
+    <Card :label="t('preview.saved_presets_title')">
       <template #header>
         <div class="preset-header-actions">
           <PresetFilters v-model="filterType" />
@@ -88,19 +91,19 @@ const filteredPresets = computed(() => {
           @delete="emit('delete-preset', $event)"
         />
         <div v-if="filteredPresets.length === 0" class="empty-presets">
-          {{ filterType === 'all' ? 'No presets saved yet' : 'No presets found for this filter' }}
+          {{ filterType === 'all' ? t('preview.no_presets') : t('preview.no_presets_filter') }}
         </div>
       </div>
       <div class="preset-save">
         <Input 
           v-model="form.presetName" 
-          placeholder="Preset name..." 
+          :placeholder="t('preview.placeholders.preset_name')" 
         />
         <div class="save-btn">
           <Button
             id="save-preset-btn"
             name="savePreset"
-            text="Save"
+            :text="t('preview.save')"
             :disabled="!form.presetName.trim()"
             @click="emit('save-preset')"
           />
@@ -108,7 +111,7 @@ const filteredPresets = computed(() => {
       </div>
     </Card>
 
-    <Card label="Code Export" class="code-export-card">
+    <Card :label="t('preview.code_export_title')" class="code-export-card">
       <CodeExport 
         :highlighted-code="highlightedCode" 
         @copy="emit('copy-code')" 
@@ -137,7 +140,28 @@ const filteredPresets = computed(() => {
   align-items: center;
   min-height: 10rem;
   min-height: 18.75rem;
+  width: 100%;
+  max-height: 25rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
 
+.preview-container::-webkit-scrollbar {
+  width: 0.375rem;
+}
+
+.preview-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.preview-container::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 0.25rem;
+}
+
+.preview-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-secondary);
 }
 
 .preset-header-actions {

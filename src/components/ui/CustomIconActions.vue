@@ -15,6 +15,9 @@ const emit = defineEmits<{
   (e: 'error', message: string): void;
 }>();
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 const onFileUpload = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const file = target.files?.[0];
@@ -22,7 +25,7 @@ const onFileUpload = (event: Event) => {
 
   if (file) {
     if (file.size > MAX_SIZE) {
-      emit('error', 'SVG file size exceeds the 1MB limit.');
+      emit('error', t('form.custom_icon_actions.errors.file_size'));
       target.value = '';
       return;
     }
@@ -36,11 +39,11 @@ const onFileUpload = (event: Event) => {
         }
       };
       reader.onerror = () => {
-        emit('error', 'Failed to read file.');
+        emit('error', t('form.custom_icon_actions.errors.read_fail'));
       };
       reader.readAsText(file);
     } else {
-       emit('error', 'Please upload a valid SVG file.');
+       emit('error', t('form.custom_icon_actions.errors.invalid_file'));
     }
   }
   target.value = '';
@@ -57,21 +60,21 @@ const onFileUpload = (event: Event) => {
         type="button"
         :tabindex="tabindex"
       >
-        ❤️ Auto Fill
+        {{ t('form.custom_icon_actions.auto_fill') }}
       </button>
       <button 
         v-else 
         class="action-btn clear-icon-btn" 
         @click="emit('clear')"
         type="button"
-        :tabindex="tabindex"
+        :tabindex="tabindex" 
       >
-        Clear
+        {{ t('form.clear') }}
       </button>
       
       <div class="file-upload-container">
         <label class="file-upload-label">
-          Or upload SVG file
+          {{ t('form.custom_icon_actions.upload_svg') }}
           <input 
             ref="fileInput"
             type="file" 

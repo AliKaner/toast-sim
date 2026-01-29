@@ -1,0 +1,87 @@
+{
+  "home": {
+    "title": "Toast Notification Builder",
+    "copyright": "© 2026 Toast Notification Builder"
+  },
+  "form": {
+    "card_title": "Configuration",
+    "clear": "Clear",
+    "error_title": "Error",
+    "labels": {
+      "type": "Type",
+      "title": "Title",
+      "message": "Message",
+      "duration": "Duration",
+      "persistent": "Persistent (no auto-dismiss)",
+      "position": "Position",
+      "options": "Options",
+      "background": "Background",
+      "text_color": "Text Color",
+      "custom_icon": "Custom Icon (SVG)",
+      "animation": "Animation"
+    },
+    "placeholders": {
+      "title": "Notification title",
+      "message": "Notification message",
+      "custom_icon": "Paste SVG code here..."
+    },
+    "options": {
+      "show_icon": "Show Icon",
+      "show_close": "Show Close Button"
+    },
+    "style_section_title": "Style",
+    "custom_icon_actions": {
+      "auto_fill": "❤️ Auto Fill",
+      "upload_svg": "Or upload SVG file",
+      "errors": {
+        "file_size": "SVG file size exceeds the 1MB limit.",
+        "read_fail": "Failed to read file.",
+        "invalid_file": "Please upload a valid SVG file."
+      }
+    }
+  },
+  "preview": {
+    "card_title": "Preview",
+    "show_notification": "Show Notification",
+    "saved_presets_title": "Saved Presets",
+    "no_presets": "No presets saved yet",
+    "no_presets_filter": "No presets found for this filter",
+    "save": "Save",
+    "code_export_title": "Code Export",
+    "placeholders": {
+      "preset_name": "Preset name..."
+    },
+    "sort": "Sort"
+  },
+  "types": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "defaults": {
+    "success_title": "Success!",
+    "error_title": "Error!",
+    "warning_title": "Warning!",
+    "info_title": "Info",
+    "item_title": "Default Title",
+    "message": "Your changes have been saved successfully."
+  },
+  "preset_actions": {
+    "load": "Load",
+    "delete": "Delete"
+  },
+  "positions": {
+    "tl": "TL",
+    "tc": "TC",
+    "tr": "TR",
+    "bl": "BL",
+    "bc": "BC",
+    "br": "BR"
+  },
+  "animations": {
+    "fade": "Fade",
+    "slide": "Slide",
+    "bounce": "Bounce"
+  }
+}

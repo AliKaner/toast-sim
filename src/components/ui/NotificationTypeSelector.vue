@@ -2,6 +2,9 @@
 import NotificationIcon from './NotificationIcon.vue'
 import { TYPE_OPTIONS } from '../../constants/notification'
 import type { NotificationType } from '../../types/notification'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface NotificationTypeSelectorProps {
   modelValue: NotificationType
@@ -47,7 +50,7 @@ const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
         <div class="type-icon">
           <NotificationIcon :type="opt.value as NotificationType" />
         </div>
-        <span class="type-text">{{ opt.text }}</span>
+        <span class="type-text">{{ t(opt.text) }}</span>
       </button>
     </div>
   </FormItemWrapper>

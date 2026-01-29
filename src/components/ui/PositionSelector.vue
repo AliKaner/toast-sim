@@ -4,6 +4,9 @@ import FormItemWrapper from './FormItemWrapper.vue';
 import { POSITION_OPTIONS } from '../../constants/notification';
 import type { Position } from '../../types/notification';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 interface Props {
   modelValue: Position;
@@ -45,7 +48,7 @@ const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
         :variant="modelValue === opt.value ? 'base' : 'outline'"
         :data-testid="testId ? `${testId}-${opt.value}` : undefined"
         :tabindex="tabindex"
-        :text="opt.text"
+        :text="t(opt.text)"
         @click="emit('update:modelValue', opt.value as Position)"
       />
     </div>

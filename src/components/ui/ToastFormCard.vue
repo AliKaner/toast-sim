@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Card from './Card.vue'
 import PositionSelector from './PositionSelector.vue'
 import Input from './Input.vue'
@@ -28,6 +29,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const toastStore = useToastStore()
+const { t } = useI18n()
 
 const isFormDirty = computed(() => {
   return props.form.title !== DEFAULT_CONFIG.title ||
@@ -57,7 +59,7 @@ const handleCustomIconError = (message: string) => {
   toastStore.addNotification({
     id: crypto.randomUUID(),
     type: 'error',
-    title: 'Error',
+    title: t('form.error_title'),
     message: message,
     duration: 3000,
     position: 'top-right',
@@ -71,25 +73,29 @@ const handleCustomIconError = (message: string) => {
 
 
 const optionsList = computed(() => [
-  { id: 'showIcon', label: 'Show Icon', value: props.form.showIcon },
-  { id: 'showCloseButton', label: 'Show Close Button', value: props.form.showCloseButton }
+  { id: 'showIcon', label: t('form.options.show_icon'), value: props.form.showIcon },
+  { id: 'showCloseButton', label: t('form.options.show_close'), value: props.form.showCloseButton }
 ]);
 
 const handleOptionUpdate = (id: string, value: boolean) => {
   if (id === 'showIcon') props.form.showIcon = value;
   if (id === 'showCloseButton') props.form.showCloseButton = value;
 };
+
+const animationOptions = computed(() => 
+  ANIMATION_OPTIONS.map(opt => ({ ...opt, text: t(opt.text) }))
+)
 </script>
 
 <template>
-  <Card label="Configuration" class="toast-form-card">
+  <Card :label="t('form.card_title')" class="toast-form-card">
     <template #header>
       <button 
         v-if="isFormDirty" 
         class="clear-btn" 
         @click="clearForm"
       >
-        Clear
+        {{ t('form.clear') }}
       </button>
     </template>
     <div class="config-section">
@@ -100,25 +106,26 @@ const handleOptionUpdate = (id: string, value: boolean) => {
           tabindex="1"
           v-model="form.type" 
           :has-custom-icon="!!form.customIcon" 
-          label="Type"
+
+          :label="t('form.labels.type')"
         />
         <Input 
           id="notification-title"
           name="title"
-          label="Title"
+          :label="t('form.labels.title')"
           test-id="title-input"
           tabindex="2"
           v-model="form.title" 
-          placeholder="Notification title" 
+          :placeholder="t('form.placeholders.title')" 
         />
         <TextArea 
           id="notification-message"
           name="message"
-          label="Message"
+          :label="t('form.labels.message')"
           test-id="message-input"
           tabindex="3"
           v-model="form.message" 
-          placeholder="Notification message" 
+          :placeholder="t('form.placeholders.message')" 
           :rows="3" 
         />
         <DurationSlider 
@@ -131,8 +138,8 @@ const handleOptionUpdate = (id: string, value: boolean) => {
           :max="10" 
           :disabled="form.isPersistent"
           suffix="s"
-          label="Duration"
-          checkbox-label="Persistent (no auto-dismiss)"
+          :label="t('form.labels.duration')"
+          :checkbox-label="t('form.labels.persistent')"
           v-model:checkbox-value="form.isPersistent"
           checkbox-test-id="persistent-checkbox"
           checkbox-tabindex="5"
@@ -144,15 +151,15 @@ const handleOptionUpdate = (id: string, value: boolean) => {
           test-id="position-selector"
           tabindex="6"
           v-model="form.position"
-          label="Position"
+          :label="t('form.labels.position')"
         />
       <OptionsGroup
         :options="optionsList"
         @update:option="handleOptionUpdate"
-        label="Options"
+        :label="t('form.labels.options')"
       />
 
-      <FormSection label="Style">
+      <FormSection :label="t('form.style_section_title')">
         <div class="style-row">
           <ColorPicker 
             id="bg-color-picker"
@@ -160,7 +167,7 @@ const handleOptionUpdate = (id: string, value: boolean) => {
             test-id="bg-color-picker"
             tabindex="7"
             v-model="form.backgroundColor" 
-            label="Background" 
+            :label="t('form.labels.background')" 
           />
           <ColorPicker 
             id="text-color-picker"
@@ -168,20 +175,21 @@ const handleOptionUpdate = (id: string, value: boolean) => {
             test-id="text-color-picker"
             tabindex="8"
             v-model="form.textColor" 
-            label="Text Color" 
+            :label="t('form.labels.text_color')" 
           />
         </div>
       </FormSection>
+
 
         <CustomIconInput
           v-if="form.showIcon"
           id="custom-icon-textarea"
           name="customIcon"
-          label="Custom Icon (SVG)"
+          :label="t('form.labels.custom_icon')"
           test-id="custom-icon-input"
           tabindex="11"
           v-model="form.customIcon"
-          placeholder="Paste SVG code here..."
+          :placeholder="t('form.placeholders.custom_icon')"
           :rows="2"
           :maxlength="5000"
           @error="handleCustomIconError"
@@ -193,8 +201,8 @@ const handleOptionUpdate = (id: string, value: boolean) => {
         test-id="animation-segment"
         tabindex="12"
         v-model="form.animation" 
-        :options="ANIMATION_OPTIONS"
-        label="Animation"
+        :options="animationOptions"
+        :label="t('form.labels.animation')"
       />
     </div>
   </Card>

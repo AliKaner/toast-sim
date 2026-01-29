@@ -66,6 +66,27 @@ function handleShowNotification() {
   justify-content: center;
   align-items: center;
   min-height: 180px;
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.toast-preview-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toast-preview-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toast-preview-container::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 4px;
+}
+
+.toast-preview-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-secondary);
 }
 
 .toast-preview-actions {
