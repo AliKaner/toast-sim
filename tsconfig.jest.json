@@ -8,8 +8,12 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "types": ["jest", "@types/jest"]
+    "types": ["jest", "@types/jest", "node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src/**/*.spec.ts", "src/**/*.test.ts"],
+  "include": ["src/**/*.spec.ts", "src/**/*.test.ts", "tests/**/*.spec.ts", "tests/**/*.ts", "src/**/*.d.ts", "tests/**/*.d.ts"],
   "exclude": ["node_modules"]
 }

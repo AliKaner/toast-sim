@@ -10,6 +10,7 @@ export default {
   moduleFileExtensions: ['vue', 'js', 'ts', 'json'],
   testMatch: ['**/*.spec.ts', '**/*.test.ts'],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.css$': '<rootDir>/tests/styleMock.cjs'
   }
 }
