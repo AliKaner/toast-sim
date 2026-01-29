@@ -15,4 +15,10 @@
   max-width: 1400px;
   margin: 0 auto;
 }
+
+@media (max-width: 480px) {
+  .app-body {
+    padding: 1rem;
+  }
+}
 </style>

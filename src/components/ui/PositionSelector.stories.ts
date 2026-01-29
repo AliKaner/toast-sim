@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import PositionSelector from './PositionSelector.vue';
-import { POSITION_OPTIONS } from '../../constants/notification';
+
 
 const meta = {
   title: 'UI/PositionSelector',

@@ -17,4 +17,10 @@
   text-align: center;
   color: var(--color-text-muted);
 }
+
+@media (max-width: 480px) {
+  .app-footer {
+    padding: 1.5rem 1rem;
+  }
+}
 </style>

@@ -184,4 +184,10 @@ function handleCopyCode() {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .builder-layout {
+    gap: 1rem;
+  }
+}
 </style>

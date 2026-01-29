@@ -32,4 +32,17 @@ import LanguageSwitch from '@/components/ui/LanguageSwitch.vue'
   align-items: center;
   gap: 1rem;
 }
+
+@media (max-width: 480px) {
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
 </style>
