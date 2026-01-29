@@ -56,14 +56,12 @@ const handleFocus = (event: FocusEvent) => {
 const handleBlur = (event: FocusEvent) => {
   emit('blur', event);
 };
+import FormItemWrapper from './FormItemWrapper.vue';
 </script>
 
+
 <template>
-<template>
-  <div class="input-wrapper">
-    <label v-if="label" :for="inputId" class="input-label">
-      {{ label }}
-    </label>
+  <FormItemWrapper :label="label" :for="inputId" :error="error">
     <input
       :id="inputId"
       :name="name"
@@ -84,23 +82,11 @@ const handleBlur = (event: FocusEvent) => {
       @focus="handleFocus"
       @blur="handleBlur"
     />
-  </div>
-</template>
+  </FormItemWrapper>
 </template>
 
 <style scoped>
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-}
 
-.input-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-text);
-}
 
 .base-input {
   width: 100%;

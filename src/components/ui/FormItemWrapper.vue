@@ -6,6 +6,7 @@ interface Props {
   hint?: string;
   noFocusColor?: boolean;
   for?: string;
+  labelId?: string;
 }
 
 const props = defineProps<Props>();
@@ -14,7 +15,7 @@ const props = defineProps<Props>();
 <template>
   <div class="form-item-wrapper" :class="{ 'has-error': error, 'no-focus-color': noFocusColor }">
     <div v-if="label" class="label-container">
-      <label class="label" :for="props.for">
+      <label class="label" :for="props.for" :id="labelId">
         {{ label }}
         <span v-if="required" class="required-indicator">*</span>
       </label>
@@ -54,7 +55,7 @@ const props = defineProps<Props>();
 .label {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: var(--color-text-muted) !important;
   display: flex;
   align-items: center;
   gap: 0.25rem;

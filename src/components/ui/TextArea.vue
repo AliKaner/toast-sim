@@ -60,14 +60,12 @@ const handleFocus = (event: FocusEvent) => {
 const handleBlur = (event: FocusEvent) => {
   emit('blur', event);
 };
+import FormItemWrapper from './FormItemWrapper.vue';
 </script>
 
+
 <template>
-<template>
-  <div class="textarea-wrapper">
-    <label v-if="label" :for="textareaId" class="textarea-label">
-      {{ label }}
-    </label>
+  <FormItemWrapper :label="label" :for="textareaId" :error="error">
     <textarea
       :id="textareaId"
       :name="name"
@@ -88,23 +86,11 @@ const handleBlur = (event: FocusEvent) => {
       @focus="handleFocus"
       @blur="handleBlur"
     />
-  </div>
-</template>
+  </FormItemWrapper>
 </template>
 
 <style scoped>
-.textarea-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-}
 
-.textarea-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-text);
-}
 
 .base-textarea {
   width: 100%;

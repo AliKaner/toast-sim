@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 import Card from './Card.vue'
+import PositionSelector from './PositionSelector.vue'
 import Input from './Input.vue'
 import TextArea from './TextArea.vue'
 import Segment from './Segment.vue'
@@ -8,9 +9,18 @@ import DurationSlider from './DurationSlider.vue'
 import ColorPicker from './ColorPicker.vue'
 import Checkbox from './Checkbox.vue'
 import NotificationTypeSelector from './NotificationTypeSelector.vue'
+import CustomIconInput from './CustomIconInput.vue'
+import OptionsGroup from './OptionsGroup.vue'
+import FormItemWrapper from './FormItemWrapper.vue'
+import FormSection from './FormSection.vue'
 import type { FormState } from '../../types/notification'
 import { useToastStore } from '../../composables/useToastStore'
-import { POSITION_OPTIONS, ANIMATION_OPTIONS, DEFAULT_CONFIG } from '../../constants/notification'
+import {
+  ANIMATION_OPTIONS,
+  DEFAULT_CONFIG,
+  POSITION_OPTIONS,
+  TYPE_OPTIONS
+} from '../../constants/notification'
 
 interface Props {
   form: FormState
@@ -37,59 +47,38 @@ const clearForm = () => {
   })
 }
 
-const HEART_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
-
-const autoFillHeart = () => {
-  props.form.customIcon = HEART_SVG
-}
-
-const clearCustomIcon = () => {
-  props.form.customIcon = ''
-}
-
 watch(() => props.form.showCloseButton, (newVal) => {
   if (!newVal && props.form.isPersistent) {
     props.form.isPersistent = false
   }
 })
 
-const onFileUpload = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  const file = target.files?.[0]
-  const MAX_SIZE = 1 * 1024 * 1024
-
-  if (file) {
-    if (file.size > MAX_SIZE) {
-      toastStore.addNotification({
-        id: crypto.randomUUID(),
-        type: 'error',
-        title: 'File too large',
-        message: 'SVG file size exceeds the 1MB limit.',
-        duration: 3000,
-        position: 'top-right',
-        backgroundColor: 'var(--color-error)',
-        textColor: 'var(--color-button-text, #fff)',
-        showIcon: true,
-        showCloseButton: true,
-        animation: 'slide'
-      })
-
-      target.value = ''
-      return
-    }
-
-    if (file.type === 'image/svg+xml') {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const result = e.target?.result as string
-        if (result) {
-          props.form.customIcon = result
-        }
-      }
-      reader.readAsText(file)
-    }
-  }
+const handleCustomIconError = (message: string) => {
+  toastStore.addNotification({
+    id: crypto.randomUUID(),
+    type: 'error',
+    title: 'Error',
+    message: message,
+    duration: 3000,
+    position: 'top-right',
+    backgroundColor: 'var(--color-error)',
+    textColor: 'var(--color-button-text, #fff)',
+    showIcon: true,
+    showCloseButton: true,
+    animation: 'slide'
+  })
 }
+
+
+const optionsList = computed(() => [
+  { id: 'showIcon', label: 'Show Icon', value: props.form.showIcon },
+  { id: 'showCloseButton', label: 'Show Close Button', value: props.form.showCloseButton }
+]);
+
+const handleOptionUpdate = (id: string, value: boolean) => {
+  if (id === 'showIcon') props.form.showIcon = value;
+  if (id === 'showCloseButton') props.form.showCloseButton = value;
+};
 </script>
 
 <template>
@@ -104,8 +93,6 @@ const onFileUpload = (event: Event) => {
       </button>
     </template>
     <div class="config-section">
-      <div class="form-group">
-        <label class="form-label" for="notification-type">Type</label>
         <NotificationTypeSelector 
           id="notification-type"
           name="type"
@@ -113,11 +100,8 @@ const onFileUpload = (event: Event) => {
           tabindex="1"
           v-model="form.type" 
           :has-custom-icon="!!form.customIcon" 
+          label="Type"
         />
-      </div>
-
-      <div class="form-group">
-        <!-- Input component now handles label internally -->
         <Input 
           id="notification-title"
           name="title"
@@ -127,10 +111,6 @@ const onFileUpload = (event: Event) => {
           v-model="form.title" 
           placeholder="Notification title" 
         />
-      </div>
-
-      <div class="form-group">
-        <!-- TextArea component now handles label internally -->
         <TextArea 
           id="notification-message"
           name="message"
@@ -141,8 +121,6 @@ const onFileUpload = (event: Event) => {
           placeholder="Notification message" 
           :rows="3" 
         />
-      </div>
-
         <DurationSlider 
           id="notification-duration"
           name="duration"
@@ -160,29 +138,21 @@ const onFileUpload = (event: Event) => {
           checkbox-tabindex="5"
           :checkbox-disabled="!form.showCloseButton"
         />
+        <PositionSelector
+          id="position-selector"
+          name="position"
+          test-id="position-selector"
+          tabindex="6"
+          v-model="form.position"
+          label="Position"
+        />
+      <OptionsGroup
+        :options="optionsList"
+        @update:option="handleOptionUpdate"
+        label="Options"
+      />
 
-
-      <div class="form-group">
-        <label class="form-label" id="position-label">Position</label>
-        <div class="position-grid" role="radiogroup" aria-labelledby="position-label">
-          <button
-            v-for="opt in POSITION_OPTIONS"
-            :key="opt.value"
-            role="radio"
-            :aria-checked="form.position === opt.value"
-            name="position"
-            :class="['position-btn', { active: form.position === opt.value }]"
-            :data-testid="`position-${opt.value}`"
-            tabindex="6"
-            @click="form.position = opt.value"
-          >
-            {{ opt.text }}
-          </button>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Style</label>
+      <FormSection label="Style">
         <div class="style-row">
           <ColorPicker 
             id="bg-color-picker"
@@ -201,75 +171,21 @@ const onFileUpload = (event: Event) => {
             label="Text Color" 
           />
         </div>
-      </div>
+      </FormSection>
 
-      <div class="form-group">
-        <label class="form-label">Options</label>
-        <div class="options-row">
-          <Checkbox 
-            id="show-icon-checkbox"
-            name="showIcon"
-            test-id="show-icon-checkbox"
-            tabindex="9"
-            v-model="form.showIcon" 
-            label="Show Icon" 
-          />
-          <Checkbox 
-            id="show-close-checkbox"
-            name="showCloseButton"
-            test-id="show-close-checkbox"
-            tabindex="10"
-            v-model="form.showCloseButton" 
-            label="Show Close Button" 
-          />
-        </div>
-      </div>
-
-      <div class="form-group" v-if="form.showIcon">
-        <!-- TextArea component handles label -->
-        <TextArea 
+        <CustomIconInput
+          v-if="form.showIcon"
           id="custom-icon-textarea"
           name="customIcon"
           label="Custom Icon (SVG)"
           test-id="custom-icon-input"
           tabindex="11"
-          v-model="form.customIcon" 
-          placeholder="Paste SVG code here..." 
-          :rows="2" 
+          v-model="form.customIcon"
+          placeholder="Paste SVG code here..."
+          :rows="2"
           :maxlength="5000"
+          @error="handleCustomIconError"
         />
-        
-        <div class="custom-icon-actions">
-          <div class="right-actions">
-            <button 
-              v-if="!form.customIcon" 
-              class="action-btn" 
-              @click="autoFillHeart"
-            >
-              ❤️ Auto Fill
-            </button>
-            <button 
-              v-else 
-              class="action-btn clear-icon-btn" 
-              @click="clearCustomIcon"
-            >
-              Clear
-            </button>
-            
-            <div class="file-upload-container">
-              <label class="file-upload-label">
-                Or upload SVG file
-                <input 
-                  type="file" 
-                  accept=".svg" 
-                  @change="onFileUpload"
-                  class="file-input"
-                />
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <Segment 
         id="animation-segment"
@@ -312,17 +228,6 @@ const onFileUpload = (event: Event) => {
   gap: 20px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text);
-}
 
 
 
@@ -340,27 +245,8 @@ const onFileUpload = (event: Event) => {
   gap: 8px;
 }
 
-.position-btn {
-  padding: 10px;
-  border: 2px solid var(--color-border);
-  border-radius: 8px;
-  background: transparent;
-  color: var(--color-text-muted);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
 
-.position-btn:hover {
-  border-color: var(--color-text-muted);
-}
 
-.position-btn.active {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: var(--color-button-text, #fff);
-}
 
 .style-row {
   display: flex;
@@ -383,63 +269,5 @@ const onFileUpload = (event: Event) => {
   flex: 1;
 }
 
-.hint {
-  font-size: 0.6875rem;
-  color: var(--color-text-muted);
-  margin-top: 0.25rem;
-}
 
-.custom-icon-actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 0.5rem;
-}
-
-.right-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.action-btn {
-  background: transparent;
-  border: none;
-  color: var(--color-error);
-  font-size: 0.75rem;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 0;
-}
-
-.clear-icon-btn {
-  opacity: 0.7;
-}
-
-.clear-icon-btn:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-
-.action-btn:hover {
-  color: var(--color-primary);
-  opacity: 0.8;
-}
-
-.file-upload-container {
-  display: flex;
-  align-items: center;
-}
-
-.file-upload-label {
-  display: inline-block;
-  font-size: 0.75rem;
-  color: var(--color-primary);
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.file-input {
-  display: none;
-}
 </style>

@@ -19,7 +19,7 @@ interface SegmentProps {
     tabindex?: number | string;
 }
 
-defineProps<SegmentProps>();
+const props = defineProps<SegmentProps>();
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: string | number): void;
@@ -28,6 +28,9 @@ const emit = defineEmits<{
 const handleSelect = (value: string | number) => {
     emit('update:modelValue', value);
 };
+
+import { computed } from 'vue';
+const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
 </script>
 
 <template>
@@ -36,7 +39,8 @@ const handleSelect = (value: string | number) => {
     :required="required" 
     :error="error" 
     :hint="hint"
-    :for="id"
+    :label-id="labelId"
+    :id="id"
   >
     <div 
         :id="id"
@@ -44,6 +48,7 @@ const handleSelect = (value: string | number) => {
         :class="{ 'segment--disabled': disabled }"
         :data-testid="testId"
         role="group"
+        :aria-labelledby="labelId"
     >
         <button
             v-for="option in options"

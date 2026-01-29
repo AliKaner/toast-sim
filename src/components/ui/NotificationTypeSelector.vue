@@ -10,38 +10,47 @@ interface NotificationTypeSelectorProps {
   id?: string
   testId?: string
   tabindex?: number | string
+  label?: string
 }
 
-defineProps<NotificationTypeSelectorProps>()
+const props = defineProps<NotificationTypeSelectorProps>()
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: NotificationType): void
 }>()
+
+import FormItemWrapper from './FormItemWrapper.vue'
+import { computed } from 'vue';
+
+const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
 </script>
 
 <template>
-  <div 
-    class="type-selector" 
-    role="radiogroup" 
-    :id="id"
-    :data-testid="testId"
-  >
-    <button
-      v-for="opt in TYPE_OPTIONS"
-      :key="opt.value"
-      :name="name"
-      :class="['type-btn', { active: !hasCustomIcon && modelValue === opt.value }, opt.value]"
-      role="radio"
-      :aria-checked="!hasCustomIcon && modelValue === opt.value"
-      :tabindex="tabindex"
-      @click="emit('update:modelValue', opt.value as NotificationType)"
+  <FormItemWrapper :label="label" :label-id="labelId" :id="id" no-focus-color>
+    <div 
+      class="type-selector" 
+      role="radiogroup" 
+      :id="id"
+      :aria-labelledby="labelId"
+      :data-testid="testId"
     >
-      <div class="type-icon">
-        <NotificationIcon :type="opt.value as NotificationType" />
-      </div>
-      <span class="type-text">{{ opt.text }}</span>
-    </button>
-  </div>
+      <button
+        v-for="opt in TYPE_OPTIONS"
+        :key="opt.value"
+        :name="name"
+        :class="['type-btn', { active: !hasCustomIcon && modelValue === opt.value }, opt.value]"
+        role="radio"
+        :aria-checked="!hasCustomIcon && modelValue === opt.value"
+        :tabindex="tabindex"
+        @click="emit('update:modelValue', opt.value as NotificationType)"
+      >
+        <div class="type-icon">
+          <NotificationIcon :type="opt.value as NotificationType" />
+        </div>
+        <span class="type-text">{{ opt.text }}</span>
+      </button>
+    </div>
+  </FormItemWrapper>
 </template>
 
 <style scoped>
