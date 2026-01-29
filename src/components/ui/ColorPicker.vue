@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { Vue3ColorPicker as ColorPicker } from '@cyhnkckali/vue3-color-picker'
+import '@cyhnkckali/vue3-color-picker/dist/style.css'
 import FormItemWrapper from './FormItemWrapper.vue'
 
 const model = defineModel<string>({ default: '#ffffff' })
@@ -34,6 +36,16 @@ function onInput(event: Event) {
   const value = input.value.replace(/[^0-9A-Fa-f]/g, '').slice(0, 6)
   model.value = `#${value}`
 }
+
+const showPicker = ref(false)
+
+function togglePicker() {
+  showPicker.value = !showPicker.value
+}
+
+function onColorChange(color: string) {
+  model.value = color
+}
 </script>
 
 <template>
@@ -46,7 +58,22 @@ function onInput(event: Event) {
     :for="id"
   >
     <div class="color-picker">
-      <div class="color-preview" :style="{ backgroundColor: displayColor }"></div>
+      <div class="color-preview-wrapper">
+        <div class="color-preview" :style="{ backgroundColor: displayColor }" @click="togglePicker"></div>
+        <div v-if="showPicker" class="picker-popover">
+          <div class="picker-overlay" @click="togglePicker"></div>
+          <div class="picker-content" @click.stop>
+            <ColorPicker 
+              :modelValue="model" 
+              @update:modelValue="onColorChange"
+              type="HEX" 
+              :show-alpha="false"
+              :show-picker-mode="false"
+              mode="solid"
+            />
+          </div>
+        </div>
+      </div>
       <div class="input-wrapper">
         <span class="hash">#</span>
         <input
@@ -71,7 +98,9 @@ function onInput(event: Event) {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  gap: 0.5rem;
   width: 100%;
+  position: relative;
 }
 
 .color-preview {
@@ -122,5 +151,36 @@ function onInput(event: Event) {
 .color-input::placeholder {
   color: var(--color-text-secondary);
   opacity: 0.5;
+}
+
+
+.color-preview-wrapper {
+  position: relative;
+}
+
+.color-preview {
+  cursor: pointer;
+}
+
+.picker-popover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  margin-top: 0.5rem;
+}
+
+.picker-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+}
+
+.picker-content {
+  position: relative;
+  z-index: 101;
 }
 </style>

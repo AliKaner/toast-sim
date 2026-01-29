@@ -35,6 +35,7 @@
     "vitest": "^4.0.18"
   },
   "dependencies": {
+    "@cyhnkckali/vue3-color-picker": "^2.1.5",
     "@highlightjs/vue-plugin": "^2.1.0",
     "@vitejs/plugin-vue": "^6.0.3",
     "highlight.js": "^11.11.1",

@@ -39,7 +39,6 @@ watch(() => form.type, (newType) => {
   const defaults = TYPE_DEFAULTS[newType]
   form.backgroundColor = defaults.bg
   form.textColor = defaults.text
-  form.title = t(TYPE_TITLES[newType])
 })
 
 // Watch for locale changes to update default values
