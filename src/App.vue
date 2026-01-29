@@ -73,7 +73,8 @@ useTheme()
 }
 
 html {
-  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  background-color: var(--color-bg);
+  background-attachment: fixed;
   min-height: 100vh;
   transition: background 0.3s ease;
 }

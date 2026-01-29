@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import type { InputType } from '../../types/notification';
 
 interface Props {
-  modelValue?: string;
+  modelValue: string;
   type?: InputType;
   placeholder?: string;
   disabled?: boolean;

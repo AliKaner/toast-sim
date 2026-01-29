@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 interface Props {
-  modelValue?: string;
+  modelValue: string;
   placeholder?: string;
   disabled?: boolean;
   readonly?: boolean;
