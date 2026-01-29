@@ -10,7 +10,6 @@ import Checkbox from './Checkbox.vue'
 import NotificationTypeSelector from './NotificationTypeSelector.vue'
 import type { FormState } from '../../types/notification'
 import { useToastStore } from '../../composables/useToastStore'
-import { nanoid } from 'nanoid'
 import { POSITION_OPTIONS, ANIMATION_OPTIONS, DEFAULT_CONFIG } from '../../constants/notification'
 
 interface Props {
@@ -62,7 +61,7 @@ const onFileUpload = (event: Event) => {
   if (file) {
     if (file.size > MAX_SIZE) {
       toastStore.addNotification({
-        id: nanoid(),
+        id: crypto.randomUUID(),
         type: 'error',
         title: 'File too large',
         message: 'SVG file size exceeds the 1MB limit.',
