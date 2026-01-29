@@ -72,18 +72,18 @@ const handleChange = (event: Event) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--color-border);
-    border-radius: 4px;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 0.125rem solid var(--color-text-muted);
+    border-radius: 0.25rem;
     background-color: transparent;
     transition: all 0.2s ease;
 }
 
 .checkbox-icon {
-    width: 14px;
-    height: 14px;
-    color: white;
+    width: 0.875rem;
+    height: 0.875rem;
+    color: var(--color-button-text, #fff);
     opacity: 0;
     transform: scale(0);
     transition: all 0.2s ease;
@@ -100,7 +100,7 @@ const handleChange = (event: Event) => {
 }
 
 .checkbox-input:focus + .checkbox-box {
-    box-shadow: 0 0 0 3px rgba(66, 184, 131, 0.2);
+    box-shadow: 0 0 0 0.1875rem var(--color-primary-soft);
 }
 
 .checkbox:hover:not(.checkbox--disabled) .checkbox-box {
@@ -109,6 +109,6 @@ const handleChange = (event: Event) => {
 
 .checkbox-label {
     font-size: 0.875rem;
-    color: var(--color-text);
+    color: var(--color-text-muted);
 }
 </style>
