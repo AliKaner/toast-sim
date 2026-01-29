@@ -11,7 +11,7 @@
 .app-footer {
   width: 100%;
   padding: 1.5rem 2rem;
-  background: rgba(30, 41, 59, 0.8);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-border);
   text-align: center;
