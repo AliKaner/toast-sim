@@ -27,33 +27,20 @@ const props = defineProps<Props>()
 const toastStore = useToastStore()
 const { t } = useI18n()
 
-const isFormDirty = computed(() => {
-  const isDefault = props.form.title === DEFAULT_CONFIG.title &&
-                    props.form.message === DEFAULT_CONFIG.message &&
-                    props.form.customIcon === '' &&
-                    props.form.presetName === '' &&
-                    props.form.backgroundColor === DEFAULT_CONFIG.backgroundColor &&
-                    props.form.type === DEFAULT_CONFIG.type &&
-                    props.form.duration === DEFAULT_CONFIG.duration &&
-                    props.form.position === DEFAULT_CONFIG.position && 
-                    props.form.showIcon === DEFAULT_CONFIG.showIcon &&
-                    props.form.showCloseButton === DEFAULT_CONFIG.showCloseButton &&
-                    props.form.animation === DEFAULT_CONFIG.animation
+const isCleared = computed(() =>
+  !props.form.title &&
+  !props.form.message &&
+  !props.form.customIcon &&
+  !props.form.presetName
+)
 
-  const isCleared = props.form.title === '' &&
-                    props.form.message === '' &&
-                    props.form.customIcon === '' &&
-                    props.form.presetName === '' &&
-                    props.form.backgroundColor === DEFAULT_CONFIG.backgroundColor &&
-                    props.form.type === DEFAULT_CONFIG.type &&
-                    props.form.duration === DEFAULT_CONFIG.duration &&
-                    props.form.position === DEFAULT_CONFIG.position &&
-                    props.form.showIcon === DEFAULT_CONFIG.showIcon &&
-                    props.form.showCloseButton === DEFAULT_CONFIG.showCloseButton &&
-                    props.form.animation === DEFAULT_CONFIG.animation
+const isDefault = computed(() =>
+  Object.entries(DEFAULT_CONFIG).every(
+    ([key, value]) => (props.form as any)[key] === value
+  )
+)
 
-  return !(isDefault || isCleared)
-})
+const isFormDirty = computed(() => !(isCleared.value || isDefault.value))
 
 const clearForm = () => {
   Object.assign(props.form, {
