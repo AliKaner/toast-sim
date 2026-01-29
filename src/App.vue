@@ -2,7 +2,6 @@
 import { RouterView } from 'vue-router'
 import { useTheme } from '@/composables/useTheme'
 
-
 useTheme()
 </script>
 
@@ -15,7 +14,6 @@ useTheme()
   --color-primary: #6400ee;
   --color-primary-soft: rgba(100, 0, 238, 0.1);
   --color-secondary: #35495e;
-  
 
   --color-success: #5bca4d;
   --color-success-soft: rgba(91, 202, 77, 0.1);
@@ -26,7 +24,6 @@ useTheme()
   --color-info: #666efd;
   --color-info-soft: rgba(102, 110, 253, 0.1);
 
-
   --color-bg: #1a1a2e;
   --color-surface: #1e293b;
   --color-text: #ffffff;
@@ -35,7 +32,6 @@ useTheme()
   --color-border: #334155;
   --color-input-bg: #1e293b;
   --color-preview-bg: #16213e;
-  
 
   --radius-xxl: 16px;
   --radius-xl: 14px;
@@ -45,7 +41,6 @@ useTheme()
   --radius-sm: 6px;
   --radius-xs: 4px;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-
 
   --bg-gradient-start: #1a1a2e;
   --bg-gradient-end: #16213e;
@@ -60,7 +55,6 @@ useTheme()
   --color-border: #e0e0e1;
   --color-input-bg: #ffffff;
   --color-preview-bg: #f7f8fa;
-  
 
   --bg-gradient-start: #f0f1f5;
   --bg-gradient-end: #f0f1f5;
@@ -87,7 +81,6 @@ body {
   transition: color 0.3s ease;
 }
 
-
 ::-webkit-scrollbar {
   width: 0.375rem;
   height: 0.375rem;
@@ -106,7 +99,6 @@ body {
   background: var(--color-text-secondary);
 }
 
-
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
@@ -118,8 +110,6 @@ body {
   position: relative;
   overflow-x: hidden;
 }
-
-
 
 .fade-enter-active,
 .fade-leave-active {
@@ -169,5 +159,4 @@ body {
   transform: translateX(100%);
   opacity: 0;
 }
-
 </style>

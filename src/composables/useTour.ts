@@ -7,7 +7,7 @@ export function useTour() {
 
   function startTour(force = false) {
     const hasSeenDemo = localStorage.getItem('insider_demo_seen')
-    
+
     if (!hasSeenDemo || force) {
       const tourDriver = driver({
         showProgress: true,
@@ -20,57 +20,57 @@ export function useTour() {
           localStorage.setItem('insider_demo_seen', 'true')
         },
         steps: [
-          { 
-            popover: { 
-              title: t('tour.welcome.title'), 
+          {
+            popover: {
+              title: t('tour.welcome.title'),
               description: t('tour.welcome.description'),
-              side: 'bottom', 
-              align: 'start' 
-            } 
+              side: 'bottom',
+              align: 'start'
+            }
           },
-          { 
-            element: '#tour-config-form', 
-            popover: { 
-              title: t('tour.configuration.title'), 
+          {
+            element: '#tour-config-form',
+            popover: {
+              title: t('tour.configuration.title'),
               description: t('tour.configuration.description'),
               side: 'right'
-            } 
+            }
           },
-          { 
-            element: '#tour-preview-container', 
-            popover: { 
-              title: t('tour.preview.title'), 
+          {
+            element: '#tour-preview-container',
+            popover: {
+              title: t('tour.preview.title'),
               description: t('tour.preview.description'),
               side: 'left'
-            } 
+            }
           },
-          { 
-            element: '#tour-presets-section', 
-            popover: { 
-              title: t('tour.presets.title'), 
+          {
+            element: '#tour-presets-section',
+            popover: {
+              title: t('tour.presets.title'),
               description: t('tour.presets.description'),
               side: 'left'
-            } 
+            }
           },
-          { 
-            element: '#tour-preset-filters', 
-            popover: { 
-              title: t('tour.filters.title'), 
+          {
+            element: '#tour-preset-filters',
+            popover: {
+              title: t('tour.filters.title'),
               description: t('tour.filters.description'),
               side: 'bottom'
-            } 
+            }
           },
-          { 
-            element: '#tour-code-export', 
-            popover: { 
-              title: t('tour.code_export.title'), 
+          {
+            element: '#tour-code-export',
+            popover: {
+              title: t('tour.code_export.title'),
               description: t('tour.code_export.description'),
               side: 'left'
-            } 
+            }
           }
         ]
       })
-  
+
       tourDriver.drive()
     }
   }

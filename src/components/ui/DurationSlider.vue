@@ -23,16 +23,13 @@ interface DurationSliderProps {
   checkboxTabindex?: number | string
 }
 
-const props = defineProps<DurationSliderProps>()
+defineProps<DurationSliderProps>()
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void
   (e: 'update:checkboxValue', value: boolean): void
   (e: 'update:checkboxValue', value: boolean): void
 }>()
-
-
-
 </script>
 
 <template>

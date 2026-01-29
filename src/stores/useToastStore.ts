@@ -15,7 +15,7 @@ export const useToastStore = defineStore('toast', () => {
       'bottom-right': []
     }
 
-    notifications.value.forEach(notification => {
+    notifications.value.forEach((notification) => {
       grouped[notification.position].push(notification)
     })
 
@@ -40,18 +40,19 @@ export const useToastStore = defineStore('toast', () => {
   }
 
   function removeNotification(id: string) {
-    const index = notifications.value.findIndex(n => n.id === id)
+    const index = notifications.value.findIndex((n) => n.id === id)
     if (index !== -1) {
       notifications.value.splice(index, 1)
     }
   }
 
+  //could be used later
   function clearAll() {
     notifications.value = []
   }
 
   function clearByPosition(position: Position) {
-    notifications.value = notifications.value.filter(n => n.position !== position)
+    notifications.value = notifications.value.filter((n) => n.position !== position)
   }
 
   return {

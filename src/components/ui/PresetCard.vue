@@ -19,16 +19,18 @@ defineEmits<{
 }>()
 
 const CUSTOM_COLOR = '#ec4899'
-
-
 </script>
 
 <template>
   <div class="preset-card">
     <div class="preset-info">
-      <div 
-        class="type-indicator" 
-        :style="{ backgroundColor: preset.config.customIcon ? CUSTOM_COLOR : TYPE_DEFAULTS[preset.config.type].bg }"
+      <div
+        class="type-indicator"
+        :style="{
+          backgroundColor: preset.config.customIcon
+            ? CUSTOM_COLOR
+            : TYPE_DEFAULTS[preset.config.type].bg
+        }"
       ></div>
       <div class="preset-details">
         <span class="preset-name">{{ preset.name }}</span>
@@ -39,14 +41,14 @@ const CUSTOM_COLOR = '#ec4899'
       </div>
     </div>
     <div class="preset-actions">
-      <Button 
-        :text="t('preset_actions.load')" 
+      <Button
+        :text="t('preset_actions.load')"
         variant="outline"
         size="small"
         @click="$emit('load', preset)"
       />
-      <Button 
-        :text="t('preset_actions.delete')" 
+      <Button
+        :text="t('preset_actions.delete')"
         variant="outline"
         size="small"
         @click="$emit('delete', preset)"
@@ -69,8 +71,8 @@ const CUSTOM_COLOR = '#ec4899'
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  flex: 1; /* Allow it to take available space */
-  min-width: 0; /* Crucial for flex child truncation */
+  flex: 1;
+  min-width: 0;
 }
 
 .type-indicator {
@@ -84,8 +86,8 @@ const CUSTOM_COLOR = '#ec4899'
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
-  flex: 1; /* Allow it to take available space */
-  min-width: 0; /* Crucial for flex child truncation */
+  flex: 1;
+  min-width: 0;
 }
 
 .preset-name {
@@ -105,7 +107,7 @@ const CUSTOM_COLOR = '#ec4899'
 }
 
 .meta-separator::before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 0.1875rem;
   height: 0.1875rem;

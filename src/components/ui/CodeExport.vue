@@ -14,9 +14,7 @@ defineEmits<Emits>()
 <template>
   <div class="code-export">
     <pre class="code-block hljs"><code v-html="highlightedCode"></code></pre>
-    <button class="copy-btn" @click="$emit('copy')">
-      📋 Copy to Clipboard
-    </button>
+    <button class="copy-btn" @click="$emit('copy')">📋 Copy to Clipboard</button>
   </div>
 </template>
 

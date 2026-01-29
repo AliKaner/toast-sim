@@ -12,8 +12,7 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: NotificationType | 'all' | 'custom'): void
 }>()
 
-
-const filters = [
+const filters: { value: NotificationType | 'all' | 'custom'; color: string; label: string }[] = [
   { value: 'all', color: 'var(--color-text-muted)', label: 'All' },
   { value: 'success', color: TYPE_DEFAULTS.success.bg, label: 'Success' },
   { value: 'error', color: TYPE_DEFAULTS.error.bg, label: 'Error' },
@@ -30,7 +29,7 @@ const filters = [
       class="filter-dot"
       :class="{ active: modelValue === filter.value }"
       :style="{ backgroundColor: filter.color }"
-      @click="emit('update:modelValue', filter.value as any)"
+      @click="emit('update:modelValue', filter.value)"
       :title="filter.label"
     >
       <span v-if="modelValue === filter.value" class="active-indicator"></span>
@@ -52,7 +51,9 @@ const filters = [
   border: 0.0625rem solid var(--color-border-light, rgba(255, 255, 255, 0.1));
   cursor: pointer;
   position: relative;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
   padding: 0;
 }
 

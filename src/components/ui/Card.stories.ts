@@ -1,37 +1,37 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Card from './Card.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Card from './Card.vue'
 
 const meta = {
   title: 'UI/Card',
   component: Card,
   tags: ['autodocs'],
   args: {
-    label: 'Card Title',
-  },
-} satisfies Meta<typeof Card>;
+    label: 'Card Title'
+  }
+} satisfies Meta<typeof Card>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: (args) => ({
     components: { Card },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
       <Card v-bind="args">
         <p style="color: var(--color-text);">This is the card content.</p>
       </Card>
-    `,
-  }),
-};
+    `
+  })
+}
 
 export const WithHeaderAction: Story = {
   render: (args) => ({
     components: { Card },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
       <Card v-bind="args">
@@ -40,6 +40,6 @@ export const WithHeaderAction: Story = {
         </template>
         <p style="color: var(--color-text);">Card with header action.</p>
       </Card>
-    `,
-  }),
-};
+    `
+  })
+}

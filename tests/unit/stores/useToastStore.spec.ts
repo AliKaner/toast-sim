@@ -1,6 +1,6 @@
 
 import { setActivePinia, createPinia } from 'pinia';
-import { useToastStore } from '@/composables/useToastStore';
+import { useToastStore } from '@/stores/useToastStore';
 import { DEFAULT_CONFIG } from '@/constants/notification';
 
 describe('useToastStore', () => {
@@ -66,15 +66,15 @@ describe('useToastStore', () => {
   });
 
   it('removes notification automatically after duration', () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const store = useToastStore();
     store.addNotification({ ...mockConfig, duration: 1000 });
     
     expect(store.notifications.length).toBe(1);
     
-    jest.advanceTimersByTime(1000);
+    vi.advanceTimersByTime(1000);
     
     expect(store.notifications.length).toBe(0);
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 });

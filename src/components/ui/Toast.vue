@@ -65,10 +65,7 @@ onBeforeUnmount(() => {
   <div class="toast" :style="containerStyle">
     <div class="toast-content">
       <div v-if="notification.showIcon" class="toast-icon">
-        <NotificationIcon 
-          :type="notification.type" 
-          :custom-icon="notification.customIcon" 
-        />
+        <NotificationIcon :type="notification.type" :custom-icon="notification.customIcon" />
       </div>
       <div class="toast-text">
         <strong class="toast-title">{{ notification.title }}</strong>
@@ -83,7 +80,7 @@ onBeforeUnmount(() => {
         ✕
       </button>
     </div>
-    
+
     <div v-if="!isPersistent" class="toast-progress-container">
       <div class="toast-progress" :style="progressStyle"></div>
     </div>

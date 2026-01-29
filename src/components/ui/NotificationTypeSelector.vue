@@ -23,16 +23,16 @@ const emit = defineEmits<{
 }>()
 
 import FormItemWrapper from './FormItemWrapper.vue'
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
+const labelId = computed(() => (props.id ? `${props.id}-label` : undefined))
 </script>
 
 <template>
   <FormItemWrapper :label="label" :label-id="labelId" :id="id" no-focus-color>
-    <div 
-      class="type-selector" 
-      role="radiogroup" 
+    <div
+      class="type-selector"
+      role="radiogroup"
       :id="id"
       :aria-labelledby="labelId"
       :data-testid="testId"
@@ -77,12 +77,22 @@ const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
   transition: all 0.2s ease;
 }
 
-.type-btn.success .type-icon { color: var(--color-success); }
-.type-btn.error .type-icon { color: var(--color-error); }
-.type-btn.warning .type-icon { color: var(--color-warning); }
-.type-btn.info .type-icon { color: var(--color-info); }
+.type-btn.success .type-icon {
+  color: var(--color-success);
+}
+.type-btn.error .type-icon {
+  color: var(--color-error);
+}
+.type-btn.warning .type-icon {
+  color: var(--color-warning);
+}
+.type-btn.info .type-icon {
+  color: var(--color-info);
+}
 
-.type-btn.active .type-icon { color: var(--color-button-text, #fff); }
+.type-btn.active .type-icon {
+  color: var(--color-button-text, #fff);
+}
 
 .type-btn:hover {
   border-color: var(--color-text-muted);
@@ -134,7 +144,7 @@ const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
   .type-text {
     display: none;
   }
-  
+
   .type-btn {
     padding: 0.5rem;
     gap: 0;

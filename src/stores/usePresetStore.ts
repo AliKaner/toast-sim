@@ -8,7 +8,6 @@ const STORAGE_KEY = 'toast-presets'
 export const usePresetStore = defineStore('presets', () => {
   const presets = ref<Preset[]>([])
 
-
   function loadFromStorage() {
     try {
       const stored = localStorage.getItem(STORAGE_KEY)
@@ -21,7 +20,6 @@ export const usePresetStore = defineStore('presets', () => {
     }
   }
 
-
   function saveToStorage() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(presets.value))
@@ -30,9 +28,7 @@ export const usePresetStore = defineStore('presets', () => {
     }
   }
 
-
   watch(presets, saveToStorage, { deep: true })
-
 
   function addPreset(name: string, config: Omit<NotificationConfig, 'id'>) {
     const preset: Preset = {
@@ -45,19 +41,16 @@ export const usePresetStore = defineStore('presets', () => {
     return preset
   }
 
-
   function deletePreset(id: string) {
-    const index = presets.value.findIndex(p => p.id === id)
+    const index = presets.value.findIndex((p) => p.id === id)
     if (index !== -1) {
       presets.value.splice(index, 1)
     }
   }
 
-
   function getPreset(id: string): Preset | undefined {
-    return presets.value.find(p => p.id === id)
+    return presets.value.find((p) => p.id === id)
   }
-
 
   loadFromStorage()
 

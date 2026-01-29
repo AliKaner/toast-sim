@@ -1,5 +1,7 @@
 import type { NotificationType, Position, AnimationType } from '../types/notification'
 
+export const MS_PER_SECOND = 1000
+
 export const TYPE_OPTIONS = [
   { text: 'types.success', icon: '✓', value: 'success' as const },
   { text: 'types.error', icon: '✕', value: 'error' as const },

@@ -14,14 +14,12 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <button 
-    class="sort-toggle" 
+  <button
+    class="sort-toggle"
     @click="emit('update:isDescending', !isDescending)"
     :title="isDescending ? 'Newest First' : 'Oldest First'"
   >
-    <span class="sort-icon" :class="{ 'is-desc': isDescending }">
-      ↓
-    </span>
+    <span class="sort-icon" :class="{ 'is-desc': isDescending }"> ↓ </span>
     {{ t('preview.sort') }}
   </button>
 </template>

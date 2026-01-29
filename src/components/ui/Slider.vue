@@ -12,11 +12,11 @@ interface SliderProps {
   label?: string
   required?: boolean
   error?: string
-  hint?: string;
-  name?: string;
-  id?: string;
-  testId?: string;
-  tabindex?: number | string;
+  hint?: string
+  name?: string
+  id?: string
+  testId?: string
+  tabindex?: number | string
 }
 
 const props = defineProps<SliderProps>()
@@ -56,17 +56,17 @@ const handleInput = (event: Event): void => {
 </script>
 
 <template>
-  <FormItemWrapper 
-    :label="label" 
-    :required="required" 
-    :error="error" 
+  <FormItemWrapper
+    :label="label"
+    :required="required"
+    :error="error"
     :hint="hint"
     no-focus-color
     :for="id"
   >
     <div class="slider-container" :class="{ dragging: isDragging }">
       <div class="slider-header" :class="{ disabled }">
-        <div 
+        <div
           ref="containerRef"
           class="slider-bar-container"
           @mousedown="startDrag"
@@ -86,15 +86,9 @@ const handleInput = (event: Event): void => {
             @input="handleInput"
           />
           <div class="slider-track">
-            <div 
-              class="slider-fill" 
-              :style="{ width: `${percentage}%` }"
-            />
+            <div class="slider-fill" :style="{ width: `${percentage}%` }" />
           </div>
-          <div 
-            class="slider-knob"
-            :style="{ left: knobPosition }"
-          />
+          <div class="slider-knob" :style="{ left: knobPosition }" />
         </div>
         <span class="slider-value">{{ modelValue }}{{ suffix }}</span>
       </div>
@@ -165,7 +159,9 @@ const handleInput = (event: Event): void => {
   border-radius: 50%;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
   pointer-events: none;
-  transition: left 0.05s ease-out, transform 0.15s ease;
+  transition:
+    left 0.05s ease-out,
+    transform 0.15s ease;
 }
 
 .dragging .slider-knob {

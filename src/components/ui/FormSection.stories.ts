@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import FormSection from './FormSection.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import FormSection from './FormSection.vue'
 
 const meta = {
   title: 'UI/FormSection',
   component: FormSection,
   tags: ['autodocs'],
   args: {
-    label: 'Section Title',
-  },
-} satisfies Meta<typeof FormSection>;
+    label: 'Section Title'
+  }
+} satisfies Meta<typeof FormSection>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: (args) => ({
     components: { FormSection },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
       <FormSection v-bind="args">
@@ -25,18 +25,18 @@ export const Default: Story = {
           Section Content
         </div>
       </FormSection>
-    `,
-  }),
-};
+    `
+  })
+}
 
 export const WithoutLabel: Story = {
   args: {
-    label: '',
+    label: ''
   },
   render: (args) => ({
     components: { FormSection },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
       <FormSection v-bind="args">
@@ -44,6 +44,6 @@ export const WithoutLabel: Story = {
           Section Content without label
         </div>
       </FormSection>
-    `,
-  }),
-};
+    `
+  })
+}

@@ -1,40 +1,36 @@
 <script setup lang="ts">
-import Button from './Button.vue';
-import FormItemWrapper from './FormItemWrapper.vue';
-import { POSITION_OPTIONS } from '../../constants/notification';
-import type { Position } from '../../types/notification';
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import Button from './Button.vue'
+import FormItemWrapper from './FormItemWrapper.vue'
+import { POSITION_OPTIONS } from '../../constants/notification'
+import type { Position } from '../../types/notification'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 interface Props {
-  modelValue: Position;
-  label?: string;
-  name?: string;
-  id?: string;
-  testId?: string;
-  tabindex?: number | string;
+  modelValue: Position
+  label?: string
+  name?: string
+  id?: string
+  testId?: string
+  tabindex?: number | string
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: Position): void;
-}>();
-const labelId = computed(() => props.id ? `${props.id}-label` : undefined);
+  (e: 'update:modelValue', value: Position): void
+}>()
+const labelId = computed(() => (props.id ? `${props.id}-label` : undefined))
 </script>
 
 <template>
-  <FormItemWrapper
-    :label="label"
-    :label-id="labelId"
-    :id="id"
-  >
-    <div 
-      class="position-grid" 
-      role="radiogroup" 
-      :id="id" 
+  <FormItemWrapper :label="label" :label-id="labelId" :id="id">
+    <div
+      class="position-grid"
+      role="radiogroup"
+      :id="id"
       :aria-labelledby="labelId"
       :data-testid="testId"
     >

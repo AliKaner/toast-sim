@@ -2,7 +2,7 @@
 import { mount } from '@vue/test-utils';
 import PresetCard from '@/components/ui/PresetCard.vue';
 
-jest.mock('vue-i18n', () => ({
+vi.mock('vue-i18n', () => ({
   useI18n: () => ({
     t: (key: string) => key,
   }),

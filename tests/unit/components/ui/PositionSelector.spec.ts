@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 import PositionSelector from '@/components/ui/PositionSelector.vue';
 import { POSITION_OPTIONS } from '@/constants/notification';
 
-jest.mock('vue-i18n', () => ({
+vi.mock('vue-i18n', () => ({
   useI18n: () => ({
     t: (key: string) => key,
   }),

@@ -1,15 +1,15 @@
 <script setup lang="ts">
 interface Props {
-  label?: string;
-  required?: boolean;
-  error?: string;
-  hint?: string;
-  noFocusColor?: boolean;
-  for?: string;
-  labelId?: string;
+  label?: string
+  required?: boolean
+  error?: string
+  hint?: string
+  noFocusColor?: boolean
+  for?: string
+  labelId?: string
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const props = defineProps<Props>();
       </label>
       <span v-if="hint && !error" class="hint">{{ hint }}</span>
     </div>
-    
+
     <div class="input-slot">
       <slot />
     </div>

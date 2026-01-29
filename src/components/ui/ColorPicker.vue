@@ -49,24 +49,28 @@ function onColorChange(color: string) {
 </script>
 
 <template>
-  <FormItemWrapper 
-    :label="label" 
-    :required="required" 
-    :error="error" 
+  <FormItemWrapper
+    :label="label"
+    :required="required"
+    :error="error"
     :hint="hint"
     no-focus-color
     :for="id"
   >
     <div class="color-picker">
       <div class="color-preview-wrapper">
-        <div class="color-preview" :style="{ backgroundColor: displayColor }" @click="togglePicker"></div>
+        <div
+          class="color-preview"
+          :style="{ backgroundColor: displayColor }"
+          @click="togglePicker"
+        ></div>
         <div v-if="showPicker" class="picker-popover">
           <div class="picker-overlay" @click="togglePicker"></div>
           <div class="picker-content" @click.stop>
-            <ColorPicker 
-              :modelValue="model" 
+            <ColorPicker
+              :modelValue="model"
               @update:modelValue="onColorChange"
-              type="HEX" 
+              type="HEX"
               :show-alpha="false"
               :show-picker-mode="false"
               mode="solid"
@@ -152,7 +156,6 @@ function onColorChange(color: string) {
   color: var(--color-text-secondary);
   opacity: 0.5;
 }
-
 
 .color-preview-wrapper {
   position: relative;

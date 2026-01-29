@@ -1,4 +1,4 @@
-import type { Preview, VueRenderer } from '@storybook/vue3'
+import type { Preview } from '@storybook/vue3'
 import { setup } from '@storybook/vue3';
 import { createPinia } from 'pinia';
 import i18n from '../src/i18n';

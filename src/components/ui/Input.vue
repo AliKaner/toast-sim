@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { InputType } from '../../types/notification';
+import { computed } from 'vue'
+import type { InputType } from '../../types/notification'
 
 interface Props {
-  modelValue: string;
-  type?: InputType;
-  placeholder?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  error?: string;
-  ariaLabel?: string;
-  ariaDescribedBy?: string;
-  autocomplete?: string;
-  maxlength?: number;
-  label?: string;
-  name?: string;
-  id?: string;
-  testId?: string;
-  tabindex?: number | string;
+  modelValue: string
+  type?: InputType
+  placeholder?: string
+  disabled?: boolean
+  readonly?: boolean
+  error?: string
+  ariaLabel?: string
+  ariaDescribedBy?: string
+  autocomplete?: string
+  maxlength?: number
+  label?: string
+  name?: string
+  id?: string
+  testId?: string
+  tabindex?: number | string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,40 +25,39 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   placeholder: '',
   disabled: false,
-  readonly: false,
-});
+  readonly: false
+})
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-  (e: 'focus', event: FocusEvent): void;
-  (e: 'blur', event: FocusEvent): void;
-}>();
+  (e: 'update:modelValue', value: string): void
+  (e: 'focus', event: FocusEvent): void
+  (e: 'blur', event: FocusEvent): void
+}>()
 
-const uniqueId = crypto.randomUUID();
-const inputId = computed(() => props.id || uniqueId);
-const errorId = computed(() => props.error ? `${inputId}-error` : undefined);
+const uniqueId = crypto.randomUUID()
+const inputId = computed(() => props.id || uniqueId)
+const errorId = computed(() => (props.error ? `${inputId.value}-error` : undefined))
 
 const inputClasses = computed(() => ({
   'base-input': true,
   'base-input--error': !!props.error,
-  'base-input--disabled': props.disabled,
-}));
+  'base-input--disabled': props.disabled
+}))
 
 const handleInput = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  emit('update:modelValue', target.value);
-};
+  const target = event.target as HTMLInputElement
+  emit('update:modelValue', target.value)
+}
 
 const handleFocus = (event: FocusEvent) => {
-  emit('focus', event);
-};
+  emit('focus', event)
+}
 
 const handleBlur = (event: FocusEvent) => {
-  emit('blur', event);
-};
-import FormItemWrapper from './FormItemWrapper.vue';
+  emit('blur', event)
+}
+import FormItemWrapper from './FormItemWrapper.vue'
 </script>
-
 
 <template>
   <FormItemWrapper :label="label" :for="inputId" :error="error">
@@ -86,8 +85,6 @@ import FormItemWrapper from './FormItemWrapper.vue';
 </template>
 
 <style scoped>
-
-
 .base-input {
   width: 100%;
   height: 2.5rem;

@@ -9,14 +9,20 @@ import PresetCard from './PresetCard.vue'
 import CodeExport from './CodeExport.vue'
 import PresetFilters from './PresetFilters.vue'
 import PresetSortToggle from './PresetSortToggle.vue'
-import type { ActiveNotification, Preset, FormState, NotificationType } from '../../types/notification'
-import { usePresetStore } from '../../composables/usePresetStore'
+import type {
+  ActiveNotification,
+  Preset,
+  FormState,
+  NotificationType
+} from '../../types/notification'
+import { usePresetStore } from '../../stores/usePresetStore'
 
 interface Props {
   previewNotification: ActiveNotification
   highlightedCode: string
-  form: FormState
 }
+
+const form = defineModel<FormState>('form', { required: true })
 
 interface Emits {
   (e: 'show-notification'): void
@@ -36,21 +42,19 @@ const isDescending = ref(true)
 
 const filteredPresets = computed(() => {
   let result = [...presetStore.presets]
-  
 
   if (filterType.value !== 'all') {
     if (filterType.value === 'custom') {
-      result = result.filter(p => !!p.config.customIcon)
+      result = result.filter((p) => !!p.config.customIcon)
     } else {
-      result = result.filter(p => p.config.type === filterType.value && !p.config.customIcon)
+      result = result.filter((p) => p.config.type === filterType.value && !p.config.customIcon)
     }
   }
-  
 
   if (isDescending.value) {
     result.reverse()
   }
-  
+
   return result
 })
 
@@ -61,10 +65,7 @@ const { t } = useI18n()
   <div class="toast-preview-card" id="tour-preview-card">
     <Card :label="t('preview.card_title')">
       <div class="preview-container" id="tour-preview-container">
-        <Toast
-          :notification="previewNotification"
-          @close="() => {}"
-        />
+        <Toast :notification="previewNotification" />
       </div>
       <Button
         id="show-notification-btn"
@@ -95,10 +96,7 @@ const { t } = useI18n()
         </div>
       </div>
       <div class="preset-save">
-        <Input 
-          v-model="form.presetName" 
-          :placeholder="t('preview.placeholders.preset_name')" 
-        />
+        <Input v-model="form.presetName" :placeholder="t('preview.placeholders.preset_name')" />
         <div class="save-btn">
           <Button
             id="save-preset-btn"
@@ -112,10 +110,7 @@ const { t } = useI18n()
     </Card>
 
     <Card :label="t('preview.code_export_title')" class="code-export-card" id="tour-code-export">
-      <CodeExport 
-        :highlighted-code="highlightedCode" 
-        @copy="emit('copy-code')" 
-      />
+      <CodeExport :highlighted-code="highlightedCode" @copy="emit('copy-code')" />
     </Card>
   </div>
 </template>

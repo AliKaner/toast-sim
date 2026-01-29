@@ -1,84 +1,83 @@
 <script setup lang="ts">
-
 interface Props {
-  hasCustomIcon: boolean;
-  testId?: string;
-  tabindex?: number | string;
+  hasCustomIcon: boolean
+  testId?: string
+  tabindex?: number | string
 }
 
-const props = defineProps<Props>();
+defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: 'auto-fill'): void;
-  (e: 'clear'): void;
-  (e: 'upload', content: string): void;
-  (e: 'error', message: string): void;
-}>();
+  (e: 'auto-fill'): void
+  (e: 'clear'): void
+  (e: 'upload', content: string): void
+  (e: 'error', message: string): void
+}>()
 
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const onFileUpload = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  const file = target.files?.[0];
-  const MAX_SIZE = 1 * 1024 * 1024;
+  const target = event.target as HTMLInputElement
+  const file = target.files?.[0]
+  const MAX_SIZE = 1 * 1024 * 1024
 
   if (file) {
     if (file.size > MAX_SIZE) {
-      emit('error', t('form.custom_icon_actions.errors.file_size'));
-      target.value = '';
-      return;
+      emit('error', t('form.custom_icon_actions.errors.file_size'))
+      target.value = ''
+      return
     }
 
     if (file.type === 'image/svg+xml') {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onload = (e) => {
-        const result = e.target?.result as string;
+        const result = e.target?.result as string
         if (result) {
-          emit('upload', result);
+          emit('upload', result)
         }
-      };
+      }
       reader.onerror = () => {
-        emit('error', t('form.custom_icon_actions.errors.read_fail'));
-      };
-      reader.readAsText(file);
+        emit('error', t('form.custom_icon_actions.errors.read_fail'))
+      }
+      reader.readAsText(file)
     } else {
-       emit('error', t('form.custom_icon_actions.errors.invalid_file'));
+      emit('error', t('form.custom_icon_actions.errors.invalid_file'))
     }
   }
-  target.value = '';
-};
+  target.value = ''
+}
 </script>
 
 <template>
   <div class="custom-icon-actions" :data-testid="testId">
     <div class="right-actions">
-      <button 
-        v-if="!hasCustomIcon" 
-        class="action-btn" 
+      <button
+        v-if="!hasCustomIcon"
+        class="action-btn"
         @click="emit('auto-fill')"
         type="button"
         :tabindex="tabindex"
       >
         {{ t('form.custom_icon_actions.auto_fill') }}
       </button>
-      <button 
-        v-else 
-        class="action-btn clear-icon-btn" 
+      <button
+        v-else
+        class="action-btn clear-icon-btn"
         @click="emit('clear')"
         type="button"
-        :tabindex="tabindex" 
+        :tabindex="tabindex"
       >
         {{ t('form.clear') }}
       </button>
-      
+
       <div class="file-upload-container">
         <label class="file-upload-label">
           {{ t('form.custom_icon_actions.upload_svg') }}
-          <input 
+          <input
             ref="fileInput"
-            type="file" 
-            accept=".svg" 
+            type="file"
+            accept=".svg"
             @change="onFileUpload"
             class="file-input"
             :tabindex="tabindex"
@@ -112,7 +111,7 @@ const onFileUpload = (event: Event) => {
   text-decoration: underline;
   padding: 0;
   opacity: 0.8;
-  display: flex; /* Fix alignment */
+  display: flex;
   align-items: center;
 }
 
@@ -137,7 +136,7 @@ const onFileUpload = (event: Event) => {
 }
 
 .file-upload-label {
-  display: inline-flex; /* Fix alignment */
+  display: inline-flex;
   align-items: center;
   font-size: 0.75rem;
   color: var(--color-text);

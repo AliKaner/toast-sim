@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Toast from './Toast.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Toast from './Toast.vue'
 
 const meta = {
   title: 'UI/Toast',
   component: Toast,
   tags: ['autodocs'],
   argTypes: {
-    'onClose': { action: 'close' },
+    onClose: { action: 'close' }
   },
   args: {
     notification: {
@@ -22,15 +22,15 @@ const meta = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      createdAt: Date.now(),
-    },
-  },
-} satisfies Meta<typeof Toast>;
+      createdAt: Date.now()
+    }
+  }
+} satisfies Meta<typeof Toast>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Success: Story = {};
+export const Success: Story = {}
 
 export const Error: Story = {
   args: {
@@ -47,10 +47,10 @@ export const Error: Story = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      createdAt: Date.now(),
-    },
-  },
-};
+      createdAt: Date.now()
+    }
+  }
+}
 
 export const Warning: Story = {
   args: {
@@ -67,10 +67,10 @@ export const Warning: Story = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      createdAt: Date.now(),
-    },
-  },
-};
+      createdAt: Date.now()
+    }
+  }
+}
 
 export const Info: Story = {
   args: {
@@ -87,10 +87,10 @@ export const Info: Story = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      createdAt: Date.now(),
-    },
-  },
-};
+      createdAt: Date.now()
+    }
+  }
+}
 
 export const Persistent: Story = {
   args: {
@@ -107,7 +107,7 @@ export const Persistent: Story = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      createdAt: Date.now(),
-    },
-  },
-};
+      createdAt: Date.now()
+    }
+  }
+}

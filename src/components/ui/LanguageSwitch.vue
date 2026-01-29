@@ -11,21 +11,9 @@ watch(locale, (newLocale) => {
 
 <template>
   <div class="language-switch">
-    <button 
-      class="lang-btn" 
-      :class="{ active: locale === 'en' }" 
-      @click="locale = 'en'"
-    >
-      EN
-    </button>
+    <button class="lang-btn" :class="{ active: locale === 'en' }" @click="locale = 'en'">EN</button>
     <span class="divider">|</span>
-    <button 
-      class="lang-btn" 
-      :class="{ active: locale === 'tr' }" 
-      @click="locale = 'tr'"
-    >
-      TR
-    </button>
+    <button class="lang-btn" :class="{ active: locale === 'tr' }" @click="locale = 'tr'">TR</button>
   </div>
 </template>
 

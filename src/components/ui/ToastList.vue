@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import Toast from './Toast.vue'
-import { useToastStore } from '../../composables/useToastStore'
+import { useToastStore } from '../../stores/useToastStore'
 import { POSITION_OPTIONS } from '../../constants/notification'
 import type { Position } from '../../types/notification'
 
 const toastStore = useToastStore()
 
-const positions = POSITION_OPTIONS.map(p => p.value) as Position[]
+const positions = POSITION_OPTIONS.map((p) => p.value) as Position[]
 
 function getPositionClasses(position: Position): string {
   const classes = ['toast-list']
-  
+
   if (position.includes('top')) {
     classes.push('toast-list--top')
   } else {
     classes.push('toast-list--bottom')
   }
-  
+
   if (position.includes('center')) {
     classes.push('toast-list--center')
   } else if (position.includes('left')) {
@@ -24,7 +24,7 @@ function getPositionClasses(position: Position): string {
   } else {
     classes.push('toast-list--right')
   }
-  
+
   return classes.join(' ')
 }
 
@@ -35,18 +35,14 @@ function handleClose(id: string) {
 
 <template>
   <Teleport to="body">
-    <div
-      v-for="position in positions"
-      :key="position"
-      :class="getPositionClasses(position)"
-    >
+    <div v-for="position in positions" :key="position" :class="getPositionClasses(position)">
       <TransitionGroup name="toast-anim">
         <Toast
           v-for="notification in toastStore.notificationsByPosition[position]"
           :key="notification.id"
           :notification="notification"
           :class="[
-            'toast-item', 
+            'toast-item',
             `toast-item--${position.includes('left') ? 'left' : position.includes('center') ? 'center' : 'right'}`,
             `anim-${notification.animation}`
           ]"
@@ -95,18 +91,15 @@ function handleClose(id: string) {
   transform: translateX(-50%);
 }
 
-
 .toast-anim-enter-active,
 .toast-anim-leave-active {
   transition: all 0.4s ease;
 }
 
-
 .anim-fade.toast-anim-enter-from,
 .anim-fade.toast-anim-leave-to {
   opacity: 0;
 }
-
 
 .anim-bounce.toast-anim-enter-active {
   animation: bounce-in 0.5s;
@@ -115,14 +108,12 @@ function handleClose(id: string) {
   animation: bounce-in 0.5s reverse;
 }
 
-
 .toast-item--right.anim-slide.toast-anim-enter-active {
   animation: slide-in-right 0.4s ease-out;
 }
 .toast-item--right.anim-slide.toast-anim-leave-active {
   animation: slide-in-right 0.4s ease-in reverse;
 }
-
 
 .toast-item--left.anim-slide.toast-anim-enter-active {
   animation: slide-in-left 0.4s ease-out;
@@ -139,25 +130,50 @@ function handleClose(id: string) {
   animation: slide-in-top 0.4s ease-in reverse;
 }
 
-
 @keyframes bounce-in {
-  0% { transform: scale(0); opacity: 0; }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-right {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-left {
-  from { transform: translateX(-100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-top {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>

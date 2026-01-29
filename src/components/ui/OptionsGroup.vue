@@ -1,33 +1,32 @@
 <script setup lang="ts">
-
-import FormItemWrapper from './FormItemWrapper.vue';
-import Checkbox from './Checkbox.vue';
+import FormItemWrapper from './FormItemWrapper.vue'
+import Checkbox from './Checkbox.vue'
 
 interface Option {
-  id: string;
-  label: string;
-  value: boolean;
-  disabled?: boolean;
+  id: string
+  label: string
+  value: boolean
+  disabled?: boolean
 }
 
 interface OptionsGroupProps {
-  label?: string;
-  options: Option[];
-  id?: string;
-  error?: string;
-  hint?: string;
-  required?: boolean;
+  label?: string
+  options: Option[]
+  id?: string
+  error?: string
+  hint?: string
+  required?: boolean
 }
 
-const props = defineProps<OptionsGroupProps>();
+defineProps<OptionsGroupProps>()
 
 const emit = defineEmits<{
-  (e: 'update:option', id: string, value: boolean): void;
-}>();
+  (e: 'update:option', id: string, value: boolean): void
+}>()
 
 const handleOptionUpdate = (id: string, value: boolean) => {
-  emit('update:option', id, value);
-};
+  emit('update:option', id, value)
+}
 </script>
 
 <template>

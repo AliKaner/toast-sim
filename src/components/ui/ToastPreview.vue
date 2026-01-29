@@ -14,7 +14,6 @@ const emit = defineEmits<{
   (e: 'showNotification'): void
 }>()
 
-
 const previewNotification = computed<ActiveNotification>(() => ({
   ...props.config,
   createdAt: Date.now()
@@ -29,10 +28,7 @@ function handleShowNotification() {
   <div class="toast-preview">
     <div class="toast-preview-label">Preview</div>
     <div class="toast-preview-container">
-      <Toast
-        :notification="previewNotification"
-        @close="() => {}"
-      />
+      <Toast :notification="previewNotification" @close="() => {}" />
     </div>
     <div class="toast-preview-actions">
       <Button

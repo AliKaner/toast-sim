@@ -3,19 +3,19 @@ import { mount } from '@vue/test-utils';
 import ToastFormCard from '@/components/ui/ToastFormCard.vue';
 import { DEFAULT_CONFIG } from '@/constants/notification';
 
-jest.mock('@/composables/useToastStore', () => ({
+vi.mock('@/stores/useToastStore', () => ({
   useToastStore: () => ({
-    addNotification: jest.fn(),
+    addNotification: vi.fn(),
   }),
 }));
 
-jest.mock('vue-i18n', () => ({
+vi.mock('vue-i18n', () => ({
   useI18n: () => ({
     t: (key: string) => key,
   }),
 }));
 
-global.crypto.randomUUID = jest.fn(() => '79685606-d760-466d-888e-647d77b21843' as any);
+
 
 describe('ToastFormCard.vue', () => {
   const mockForm = { 
@@ -72,6 +72,6 @@ describe('ToastFormCard.vue', () => {
     expect(clearBtn.exists()).toBe(true);
     
     await clearBtn.trigger('click');
-    expect(dirtyForm.title).toBe(DEFAULT_CONFIG.title);
+    expect(dirtyForm.title).toBe('');
   });
 });

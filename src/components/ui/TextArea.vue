@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 interface Props {
-  modelValue: string;
-  placeholder?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  error?: string;
-  ariaLabel?: string;
-  ariaDescribedBy?: string;
-  maxlength?: number;
-  rows?: number;
-  resize?: 'none' | 'vertical' | 'horizontal' | 'both';
-  label?: string;
-  name?: string;
-  id?: string;
-  testId?: string;
-  tabindex?: number | string;
+  modelValue: string
+  placeholder?: string
+  disabled?: boolean
+  readonly?: boolean
+  error?: string
+  ariaLabel?: string
+  ariaDescribedBy?: string
+  maxlength?: number
+  rows?: number
+  resize?: 'none' | 'vertical' | 'horizontal' | 'both'
+  label?: string
+  name?: string
+  id?: string
+  testId?: string
+  tabindex?: number | string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,44 +25,43 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   readonly: false,
   rows: 4,
-  resize: 'vertical',
-});
+  resize: 'vertical'
+})
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-  (e: 'focus', event: FocusEvent): void;
-  (e: 'blur', event: FocusEvent): void;
-}>();
+  (e: 'update:modelValue', value: string): void
+  (e: 'focus', event: FocusEvent): void
+  (e: 'blur', event: FocusEvent): void
+}>()
 
-const uniqueId = crypto.randomUUID();
-const textareaId = computed(() => props.id || uniqueId);
-const errorId = computed(() => props.error ? `${textareaId}-error` : undefined);
+const uniqueId = crypto.randomUUID()
+const textareaId = computed(() => props.id || uniqueId)
+const errorId = computed(() => (props.error ? `${textareaId.value}-error` : undefined))
 
 const textareaClasses = computed(() => ({
   'base-textarea': true,
   'base-textarea--error': !!props.error,
-  'base-textarea--disabled': props.disabled,
-}));
+  'base-textarea--disabled': props.disabled
+}))
 
 const textareaStyle = computed(() => ({
-  resize: props.resize,
-}));
+  resize: props.resize
+}))
 
 const handleInput = (event: Event) => {
-  const target = event.target as HTMLTextAreaElement;
-  emit('update:modelValue', target.value);
-};
+  const target = event.target as HTMLTextAreaElement
+  emit('update:modelValue', target.value)
+}
 
 const handleFocus = (event: FocusEvent) => {
-  emit('focus', event);
-};
+  emit('focus', event)
+}
 
 const handleBlur = (event: FocusEvent) => {
-  emit('blur', event);
-};
-import FormItemWrapper from './FormItemWrapper.vue';
+  emit('blur', event)
+}
+import FormItemWrapper from './FormItemWrapper.vue'
 </script>
-
 
 <template>
   <FormItemWrapper :label="label" :for="textareaId" :error="error">
@@ -90,8 +89,6 @@ import FormItemWrapper from './FormItemWrapper.vue';
 </template>
 
 <style scoped>
-
-
 .base-textarea {
   width: 100%;
   padding: 0.875rem 1rem;

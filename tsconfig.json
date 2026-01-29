@@ -22,7 +22,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite/client", "jest", "@types/jest", "node"]
+    "types": ["vite/client", "vitest/globals", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.spec.ts"],
   "exclude": ["node_modules", "dist"]

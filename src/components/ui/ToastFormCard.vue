@@ -12,38 +12,27 @@ import NotificationTypeSelector from './NotificationTypeSelector.vue'
 import CustomIconInput from './CustomIconInput.vue'
 import OptionsGroup from './OptionsGroup.vue'
 import FormSection from './FormSection.vue'
-import type { FormState } from '../../types/notification'
-import { useToastStore } from '../../composables/useToastStore'
-import {
-  ANIMATION_OPTIONS,
-  DEFAULT_CONFIG,
-} from '../../constants/notification'
+import type { FormState, NotificationType } from '@/types/notification'
+import { useToastStore } from '@/stores/useToastStore'
+import { randomId } from '@/utils/random'
+import { ANIMATION_OPTIONS, DEFAULT_CONFIG } from '@/constants/notification'
 
-interface Props {
-  form: FormState
-}
-
-const props = defineProps<Props>()
+const form = defineModel<FormState>('form', { required: true })
 const toastStore = useToastStore()
 const { t } = useI18n()
 
-const isCleared = computed(() =>
-  !props.form.title &&
-  !props.form.message &&
-  !props.form.customIcon &&
-  !props.form.presetName
+const isCleared = computed(
+  () => !form.value.title && !form.value.message && !form.value.customIcon && !form.value.presetName
 )
 
 const isDefault = computed(() =>
-  Object.entries(DEFAULT_CONFIG).every(
-    ([key, value]) => (props.form as any)[key] === value
-  )
+  Object.entries(DEFAULT_CONFIG).every(([key, value]) => form.value[key as keyof FormState] === value)
 )
 
 const isFormDirty = computed(() => !(isCleared.value || isDefault.value))
 
 const clearForm = () => {
-  Object.assign(props.form, {
+  Object.assign(form.value, {
     ...DEFAULT_CONFIG,
     title: '',
     message: '',
@@ -53,7 +42,7 @@ const clearForm = () => {
   })
 
   toastStore.addNotification({
-    id: crypto.randomUUID(),
+    id: randomId(),
     type: 'success',
     title: t('defaults.info_title'),
     message: t('form.cleared_toast', 'Form cleared successfully'),
@@ -67,11 +56,14 @@ const clearForm = () => {
   })
 }
 
-watch(() => props.form.showCloseButton, (newVal) => {
-  if (!newVal && props.form.isPersistent) {
-    props.form.isPersistent = false
+watch(
+  () => form.value.showCloseButton,
+  (newVal) => {
+    if (!newVal && form.value.isPersistent) {
+      form.value.isPersistent = false
+    }
   }
-})
+)
 
 const handleCustomIconError = (message: string) => {
   toastStore.addNotification({
@@ -89,27 +81,26 @@ const handleCustomIconError = (message: string) => {
   })
 }
 
-
 const optionsList = computed(() => [
-  { id: 'showIcon', label: t('form.options.show_icon'), value: props.form.showIcon },
-  { id: 'showCloseButton', label: t('form.options.show_close'), value: props.form.showCloseButton }
-]);
+  { id: 'showIcon', label: t('form.options.show_icon'), value: form.value.showIcon },
+  { id: 'showCloseButton', label: t('form.options.show_close'), value: form.value.showCloseButton }
+])
 
 const handleOptionUpdate = (id: string, value: boolean) => {
-  if (id === 'showIcon') props.form.showIcon = value;
-  if (id === 'showCloseButton') props.form.showCloseButton = value;
-};
+  if (id === 'showIcon') form.value.showIcon = value
+  if (id === 'showCloseButton') form.value.showCloseButton = value
+}
 
-const animationOptions = computed(() => 
-  ANIMATION_OPTIONS.map(opt => ({ ...opt, text: t(opt.text) }))
+const animationOptions = computed(() =>
+  ANIMATION_OPTIONS.map((opt) => ({ ...opt, text: t(opt.text) }))
 )
 
 const emit = defineEmits<{
-  (e: 'type-change', type: string): void
+  'type-change': [type: NotificationType]
 }>()
 
-function handleTypeChange(newType: any) {
-  props.form.type = newType
+function handleTypeChange(newType: NotificationType) {
+  form.value.type = newType
   emit('type-change', newType)
 }
 </script>
@@ -117,63 +108,59 @@ function handleTypeChange(newType: any) {
 <template>
   <Card :label="t('form.card_title')" class="toast-form-card" id="tour-config-form">
     <template #header>
-      <button 
-        v-if="isFormDirty" 
-        class="clear-btn" 
-        @click="clearForm"
-      >
+      <button v-if="isFormDirty" class="clear-btn" @click="clearForm">
         {{ t('form.clear') }}
       </button>
     </template>
     <div class="config-section">
-        <NotificationTypeSelector 
-          id="notification-type"
-          name="type"
-          test-id="type-selector"
-          :model-value="form.type"
-          @update:model-value="handleTypeChange" 
-          :has-custom-icon="!!form.customIcon" 
-          :label="t('form.labels.type')"
-        />
-        <Input 
-          id="notification-title"
-          name="title"
-          :label="t('form.labels.title')"
-          test-id="title-input"
-          v-model="form.title" 
-          :placeholder="t('form.placeholders.title')" 
-        />
-        <TextArea 
-          id="notification-message"
-          name="message"
-          :label="t('form.labels.message')"
-          test-id="message-input"
-          v-model="form.message" 
-          :placeholder="t('form.placeholders.message')" 
-          :rows="3" 
-        />
-        <DurationSlider 
-          id="notification-duration"
-          name="duration"
-          test-id="duration-slider"
-          v-model="form.duration" 
-          :min="1" 
-          :max="10" 
-          :disabled="form.isPersistent"
-          suffix="s"
-          :label="t('form.labels.duration')"
-          :checkbox-label="t('form.labels.persistent')"
-          v-model:checkbox-value="form.isPersistent"
-          checkbox-test-id="persistent-checkbox"
-          :checkbox-disabled="!form.showCloseButton"
-        />
-        <PositionSelector
-          id="position-selector"
-          name="position"
-          test-id="position-selector"
-          v-model="form.position"
-          :label="t('form.labels.position')"
-        />
+      <NotificationTypeSelector
+        id="notification-type"
+        name="type"
+        test-id="type-selector"
+        :model-value="form.type"
+        @update:model-value="handleTypeChange"
+        :has-custom-icon="!!form.customIcon"
+        :label="t('form.labels.type')"
+      />
+      <Input
+        id="notification-title"
+        name="title"
+        :label="t('form.labels.title')"
+        test-id="title-input"
+        v-model="form.title"
+        :placeholder="t('form.placeholders.title')"
+      />
+      <TextArea
+        id="notification-message"
+        name="message"
+        :label="t('form.labels.message')"
+        test-id="message-input"
+        v-model="form.message"
+        :placeholder="t('form.placeholders.message')"
+        :rows="3"
+      />
+      <DurationSlider
+        id="notification-duration"
+        name="duration"
+        test-id="duration-slider"
+        v-model="form.duration"
+        :min="1"
+        :max="10"
+        :disabled="form.isPersistent"
+        suffix="s"
+        :label="t('form.labels.duration')"
+        :checkbox-label="t('form.labels.persistent')"
+        v-model:checkbox-value="form.isPersistent"
+        checkbox-test-id="persistent-checkbox"
+        :checkbox-disabled="!form.showCloseButton"
+      />
+      <PositionSelector
+        id="position-selector"
+        name="position"
+        test-id="position-selector"
+        v-model="form.position"
+        :label="t('form.labels.position')"
+      />
       <OptionsGroup
         :options="optionsList"
         @update:option="handleOptionUpdate"
@@ -182,42 +169,40 @@ function handleTypeChange(newType: any) {
 
       <FormSection :label="t('form.style_section_title')">
         <div class="style-row">
-          <ColorPicker 
+          <ColorPicker
             id="bg-color-picker"
             name="backgroundColor"
             test-id="bg-color-picker"
-            v-model="form.backgroundColor" 
-            :label="t('form.labels.background')" 
+            v-model="form.backgroundColor"
+            :label="t('form.labels.background')"
           />
-          <ColorPicker 
+          <ColorPicker
             id="text-color-picker"
             name="textColor"
             test-id="text-color-picker"
-            v-model="form.textColor" 
-            :label="t('form.labels.text_color')" 
+            v-model="form.textColor"
+            :label="t('form.labels.text_color')"
           />
         </div>
       </FormSection>
+      <CustomIconInput
+        v-if="form.showIcon"
+        id="custom-icon-textarea"
+        name="customIcon"
+        :label="t('form.labels.custom_icon')"
+        test-id="custom-icon-input"
+        v-model="form.customIcon"
+        :placeholder="t('form.placeholders.custom_icon')"
+        :rows="2"
+        :maxlength="5000"
+        @error="handleCustomIconError"
+      />
 
-
-        <CustomIconInput
-          v-if="form.showIcon"
-          id="custom-icon-textarea"
-          name="customIcon"
-          :label="t('form.labels.custom_icon')"
-          test-id="custom-icon-input"
-          v-model="form.customIcon"
-          :placeholder="t('form.placeholders.custom_icon')"
-          :rows="2"
-          :maxlength="5000"
-          @error="handleCustomIconError"
-        />
-
-      <Segment 
+      <Segment
         id="animation-segment"
         name="animation"
         test-id="animation-segment"
-        v-model="form.animation" 
+        v-model="form.animation"
         :options="animationOptions"
         :label="t('form.labels.animation')"
       />
@@ -253,32 +238,20 @@ function handleTypeChange(newType: any) {
   gap: 20px;
 }
 
-
-
-
 .duration-control {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
-
-
 .position-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
-
-
-
-
 .style-row {
   display: flex;
   gap: 1.5rem;
 }
-
-
 
 .options-row {
   display: flex;
@@ -293,6 +266,4 @@ function handleTypeChange(newType: any) {
 :deep(.segment-option) {
   flex: 1;
 }
-
-
 </style>
