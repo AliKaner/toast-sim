@@ -33,14 +33,12 @@ const handleClick = (event: MouseEvent) => {
     }
 };
 
-const computedClasses = computed(() => {
-    return [
-        'button',
-        `button--${props.variant}`,
-        `button--${props.size}`,
-        props.className
-    ].filter(Boolean).join(' ');
-});
+const computedClasses = computed(() => [
+    'button',
+    `button--${props.variant}`,
+    `button--${props.size}`,
+    props.className,
+]);
 </script>
 
 <template>
