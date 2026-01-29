@@ -15,6 +15,12 @@ interface DurationSliderProps {
   checkboxLabel?: string
   checkboxValue?: boolean
   checkboxDisabled?: boolean
+  name?: string
+  id?: string
+  testId?: string
+  tabindex?: number | string
+  checkboxTestId?: string
+  checkboxTabindex?: number | string
 }
 
 const props = defineProps<DurationSliderProps>()
@@ -36,6 +42,10 @@ const emit = defineEmits<{
     :required="required"
     :error="error"
     :hint="hint"
+    :name="name"
+    :id="id"
+    :test-id="testId"
+    :tabindex="tabindex"
     @update:model-value="emit('update:modelValue', $event)"
   >
     <Checkbox
@@ -43,6 +53,8 @@ const emit = defineEmits<{
       :model-value="checkboxValue"
       :label="checkboxLabel"
       :disabled="checkboxDisabled"
+      :test-id="checkboxTestId"
+      :tabindex="checkboxTabindex"
       @update:model-value="emit('update:checkboxValue', $event)"
     />
   </Slider>

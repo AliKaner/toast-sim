@@ -6,6 +6,10 @@ import type { NotificationType } from '../../types/notification'
 interface NotificationTypeSelectorProps {
   modelValue: NotificationType
   hasCustomIcon?: boolean
+  name?: string
+  id?: string
+  testId?: string
+  tabindex?: number | string
 }
 
 defineProps<NotificationTypeSelectorProps>()
@@ -16,11 +20,20 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="type-selector">
+  <div 
+    class="type-selector" 
+    role="radiogroup" 
+    :id="id"
+    :data-testid="testId"
+  >
     <button
       v-for="opt in TYPE_OPTIONS"
       :key="opt.value"
+      :name="name"
       :class="['type-btn', { active: !hasCustomIcon && modelValue === opt.value }, opt.value]"
+      role="radio"
+      :aria-checked="!hasCustomIcon && modelValue === opt.value"
+      :tabindex="tabindex"
       @click="emit('update:modelValue', opt.value as NotificationType)"
     >
       <div class="type-icon">

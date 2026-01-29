@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useId } from 'vue';
+import { computed } from 'vue';
 import type { InputType } from '../../types/notification';
 
 interface Props {
@@ -13,6 +13,11 @@ interface Props {
   ariaDescribedBy?: string;
   autocomplete?: string;
   maxlength?: number;
+  label?: string;
+  name?: string;
+  id?: string;
+  testId?: string;
+  tabindex?: number | string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,7 +34,8 @@ const emit = defineEmits<{
   (e: 'blur', event: FocusEvent): void;
 }>();
 
-const inputId = useId();
+const uniqueId = crypto.randomUUID();
+const inputId = computed(() => props.id || uniqueId);
 const errorId = computed(() => props.error ? `${inputId}-error` : undefined);
 
 const inputClasses = computed(() => ({
@@ -53,26 +59,49 @@ const handleBlur = (event: FocusEvent) => {
 </script>
 
 <template>
-  <input
-    :id="inputId"
-    :type="type"
-    :value="modelValue"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    :readonly="readonly"
-    :class="inputClasses"
-    :aria-label="ariaLabel"
-    :aria-invalid="!!error"
-    :aria-describedby="error ? errorId : ariaDescribedBy"
-    :autocomplete="autocomplete"
-    :maxlength="maxlength"
-    @input="handleInput"
-    @focus="handleFocus"
-    @blur="handleBlur"
-  />
+<template>
+  <div class="input-wrapper">
+    <label v-if="label" :for="inputId" class="input-label">
+      {{ label }}
+    </label>
+    <input
+      :id="inputId"
+      :name="name"
+      :type="type"
+      :value="modelValue"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
+      :class="inputClasses"
+      :aria-label="ariaLabel"
+      :aria-invalid="!!error"
+      :aria-describedby="error ? errorId : ariaDescribedBy"
+      :autocomplete="autocomplete"
+      :maxlength="maxlength"
+      :data-testid="testId"
+      :tabindex="tabindex"
+      @input="handleInput"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    />
+  </div>
+</template>
 </template>
 
 <style scoped>
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.input-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
 .base-input {
   width: 100%;
   height: 2.5rem;

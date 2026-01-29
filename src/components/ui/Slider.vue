@@ -12,7 +12,11 @@ interface SliderProps {
   label?: string
   required?: boolean
   error?: string
-  hint?: string
+  hint?: string;
+  name?: string;
+  id?: string;
+  testId?: string;
+  tabindex?: number | string;
 }
 
 const props = defineProps<SliderProps>()
@@ -58,6 +62,7 @@ const handleInput = (event: Event): void => {
     :error="error" 
     :hint="hint"
     no-focus-color
+    :for="id"
   >
     <div class="slider-container" :class="{ dragging: isDragging }">
       <div class="slider-header" :class="{ disabled }">
@@ -69,11 +74,15 @@ const handleInput = (event: Event): void => {
         >
           <input
             type="range"
+            :id="id"
+            :name="name"
             :min="minValue"
             :max="maxValue"
             :value="modelValue"
             :disabled="disabled"
             class="slider-input"
+            :data-testid="testId"
+            :tabindex="tabindex"
             @input="handleInput"
           />
           <div class="slider-track">

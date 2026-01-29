@@ -5,6 +5,8 @@ interface CheckboxProps {
     disabled?: boolean;
     id?: string;
     name?: string;
+    testId?: string;
+    tabindex?: number | string;
 }
 
 defineProps<CheckboxProps>();
@@ -28,6 +30,8 @@ const handleChange = (event: Event) => {
             :name="name"
             :checked="modelValue"
             :disabled="disabled"
+            :data-testid="testId"
+            :tabindex="tabindex"
             @change="handleChange"
         />
         <span class="checkbox-box">

@@ -3,6 +3,10 @@ interface SwitchProps {
   modelValue: boolean
   label?: string
   disabled?: boolean
+  name?: string
+  id?: string
+  testId?: string
+  tabindex?: number | string
 }
 
 defineProps<SwitchProps>()
@@ -13,15 +17,19 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <label class="switch-wrapper" :class="{ disabled }">
+  <label class="switch-wrapper" :class="{ disabled }" :for="id">
     <span v-if="label" class="switch-label">{{ label }}</span>
     <button
+      :id="id"
+      :name="name"
       type="button"
       role="switch"
       :aria-checked="modelValue"
       :disabled="disabled"
       class="switch"
       :class="{ active: modelValue }"
+      :data-testid="testId"
+      :tabindex="tabindex"
       @click="emit('update:modelValue', !modelValue)"
     >
       <div class="switch-track" />

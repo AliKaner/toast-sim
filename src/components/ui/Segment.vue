@@ -13,6 +13,10 @@ interface SegmentProps {
     required?: boolean;
     error?: string;
     hint?: string;
+    name?: string;
+    id?: string;
+    testId?: string;
+    tabindex?: number | string;
 }
 
 defineProps<SegmentProps>();
@@ -32,15 +36,22 @@ const handleSelect = (value: string | number) => {
     :required="required" 
     :error="error" 
     :hint="hint"
-    no-focus-color
+    :for="id"
   >
-    <div class="segment" :class="{ 'segment--disabled': disabled }">
+    <div 
+        :id="id"
+        class="segment" 
+        :class="{ 'segment--disabled': disabled }"
+        :data-testid="testId"
+        role="group"
+    >
         <button
             v-for="option in options"
             :key="option.value"
             class="segment-option"
             :class="{ 'segment-option--active': modelValue === option.value }"
             :disabled="disabled"
+            :tabindex="tabindex"
             @click="handleSelect(option.value)"
         >
             <span class="segment-option-text">{{ option.text }}</span>

@@ -5,15 +5,16 @@ interface Props {
   error?: string;
   hint?: string;
   noFocusColor?: boolean;
+  for?: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 </script>
 
 <template>
   <div class="form-item-wrapper" :class="{ 'has-error': error, 'no-focus-color': noFocusColor }">
     <div v-if="label" class="label-container">
-      <label class="label">
+      <label class="label" :for="props.for">
         {{ label }}
         <span v-if="required" class="required-indicator">*</span>
       </label>

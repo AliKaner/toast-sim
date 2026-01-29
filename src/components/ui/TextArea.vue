@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useId } from 'vue';
+import { computed } from 'vue';
 
 interface Props {
   modelValue?: string;
@@ -12,6 +12,11 @@ interface Props {
   maxlength?: number;
   rows?: number;
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
+  label?: string;
+  name?: string;
+  id?: string;
+  testId?: string;
+  tabindex?: number | string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,7 +34,8 @@ const emit = defineEmits<{
   (e: 'blur', event: FocusEvent): void;
 }>();
 
-const textareaId = useId();
+const uniqueId = crypto.randomUUID();
+const textareaId = computed(() => props.id || uniqueId);
 const errorId = computed(() => props.error ? `${textareaId}-error` : undefined);
 
 const textareaClasses = computed(() => ({
@@ -57,26 +63,49 @@ const handleBlur = (event: FocusEvent) => {
 </script>
 
 <template>
-  <textarea
-    :id="textareaId"
-    :value="modelValue"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    :readonly="readonly"
-    :class="textareaClasses"
-    :style="textareaStyle"
-    :aria-label="ariaLabel"
-    :aria-invalid="!!error"
-    :aria-describedby="error ? errorId : ariaDescribedBy"
-    :maxlength="maxlength"
-    :rows="rows"
-    @input="handleInput"
-    @focus="handleFocus"
-    @blur="handleBlur"
-  />
+<template>
+  <div class="textarea-wrapper">
+    <label v-if="label" :for="textareaId" class="textarea-label">
+      {{ label }}
+    </label>
+    <textarea
+      :id="textareaId"
+      :name="name"
+      :value="modelValue"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
+      :class="textareaClasses"
+      :style="textareaStyle"
+      :aria-label="ariaLabel"
+      :aria-invalid="!!error"
+      :aria-describedby="error ? errorId : ariaDescribedBy"
+      :maxlength="maxlength"
+      :rows="rows"
+      :data-testid="testId"
+      :tabindex="tabindex"
+      @input="handleInput"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    />
+  </div>
+</template>
 </template>
 
 <style scoped>
+.textarea-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.textarea-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
 .base-textarea {
   width: 100%;
   padding: 0.875rem 1rem;

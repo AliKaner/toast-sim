@@ -105,24 +105,49 @@ const onFileUpload = (event: Event) => {
     </template>
     <div class="config-section">
       <div class="form-group">
-        <label class="form-label">Type</label>
+        <label class="form-label" for="notification-type">Type</label>
         <NotificationTypeSelector 
+          id="notification-type"
+          name="type"
+          test-id="type-selector"
+          tabindex="1"
           v-model="form.type" 
           :has-custom-icon="!!form.customIcon" 
         />
       </div>
 
       <div class="form-group">
-        <label class="form-label">Title</label>
-        <Input v-model="form.title" placeholder="Notification title" />
+        <!-- Input component now handles label internally -->
+        <Input 
+          id="notification-title"
+          name="title"
+          label="Title"
+          test-id="title-input"
+          tabindex="2"
+          v-model="form.title" 
+          placeholder="Notification title" 
+        />
       </div>
 
       <div class="form-group">
-        <label class="form-label">Message</label>
-        <TextArea v-model="form.message" placeholder="Notification message" :rows="3" />
+        <!-- TextArea component now handles label internally -->
+        <TextArea 
+          id="notification-message"
+          name="message"
+          label="Message"
+          test-id="message-input"
+          tabindex="3"
+          v-model="form.message" 
+          placeholder="Notification message" 
+          :rows="3" 
+        />
       </div>
 
         <DurationSlider 
+          id="notification-duration"
+          name="duration"
+          test-id="duration-slider"
+          tabindex="4"
           v-model="form.duration" 
           :min="1" 
           :max="10" 
@@ -131,17 +156,24 @@ const onFileUpload = (event: Event) => {
           label="Duration"
           checkbox-label="Persistent (no auto-dismiss)"
           v-model:checkbox-value="form.isPersistent"
+          checkbox-test-id="persistent-checkbox"
+          checkbox-tabindex="5"
           :checkbox-disabled="!form.showCloseButton"
         />
 
 
       <div class="form-group">
-        <label class="form-label">Position</label>
-        <div class="position-grid">
+        <label class="form-label" id="position-label">Position</label>
+        <div class="position-grid" role="radiogroup" aria-labelledby="position-label">
           <button
             v-for="opt in POSITION_OPTIONS"
             :key="opt.value"
+            role="radio"
+            :aria-checked="form.position === opt.value"
+            name="position"
             :class="['position-btn', { active: form.position === opt.value }]"
+            :data-testid="`position-${opt.value}`"
+            tabindex="6"
             @click="form.position = opt.value"
           >
             {{ opt.text }}
@@ -152,22 +184,55 @@ const onFileUpload = (event: Event) => {
       <div class="form-group">
         <label class="form-label">Style</label>
         <div class="style-row">
-          <ColorPicker v-model="form.backgroundColor" label="Background" />
-          <ColorPicker v-model="form.textColor" label="Text Color" />
+          <ColorPicker 
+            id="bg-color-picker"
+            name="backgroundColor"
+            test-id="bg-color-picker"
+            tabindex="7"
+            v-model="form.backgroundColor" 
+            label="Background" 
+          />
+          <ColorPicker 
+            id="text-color-picker"
+            name="textColor"
+            test-id="text-color-picker"
+            tabindex="8"
+            v-model="form.textColor" 
+            label="Text Color" 
+          />
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-label">Options</label>
         <div class="options-row">
-          <Checkbox v-model="form.showIcon" label="Show Icon" />
-          <Checkbox v-model="form.showCloseButton" label="Show Close Button" />
+          <Checkbox 
+            id="show-icon-checkbox"
+            name="showIcon"
+            test-id="show-icon-checkbox"
+            tabindex="9"
+            v-model="form.showIcon" 
+            label="Show Icon" 
+          />
+          <Checkbox 
+            id="show-close-checkbox"
+            name="showCloseButton"
+            test-id="show-close-checkbox"
+            tabindex="10"
+            v-model="form.showCloseButton" 
+            label="Show Close Button" 
+          />
         </div>
       </div>
 
       <div class="form-group" v-if="form.showIcon">
-        <label class="form-label">Custom Icon (SVG)</label>
+        <!-- TextArea component handles label -->
         <TextArea 
+          id="custom-icon-textarea"
+          name="customIcon"
+          label="Custom Icon (SVG)"
+          test-id="custom-icon-input"
+          tabindex="11"
           v-model="form.customIcon" 
           placeholder="Paste SVG code here..." 
           :rows="2" 
@@ -207,6 +272,10 @@ const onFileUpload = (event: Event) => {
       </div>
 
       <Segment 
+        id="animation-segment"
+        name="animation"
+        test-id="animation-segment"
+        tabindex="12"
         v-model="form.animation" 
         :options="ANIMATION_OPTIONS"
         label="Animation"

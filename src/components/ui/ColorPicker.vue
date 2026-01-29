@@ -9,6 +9,10 @@ interface ColorPickerProps {
   required?: boolean
   error?: string
   hint?: string
+  name?: string
+  id?: string
+  testId?: string
+  tabindex?: number | string
 }
 
 defineProps<ColorPickerProps>()
@@ -39,6 +43,7 @@ function onInput(event: Event) {
     :error="error" 
     :hint="hint"
     no-focus-color
+    :for="id"
   >
     <div class="color-picker">
       <div class="color-preview" :style="{ backgroundColor: displayColor }"></div>
@@ -46,11 +51,15 @@ function onInput(event: Event) {
         <span class="hash">#</span>
         <input
           type="text"
+          :id="id"
+          :name="name"
           class="color-input"
           :value="hexWithoutHash"
           @input="onInput"
           maxlength="6"
           placeholder="000000"
+          :data-testid="testId"
+          :tabindex="tabindex"
         />
       </div>
     </div>
