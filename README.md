@@ -126,16 +126,6 @@ tests/
 - **Challenge:** Toasts need to stack vertically but slide in differently depending on the quadrant (e.g., slide from left for `top-left`, slide from right for `top-right`).
 - **Solution:** Created dynamic SCSS classes for `<transition-group>` names. Based on the `position` prop, the app applies specific transform origins and entry paths, ensuring a polished "premium" feel across all positions.
 
-### 3. State Persistence and Sanitization
-- **Challenge:** Presets needed to be stored in `localStorage`, but manual edits to storage could break the app.
-- **Solution:** Used **Zod** schemas to validate the data coming out of `localStorage`. If the data is corrupted or outdated, the app gracefully falls back to default values.
-
-### 4. Accessibility (A11y)
-- **Challenge:** Color pickers and custom styles can lead to low-contrast notifications.
-- **Solution:** Integrated a contrast-checking logic that subtly warns the user or adjusts the text color if the background/text pair doesn't meet AA standards.
-
----
-
 ## 🔮 Future Roadmap
 
 - [ ] **Drag & Drop Reordering:** Allow users to manually reorder toast priority.
