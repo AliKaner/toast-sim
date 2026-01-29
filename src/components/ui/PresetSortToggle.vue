@@ -28,16 +28,16 @@ const { t } = useI18n()
 .sort-toggle {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
   background: transparent;
   border: none;
   color: var(--color-text-secondary);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
   transition: color 0.2s ease;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
 }
 
 .sort-toggle:hover {
@@ -48,7 +48,7 @@ const { t } = useI18n()
 .sort-icon {
   display: inline-block;
   transition: transform 0.3s ease;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .sort-icon.is-desc {

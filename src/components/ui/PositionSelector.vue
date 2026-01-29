@@ -55,6 +55,6 @@ const labelId = computed(() => (props.id ? `${props.id}-label` : undefined))
 .position-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 0.5rem;
 }
 </style>

@@ -59,8 +59,8 @@ function handleClose(id: string) {
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px;
+  gap: 0.75rem;
+  padding: 1rem;
   pointer-events: none;
 }
 
@@ -168,7 +168,7 @@ function handleClose(id: string) {
 
 @keyframes slide-in-top {
   from {
-    transform: translateY(-20px);
+    transform: translateY(-1.25rem);
     opacity: 0;
   }
   to {

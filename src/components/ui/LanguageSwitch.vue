@@ -21,11 +21,11 @@ watch(locale, (newLocale) => {
 .language-switch {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
   background: var(--color-background-soft);
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--color-border);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 0.0625rem solid var(--color-border);
 }
 
 .lang-btn {
@@ -35,7 +35,7 @@ watch(locale, (newLocale) => {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text-muted);
-  padding: 2px 4px;
+  padding: 0.125rem 0.25rem;
   transition: all 0.2s ease;
 }
 

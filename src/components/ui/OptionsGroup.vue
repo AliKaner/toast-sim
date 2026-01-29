@@ -59,7 +59,7 @@ const handleOptionUpdate = (id: string, value: boolean) => {
   gap: 1rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 40rem) {
   .options-grid {
     grid-template-columns: 1fr;
   }

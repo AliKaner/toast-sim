@@ -140,7 +140,7 @@ const labelId = computed(() => (props.id ? `${props.id}-label` : undefined))
   font-weight: 500;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .type-text {
     display: none;
   }

@@ -96,6 +96,6 @@ const props = defineProps<Props>()
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(-5px);
+  transform: translateY(-0.3125rem);
 }
 </style>

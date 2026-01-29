@@ -11,11 +11,11 @@
   flex: 1;
   width: 100%;
   padding: 2rem;
-  max-width: 1400px;
+  max-width: 87.5rem;
   margin: 0 auto;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .app-body {
     padding: 1rem;
   }

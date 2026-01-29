@@ -33,15 +33,16 @@ useTheme()
   --color-input-bg: #1e293b;
   --color-preview-bg: #16213e;
   --color-surface-hover: rgba(255, 255, 255, 0.05);
+  --color-switch-knob: #1a1a2e;
 
-  --radius-xxl: 16px;
-  --radius-xl: 14px;
-  --radius-lg: 12px;
-  --radius-base: 10px;
-  --radius-md: 8px;
-  --radius-sm: 6px;
-  --radius-xs: 4px;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --radius-xxl: 1rem;
+  --radius-xl: 0.875rem;
+  --radius-lg: 0.75rem;
+  --radius-base: 0.625rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.375rem;
+  --radius-xs: 0.25rem;
+  --shadow-sm: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
 
   --bg-gradient-start: #1a1a2e;
   --bg-gradient-end: #16213e;
@@ -57,6 +58,7 @@ useTheme()
   --color-input-bg: #ffffff;
   --color-preview-bg: #f7f8fa;
   --color-surface-hover: #f7f8fa;
+  --color-switch-knob: #ffffff;
 
   --bg-gradient-start: #f0f1f5;
   --bg-gradient-end: #f0f1f5;

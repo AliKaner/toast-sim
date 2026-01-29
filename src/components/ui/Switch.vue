@@ -92,7 +92,7 @@ const emit = defineEmits<{
   left: 0.125rem;
   width: 1.25rem;
   height: 1.25rem;
-  background: var(--color-button-text, #fff);
+  background: var(--color-switch-knob, #fff);
   border-radius: 50%;
   transition: transform 0.2s ease;
   box-shadow: 0 0.125rem 0.25rem var(--color-shadow, rgba(0, 0, 0, 0.2));

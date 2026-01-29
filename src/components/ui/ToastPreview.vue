@@ -45,7 +45,7 @@ function handleShowNotification() {
 .toast-preview {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .toast-preview-label {
@@ -56,20 +56,20 @@ function handleShowNotification() {
 
 .toast-preview-container {
   background: var(--color-surface);
-  border-radius: 12px;
-  padding: 40px 24px;
+  border-radius: 0.75rem;
+  padding: 2.5rem 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 180px;
-  max-height: 300px;
+  min-height: 11.25rem;
+  max-height: 18.75rem;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
 }
 
 .toast-preview-container::-webkit-scrollbar {
-  width: 6px;
+  width: 0.375rem;
 }
 
 .toast-preview-container::-webkit-scrollbar-track {
@@ -78,7 +78,7 @@ function handleShowNotification() {
 
 .toast-preview-container::-webkit-scrollbar-thumb {
   background-color: var(--color-border);
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
 .toast-preview-container::-webkit-scrollbar-thumb:hover {

@@ -28,8 +28,8 @@ defineEmits<{
   width: 100%;
   padding: 0.75rem 2rem;
   background: var(--color-surface);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(0.625rem);
+  border-bottom: 0.0625rem solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -42,7 +42,7 @@ defineEmits<{
 }
 
 .header-logo {
-  height: 32px;
+  height: 2rem;
   width: auto;
 }
 
@@ -55,7 +55,7 @@ defineEmits<{
 .demo-btn {
   background: var(--color-primary-soft);
   color: var(--color-primary);
-  border: 1px solid var(--color-primary-soft);
+  border: 0.0625rem solid var(--color-primary-soft);
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
@@ -69,7 +69,7 @@ defineEmits<{
   color: #fff;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .app-header {
     flex-direction: column;
     gap: 1rem;

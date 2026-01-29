@@ -7,7 +7,7 @@ const { isDark, toggleTheme } = useTheme()
 
 <template>
   <div class="theme-switch">
-    <div class="icon sun">
+    <div class="icon sun" :class="{ active: !isDark }">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -31,7 +31,7 @@ const { isDark, toggleTheme } = useTheme()
       </svg>
     </div>
     <Switch :model-value="isDark" @update:model-value="toggleTheme" aria-label="Toggle Theme" />
-    <div class="icon moon">
+    <div class="icon moon" :class="{ active: isDark }">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -53,8 +53,8 @@ const { isDark, toggleTheme } = useTheme()
 .theme-switch {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px;
+  gap: 0.5rem;
+  padding: 0.25rem;
 }
 
 .icon {
@@ -65,11 +65,11 @@ const { isDark, toggleTheme } = useTheme()
   transition: color 0.3s ease;
 }
 
-.icon.sun {
+.icon.sun.active {
   color: var(--color-warning);
 }
 
-.icon.moon {
+.icon.moon.active {
   color: var(--color-info);
 }
 </style>

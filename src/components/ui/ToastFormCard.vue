@@ -220,11 +220,11 @@ function handleTypeChange(newType: NotificationType) {
   background: transparent;
   border: none;
   color: var(--color-error);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
   transition: all 0.2s ease;
 }
 
@@ -235,18 +235,18 @@ function handleTypeChange(newType: NotificationType) {
 .config-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 }
 
 .duration-control {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
 }
 .position-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 0.5rem;
 }
 .style-row {
   display: flex;

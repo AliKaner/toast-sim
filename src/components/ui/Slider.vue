@@ -36,7 +36,7 @@ const percentage = computed(() => {
 })
 
 const knobPosition = computed(() => {
-  return `calc(${percentage.value}% - 10px)`
+  return `calc(${percentage.value}% - 0.625rem)`
 })
 
 const containerRef = ref<HTMLElement | null>(null)

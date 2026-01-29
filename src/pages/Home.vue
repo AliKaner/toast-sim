@@ -245,7 +245,7 @@ async function handleCopyCode() {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .builder-layout {
     gap: 1rem;
     width: 100%;

@@ -83,7 +83,7 @@ defineEmits<Emits>()
   color: var(--color-primary);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .copy-btn {
     width: 100%;
   }
