@@ -103,7 +103,7 @@
     },
     "filters": {
       "title": "Filtrele ve Sırala",
-      "description": "Ön ayarları türe göre filtrelemek için **renkli noktaları** kullanın (örn. Başarı için yeşil). Ayrıca sıralamayı değiştirebilirsiniz."
+      "description": "Ön ayarları türe göre filtrelemek için *renkli noktaları* kullanın (örn. Başarı için yeşil). Ayrıca sıralamayı değiştirebilirsiniz."
     },
     "code_export": {
       "title": "Kod Dışa Aktarma",

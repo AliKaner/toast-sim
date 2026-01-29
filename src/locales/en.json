@@ -103,7 +103,7 @@
     },
     "filters": {
       "title": "Filter & Sort",
-      "description": "Use the **colored dots** to filter presets by type (e.g., green for Success, red for Error). You can also toggle the sort order."
+      "description": "Use the *colored dots* to filter presets by type (e.g., green for Success, red for Error). You can also toggle the sort order."
     },
     "code_export": {
       "title": "Code Export",
