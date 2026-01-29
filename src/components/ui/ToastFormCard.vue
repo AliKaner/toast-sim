@@ -39,6 +39,8 @@ const isFormDirty = computed(() => {
 const clearForm = () => {
   Object.assign(props.form, {
     ...DEFAULT_CONFIG,
+    title: '',
+    message: '',
     isPersistent: false,
     presetName: '',
     customIcon: ''

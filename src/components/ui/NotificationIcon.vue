@@ -1,16 +1,22 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { NotificationType } from '../../types/notification'
+import { sanitizeSvg } from '../../utils/sanitize'
 
 interface NotificationIconProps {
   type: NotificationType
   customIcon?: string
 }
 
-defineProps<NotificationIconProps>()
+const props = defineProps<NotificationIconProps>()
+
+const sanitizedIcon = computed(() => {
+  return props.customIcon ? sanitizeSvg(props.customIcon) : ''
+})
 </script>
 
 <template>
-  <div v-if="customIcon" class="icon-custom" v-html="customIcon"></div>
+  <div v-if="customIcon" class="icon-custom" v-html="sanitizedIcon"></div>
   
   <svg v-else-if="type === 'success'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
     <path d="M4.5 12.75l6 6 9-13.5" />

@@ -69,6 +69,8 @@ const CUSTOM_COLOR = '#ec4899'
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex: 1; /* Allow it to take available space */
+  min-width: 0; /* Crucial for flex child truncation */
 }
 
 .type-indicator {
@@ -82,12 +84,17 @@ const CUSTOM_COLOR = '#ec4899'
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
+  flex: 1; /* Allow it to take available space */
+  min-width: 0; /* Crucial for flex child truncation */
 }
 
 .preset-name {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .preset-meta {

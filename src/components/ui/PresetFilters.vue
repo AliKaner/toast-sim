@@ -12,15 +12,13 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: NotificationType | 'all' | 'custom'): void
 }>()
 
-const CUSTOM_COLOR = '#ec4899'
 
 const filters = [
   { value: 'all', color: 'var(--color-text-muted)', label: 'All' },
   { value: 'success', color: TYPE_DEFAULTS.success.bg, label: 'Success' },
   { value: 'error', color: TYPE_DEFAULTS.error.bg, label: 'Error' },
   { value: 'warning', color: TYPE_DEFAULTS.warning.bg, label: 'Warning' },
-  { value: 'info', color: TYPE_DEFAULTS.info.bg, label: 'Info' },
-  { value: 'custom', color: CUSTOM_COLOR, label: 'Custom' }
+  { value: 'info', color: TYPE_DEFAULTS.info.bg, label: 'Info' }
 ]
 </script>
 

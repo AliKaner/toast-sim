@@ -106,15 +106,18 @@ const onFileUpload = (event: Event) => {
 .action-btn {
   background: transparent;
   border: none;
-  color: var(--color-error);
+  color: var(--color-text);
   font-size: 0.75rem;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: underline;
   padding: 0;
+  opacity: 0.8;
 }
 
 .clear-icon-btn {
-  opacity: 0.7;
+  color: var(--color-error);
+  text-decoration: none;
+  opacity: 0.9;
 }
 
 .clear-icon-btn:hover {
@@ -123,8 +126,7 @@ const onFileUpload = (event: Event) => {
 }
 
 .action-btn:hover {
-  color: var(--color-primary);
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .file-upload-container {
@@ -135,9 +137,14 @@ const onFileUpload = (event: Event) => {
 .file-upload-label {
   display: inline-block;
   font-size: 0.75rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   cursor: pointer;
   text-decoration: underline;
+  opacity: 0.8;
+}
+
+.file-upload-label:hover {
+  opacity: 1;
 }
 
 .file-input {
