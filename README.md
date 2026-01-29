@@ -1,26 +1,22 @@
-# 🍞 Toast Notification Builder
+# Toast Notification Builder
 
 A premium, highly customizable toast notification configuration tool built with **Vue 3**, **TypeScript**, and **Pinia**. Design, preview, and export perfect notification styles for your application with real-time feedback.
-
-![Open Graph Banner](./docs/og-image.png)
 
 ## 🚀 Live Demo & Visuals
 
 > [!TIP]
-> **Live Demo:** [Check it out here!](https://your-demo-url.vercel.app)
+> **Live Demo:** [Check it out here!](https://insider-js-case.vercel.app/)
 
 ### � Walkthrough Video
-![Project Walkthrough](./docs/walkthrough.mp4)
+https://github.com/user-attachments/assets/4f222759-2142-4294-8c33-e84d029a65b7
+
 
 ### �📱 Preview
-| Desktop View | Mobile View |
-| :---: | :---: |
-| ![Desktop Preview](./docs/desktop-preview.png) | ![Mobile Preview](./docs/mobile-preview.png) |
+<img width="663" height="649" alt="Screenshot 2026-01-29 at 17 42 46" src="https://github.com/user-attachments/assets/63299138-8216-49f2-8415-d31e94766b2c" />
+<img width="313" height="611" alt="Screenshot 2026-01-29 at 17 43 42" src="https://github.com/user-attachments/assets/a855da52-6462-4bf5-8b9c-7eff74a7347a" />
 
 ### 📊 Performance & SEO
-| Google Lighthouse | Accessibility |
-| :---: | :---: |
-| ![Lighthouse Score](./docs/lighthouse.png) | ![A11y Score](./docs/a11y.png) |
+<img width="384" height="140" alt="Screenshot 2026-01-29 at 17 40 56" src="https://github.com/user-attachments/assets/9d2865da-7e3c-4471-893d-72e385cb0a1f" />
 
 ---
 
