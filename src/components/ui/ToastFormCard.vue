@@ -28,12 +28,33 @@ const toastStore = useToastStore()
 const { t } = useI18n()
 
 const isFormDirty = computed(() => {
-  return props.form.title !== DEFAULT_CONFIG.title ||
-         props.form.message !== DEFAULT_CONFIG.message ||
-         props.form.customIcon !== '' ||
-         props.form.presetName !== '' ||
-         props.form.backgroundColor !== DEFAULT_CONFIG.backgroundColor ||
-         props.form.type !== DEFAULT_CONFIG.type
+  // Check if matches default config
+  const isDefault = props.form.title === DEFAULT_CONFIG.title &&
+                    props.form.message === DEFAULT_CONFIG.message &&
+                    props.form.customIcon === '' &&
+                    props.form.presetName === '' &&
+                    props.form.backgroundColor === DEFAULT_CONFIG.backgroundColor &&
+                    props.form.type === DEFAULT_CONFIG.type &&
+                    props.form.duration === DEFAULT_CONFIG.duration &&
+                    props.form.position === DEFAULT_CONFIG.position && 
+                    props.form.showIcon === DEFAULT_CONFIG.showIcon &&
+                    props.form.showCloseButton === DEFAULT_CONFIG.showCloseButton &&
+                    props.form.animation === DEFAULT_CONFIG.animation
+
+  // Check if matches "cleared" state (empty strings)
+  const isCleared = props.form.title === '' &&
+                    props.form.message === '' &&
+                    props.form.customIcon === '' &&
+                    props.form.presetName === '' &&
+                    props.form.backgroundColor === DEFAULT_CONFIG.backgroundColor &&
+                    props.form.type === DEFAULT_CONFIG.type &&
+                    props.form.duration === DEFAULT_CONFIG.duration &&
+                    props.form.position === DEFAULT_CONFIG.position &&
+                    props.form.showIcon === DEFAULT_CONFIG.showIcon &&
+                    props.form.showCloseButton === DEFAULT_CONFIG.showCloseButton &&
+                    props.form.animation === DEFAULT_CONFIG.animation
+
+  return !(isDefault || isCleared)
 })
 
 const clearForm = () => {
@@ -86,7 +107,7 @@ const animationOptions = computed(() =>
 </script>
 
 <template>
-  <Card :label="t('form.card_title')" class="toast-form-card">
+  <Card :label="t('form.card_title')" class="toast-form-card" id="tour-config-form">
     <template #header>
       <button 
         v-if="isFormDirty" 

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import ThemeSwitch from '@/components/ui/ThemeSwitch.vue'
 import LanguageSwitch from '@/components/ui/LanguageSwitch.vue'
+
+defineEmits<{
+  (e: 'start-tour'): void
+}>()
 </script>
 
 <template>
@@ -12,6 +16,7 @@ import LanguageSwitch from '@/components/ui/LanguageSwitch.vue'
       </div>
     </div>
     <div class="header-actions">
+      <button class="demo-btn" @click="$emit('start-tour')">Demo</button>
       <LanguageSwitch />
       <ThemeSwitch />
     </div>
@@ -45,6 +50,23 @@ import LanguageSwitch from '@/components/ui/LanguageSwitch.vue'
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.demo-btn {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary-soft);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.demo-btn:hover {
+  background: var(--color-primary);
+  color: #fff;
 }
 
 @media (max-width: 480px) {

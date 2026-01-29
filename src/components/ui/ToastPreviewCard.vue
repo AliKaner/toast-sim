@@ -58,9 +58,9 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <div class="toast-preview-card">
+  <div class="toast-preview-card" id="tour-preview-card">
     <Card :label="t('preview.card_title')">
-      <div class="preview-container">
+      <div class="preview-container" id="tour-preview-container">
         <Toast
           :notification="previewNotification"
           @close="() => {}"
@@ -74,9 +74,9 @@ const { t } = useI18n()
       />
     </Card>
 
-    <Card :label="t('preview.saved_presets_title')">
+    <Card :label="t('preview.saved_presets_title')" id="tour-presets-section">
       <template #header>
-        <div class="preset-header-actions">
+        <div class="preset-header-actions" id="tour-preset-filters">
           <PresetFilters v-model="filterType" />
           <div class="header-divider"></div>
           <PresetSortToggle v-model:is-descending="isDescending" />
@@ -111,7 +111,7 @@ const { t } = useI18n()
       </div>
     </Card>
 
-    <Card :label="t('preview.code_export_title')" class="code-export-card">
+    <Card :label="t('preview.code_export_title')" class="code-export-card" id="tour-code-export">
       <CodeExport 
         :highlighted-code="highlightedCode" 
         @copy="emit('copy-code')" 

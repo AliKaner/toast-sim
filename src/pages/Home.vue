@@ -13,8 +13,15 @@ import { nanoid } from 'nanoid'
 import { highlightCode, generateNotificationCode } from '../utils/codeHighlight'
 import { TYPE_DEFAULTS, TYPE_TITLES, DEFAULT_CONFIG } from '../constants/notification'
 import { useI18n } from 'vue-i18n'
+import { onMounted } from 'vue'
+import { useTour } from '../composables/useTour'
 
 const { t, locale } = useI18n()
+const { startTour } = useTour()
+
+onMounted(() => {
+  startTour()
+})
 
 const toastStore = useToastStore()
 const presetStore = usePresetStore()
@@ -127,7 +134,7 @@ function handleCopyCode() {
   <div class="home-page">
     <ToastList />
 
-    <Header>
+    <Header @start-tour="startTour(true)">
       <h1 class="logo">{{ t('home.title') }}</h1>
     </Header>
 

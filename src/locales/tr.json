@@ -83,5 +83,36 @@
     "fade": "Soluk",
     "slide": "Kayma",
     "bounce": "Zıplama"
+  },
+  "tour": {
+    "welcome": {
+      "title": "Insider Toast Builder'a Hoş Geldiniz!",
+      "description": "Güzel toast bildirimleri oluşturmaya başlamanıza yardımcı olmak için kısa bir tura çıkalım."
+    },
+    "configuration": {
+      "title": "Yapılandırma",
+      "description": "Bildiriminizi buradan özelleştirin. Türleri, renkleri, konumları ve animasyonları seçin."
+    },
+    "preview": {
+      "title": "Canlı Önizleme",
+      "description": "Değişikliklerinizi gerçek zamanlı görün. Test etmek için 'Bildirimi Göster' butonunu kullanın."
+    },
+    "presets": {
+      "title": "Kayıtlı Ön Ayarlar",
+      "description": "Kayıtlı bildirimlerinizi buradan yönetirsiniz. Aşağıda ön ayar listesini görebilirsiniz."
+    },
+    "filters": {
+      "title": "Filtrele ve Sırala",
+      "description": "Ön ayarları türe göre filtrelemek için **renkli noktaları** kullanın (örn. Başarı için yeşil). Ayrıca sıralamayı değiştirebilirsiniz."
+    },
+    "code_export": {
+      "title": "Kod Dışa Aktarma",
+      "description": "Kullanmaya hazır mısınız? Oluşturulan Vue kodunu kopyalayın ve doğrudan projenizde kullanın."
+    },
+    "buttons": {
+      "done": "Tamamla",
+      "next": "İleri",
+      "prev": "Geri"
+    }
   }
 }

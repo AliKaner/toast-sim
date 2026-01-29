@@ -83,5 +83,36 @@
     "fade": "Fade",
     "slide": "Slide",
     "bounce": "Bounce"
+  },
+  "tour": {
+    "welcome": {
+      "title": "Welcome to Insider Toast Builder!",
+      "description": "Let's take a quick tour to help you get started with creating beautiful toast notifications."
+    },
+    "configuration": {
+      "title": "Configuration",
+      "description": "Customize your notification here. Choose types, colors, positions, and animations."
+    },
+    "preview": {
+      "title": "Live Preview",
+      "description": "See your changes in real-time. Use the 'Show Notification' button to test it out."
+    },
+    "presets": {
+      "title": "Saved Presets Control",
+      "description": "This is where you manage your saved notifications. You can see your list of presets below."
+    },
+    "filters": {
+      "title": "Filter & Sort",
+      "description": "Use the **colored dots** to filter presets by type (e.g., green for Success, red for Error). You can also toggle the sort order."
+    },
+    "code_export": {
+      "title": "Code Export",
+      "description": "Ready to use? Copy the generated Vue code and use it directly in your project."
+    },
+    "buttons": {
+      "done": "Done",
+      "next": "Next",
+      "prev": "Previous"
+    }
   }
 }
