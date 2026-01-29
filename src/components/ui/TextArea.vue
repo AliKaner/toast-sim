@@ -84,11 +84,11 @@ const handleBlur = (event: FocusEvent) => {
   font-family: inherit;
   color: var(--color-text);
   background-color: var(--color-input-bg);
-  border: 2px solid var(--color-border);
+  border: 0.125rem solid var(--color-border);
   border-radius: var(--radius-lg);
   outline: none;
   transition: all 0.2s ease;
-  min-height: 100px;
+  min-height: 6.25rem;
 }
 
 .base-textarea::placeholder {
@@ -102,7 +102,7 @@ const handleBlur = (event: FocusEvent) => {
 
 .base-textarea:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-soft);
+  box-shadow: 0 0 0 0.1875rem var(--color-primary-soft);
 }
 
 .base-textarea--error {
@@ -111,7 +111,30 @@ const handleBlur = (event: FocusEvent) => {
 }
 
 .base-textarea--error:focus {
-  box-shadow: 0 0 0 3px var(--color-error-soft);
+  box-shadow: 0 0 0 0.1875rem var(--color-error-soft);
+}
+
+.base-textarea::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.base-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.base-textarea::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 0.25rem;
+}
+
+.base-textarea::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+.base-textarea::-webkit-resizer {
+  background-image: linear-gradient(135deg, transparent 50%, var(--color-border) 50%);
+  background-origin: content-box;
+  background-clip: content-box;
 }
 
 .base-textarea--disabled {

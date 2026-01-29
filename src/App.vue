@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { useTheme } from '@/composables/useTheme'
 
+
+useTheme()
 </script>
 
 <template>
@@ -8,25 +11,59 @@ import { RouterView } from 'vue-router'
 </template>
 
 <style lang="scss">
-$primary-color: #42b883;
-$secondary-color: #35495e;
-$background-color: #1a1a2e;
-$text-color: #ffffff;
-$box-shadow: 0 4px 20px rgba(66, 184, 131, 0.3);
-
 :root {
-  --color-primary: #42b883;
-  --color-primary-soft: rgba(66, 184, 131, 0.1);
+  --color-primary: #6400ee;
+  --color-primary-soft: rgba(100, 0, 238, 0.1);
   --color-secondary: #35495e;
+  
+
+  --color-success: #5bca4d;
+  --color-success-soft: rgba(91, 202, 77, 0.1);
+  --color-error: #d84947;
+  --color-error-soft: rgba(216, 73, 71, 0.1);
+  --color-warning: #e3a600;
+  --color-warning-soft: rgba(227, 166, 0, 0.1);
+  --color-info: #666efd;
+  --color-info-soft: rgba(102, 110, 253, 0.1);
+
+
   --color-bg: #1a1a2e;
+  --color-surface: #1e293b;
   --color-text: #ffffff;
   --color-text-muted: #94a3b8;
-  --color-error: #ef4444;
-  --color-error-soft: rgba(239, 68, 68, 0.1);
+  --color-text-secondary: #64748b;
   --color-border: #334155;
   --color-input-bg: #1e293b;
+  --color-preview-bg: #16213e;
+  
+
+  --radius-xxl: 16px;
+  --radius-xl: 14px;
   --radius-lg: 12px;
+  --radius-base: 10px;
+  --radius-md: 8px;
+  --radius-sm: 6px;
+  --radius-xs: 4px;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+
+  --bg-gradient-start: #1a1a2e;
+  --bg-gradient-end: #16213e;
+}
+
+[data-theme='light'] {
+  --color-bg: #f0f1f5;
+  --color-surface: #ffffff;
+  --color-text: #000000;
+  --color-text-muted: #555555;
+  --color-text-secondary: #475569;
+  --color-border: #e0e0e1;
+  --color-input-bg: #ffffff;
+  --color-preview-bg: #f7f8fa;
+  
+
+  --bg-gradient-start: #f0f1f5;
+  --bg-gradient-end: #f0f1f5;
 }
 
 * {
@@ -37,15 +74,44 @@ $box-shadow: 0 4px 20px rgba(66, 184, 131, 0.3);
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, $background-color 0%, #16213e 100%);
-  color: $text-color;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  color: var(--color-text);
   min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+::-webkit-scrollbar {
+  width: 0.375rem;
+  height: 0.375rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 0.625rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
 }
 
 #app {
   width: 100%;
   min-height: 100vh;
+  position: relative;
 }
+
+
 
 .fade-enter-active,
 .fade-leave-active {

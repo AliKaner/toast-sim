@@ -1,33 +1,23 @@
 <script setup lang="ts">
 import type { Preset } from '../../types/notification'
+import { TYPE_DEFAULTS } from '../../constants/notification'
+import { formatDuration, formatPosition } from '../../utils/format'
 import Button from './Button.vue'
 
-defineProps<{
+interface PresetCardProps {
   preset: Preset
-}>()
+}
+
+defineProps<PresetCardProps>()
 
 defineEmits<{
   load: [preset: Preset]
   delete: [preset: Preset]
 }>()
 
-const typeColors: Record<string, string> = {
-  success: '#22c55e',
-  error: '#ef4444',
-  warning: '#f59e0b',
-  info: '#3b82f6'
-}
+const CUSTOM_COLOR = '#ec4899'
 
-function formatDuration(ms: number): string {
-  if (ms === 0) return 'Persistent'
-  return `${ms / 1000}s`
-}
 
-function formatPosition(position: string): string {
-  return position.split('-').map(word => 
-    word.charAt(0).toUpperCase() + word.slice(1)
-  ).join(' ')
-}
 </script>
 
 <template>
@@ -35,22 +25,27 @@ function formatPosition(position: string): string {
     <div class="preset-info">
       <div 
         class="type-indicator" 
-        :style="{ backgroundColor: typeColors[preset.config.type] }"
+        :style="{ backgroundColor: preset.config.customIcon ? CUSTOM_COLOR : TYPE_DEFAULTS[preset.config.type].bg }"
       ></div>
       <div class="preset-details">
         <span class="preset-name">{{ preset.name }}</span>
-        <span class="preset-meta">
-          {{ formatDuration(preset.config.duration) }} • {{ formatPosition(preset.config.position) }}
-        </span>
+        <div class="preset-meta">
+          <span>{{ formatDuration(preset.config.duration) }}</span>
+          <span class="meta-separator">{{ formatPosition(preset.config.position) }}</span>
+        </div>
       </div>
     </div>
     <div class="preset-actions">
       <Button 
         text="Load" 
+        variant="outline"
+        size="small"
         @click="$emit('load', preset)"
       />
       <Button 
         text="Delete" 
+        variant="outline"
+        size="small"
         @click="$emit('delete', preset)"
       />
     </div>
@@ -62,23 +57,20 @@ function formatPosition(position: string): string {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.preset-card:last-child {
-  border-bottom: none;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  background: var(--color-surface-hover);
 }
 
 .preset-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .type-indicator {
-  width: 10px;
-  height: 10px;
+  width: 0.625rem;
+  height: 0.625rem;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -86,22 +78,35 @@ function formatPosition(position: string): string {
 .preset-details {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.125rem;
 }
 
 .preset-name {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text);
 }
 
 .preset-meta {
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
   color: var(--color-text-secondary);
+}
+
+.meta-separator::before {
+  content: "";
+  display: inline-block;
+  width: 0.1875rem;
+  height: 0.1875rem;
+  background-color: currentColor;
+  border-radius: 50%;
+  margin: 0 0.375rem;
+  vertical-align: middle;
 }
 
 .preset-actions {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
 }
 </style>

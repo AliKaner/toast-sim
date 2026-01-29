@@ -4,13 +4,14 @@ interface Props {
   required?: boolean;
   error?: string;
   hint?: string;
+  noFocusColor?: boolean;
 }
 
 defineProps<Props>();
 </script>
 
 <template>
-  <div class="form-item-wrapper" :class="{ 'has-error': error }">
+  <div class="form-item-wrapper" :class="{ 'has-error': error, 'no-focus-color': noFocusColor }">
     <div v-if="label" class="label-container">
       <label class="label">
         {{ label }}
@@ -39,11 +40,14 @@ defineProps<Props>();
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.form-item-wrapper:last-child {
+  margin-bottom: 0;
+}
+
 .label-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.25rem;
 }
 
 .label {
@@ -71,7 +75,7 @@ defineProps<Props>();
   transition: transform 0.2s ease;
 }
 
-.form-item-wrapper:focus-within .label {
+.form-item-wrapper:not(.no-focus-color):focus-within .label {
   color: var(--color-primary);
 }
 

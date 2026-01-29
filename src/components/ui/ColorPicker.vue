@@ -1,10 +1,24 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import FormItemWrapper from './FormItemWrapper.vue'
 
-const model = defineModel<string>({ default: '' })
+const model = defineModel<string>({ default: '#ffffff' })
+
+interface ColorPickerProps {
+  label?: string
+  required?: boolean
+  error?: string
+  hint?: string
+}
+
+defineProps<ColorPickerProps>()
+
+const hexWithoutHash = computed(() => {
+  return model.value.replace('#', '').replace(/[^0-9A-Fa-f]/g, '')
+})
 
 const displayColor = computed(() => {
-  const hex = model.value.replace(/[^0-9A-Fa-f]/g, '')
+  const hex = hexWithoutHash.value
   if (hex.length === 6) {
     return `#${hex}`
   }
@@ -13,60 +27,87 @@ const displayColor = computed(() => {
 
 function onInput(event: Event) {
   const input = event.target as HTMLInputElement
-  // Sadece hex karakterleri kabul et (0-9, A-F, a-f)
   const value = input.value.replace(/[^0-9A-Fa-f]/g, '').slice(0, 6)
-  model.value = value
+  model.value = `#${value}`
 }
 </script>
 
 <template>
-  <div class="color-picker">
-    <div class="color-preview" :style="{ backgroundColor: displayColor }"></div>
-    <span class="hash">#</span>
-    <input
-      type="text"
-      class="color-input"
-      :value="model"
-      @input="onInput"
-      maxlength="6"
-      placeholder="000000"
-    />
-  </div>
+  <FormItemWrapper 
+    :label="label" 
+    :required="required" 
+    :error="error" 
+    :hint="hint"
+    no-focus-color
+  >
+    <div class="color-picker">
+      <div class="color-preview" :style="{ backgroundColor: displayColor }"></div>
+      <div class="input-wrapper">
+        <span class="hash">#</span>
+        <input
+          type="text"
+          class="color-input"
+          :value="hexWithoutHash"
+          @input="onInput"
+          maxlength="6"
+          placeholder="000000"
+        />
+      </div>
+    </div>
+  </FormItemWrapper>
 </template>
 
 <style scoped>
 .color-picker {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  padding: 8px 12px;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .color-preview {
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
+  width: 2.125rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  border: 0.0625rem solid var(--color-border);
   flex-shrink: 0;
 }
 
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  background: var(--color-surface);
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 0 0.75rem;
+  height: 2.5rem;
+  transition: border-color 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.1875rem var(--color-primary-soft);
+}
+
 .hash {
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   font-family: monospace;
-  font-size: 14px;
+  font-size: 0.875rem;
+  user-select: none;
 }
 
 .color-input {
   border: none;
   background: transparent;
   font-family: monospace;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--color-text);
-  width: 70px;
+  width: 100%;
   outline: none;
+  padding: 0;
+  height: 100%;
 }
 
 .color-input::placeholder {

@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (e: 'showNotification'): void
 }>()
 
-// Convert NotificationConfig to ActiveNotification for preview
+
 const previewNotification = computed<ActiveNotification>(() => ({
   ...props.config,
   createdAt: Date.now()

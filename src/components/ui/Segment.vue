@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import FormItemWrapper from './FormItemWrapper.vue'
 interface SegmentOption {
     text: string;
-    icon?: string;
     value: string | number;
 }
 
@@ -9,7 +9,10 @@ interface SegmentProps {
     options: SegmentOption[];
     modelValue: string | number;
     disabled?: boolean;
-    variant?: 'primary' | 'success';
+    label?: string;
+    required?: boolean;
+    error?: string;
+    hint?: string;
 }
 
 defineProps<SegmentProps>();
@@ -24,10 +27,14 @@ const handleSelect = (value: string | number) => {
 </script>
 
 <template>
-    <div class="segment" :class="[
-        { 'segment--disabled': disabled },
-        `segment--${variant || 'primary'}`
-    ]">
+  <FormItemWrapper 
+    :label="label" 
+    :required="required" 
+    :error="error" 
+    :hint="hint"
+    no-focus-color
+  >
+    <div class="segment" :class="{ 'segment--disabled': disabled }">
         <button
             v-for="option in options"
             :key="option.value"
@@ -36,10 +43,10 @@ const handleSelect = (value: string | number) => {
             :disabled="disabled"
             @click="handleSelect(option.value)"
         >
-            <span v-if="option.icon" class="segment-option-icon">{{ option.icon }}</span>
             <span class="segment-option-text">{{ option.text }}</span>
         </button>
     </div>
+  </FormItemWrapper>
 </template>
 
 <style scoped>
@@ -58,14 +65,14 @@ const handleSelect = (value: string | number) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 0.25rem;
     padding: 0.625rem 1rem;
     font-size: 0.875rem;
     font-family: inherit;
     font-weight: 500;
-    color: var(--color-text-muted);
+    color: var(--color-text);
     background-color: transparent;
-    border: none;
+    border: 0.0625rem solid var(--color-border);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -73,30 +80,19 @@ const handleSelect = (value: string | number) => {
 
 .segment-option:hover:not(:disabled):not(.segment-option--active) {
     color: var(--color-text);
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--color-surface-hover);
 }
 
 .segment-option--active {
-    color: var(--color-text);
-    border-radius: 3px;
-}
-
-.segment--primary .segment-option--active {
+    color: var(--color-button-text, #fff);
     background-color: var(--color-primary);
-    box-shadow: 0 2px 8px rgba(66, 184, 131, 0.3);
-}
-
-.segment--success .segment-option--active {
-    background-color: var(--color-success, #22c55e);
-    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+    border-color: var(--color-primary);
+    box-shadow: 0 0.125rem 0.5rem var(--color-primary-soft);
+    border-radius: var(--radius-md);
 }
 
 .segment-option:disabled {
     cursor: not-allowed;
-}
-
-.segment-option-icon {
-    font-size: 1rem;
 }
 
 .segment-option-text {

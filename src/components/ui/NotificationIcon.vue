@@ -1,0 +1,44 @@
+<script setup lang="ts">
+import type { NotificationType } from '../../types/notification'
+
+interface NotificationIconProps {
+  type: NotificationType
+  customIcon?: string
+}
+
+defineProps<NotificationIconProps>()
+</script>
+
+<template>
+  <div v-if="customIcon" class="icon-custom" v-html="customIcon"></div>
+  
+  <svg v-else-if="type === 'success'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 12.75l6 6 9-13.5" />
+  </svg>
+
+  <svg v-else-if="type === 'error'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 18L18 6M6 6l12 12" />
+  </svg>
+
+  <svg v-else-if="type === 'warning'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+  </svg>
+
+  <svg v-else-if="type === 'info'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 9v9m0-12.5v.01" />
+  </svg>
+</template>
+
+<style scoped>
+svg, .icon-custom {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.icon-custom :deep(svg) {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+</style>
