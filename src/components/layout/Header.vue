@@ -5,8 +5,11 @@ import LanguageSwitch from '@/components/ui/LanguageSwitch.vue'
 
 <template>
   <header class="app-header">
-    <div class="header-content">
-      <slot />
+    <div class="header-left">
+      <img src="/faviconV2.png" alt="Logo" class="header-logo" />
+      <div class="header-content">
+        <slot />
+      </div>
     </div>
     <div class="header-actions">
       <LanguageSwitch />
@@ -25,6 +28,17 @@ import LanguageSwitch from '@/components/ui/LanguageSwitch.vue'
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-logo {
+  height: 32px;
+  width: auto;
 }
 
 .header-actions {

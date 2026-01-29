@@ -41,15 +41,11 @@ watch(() => form.type, (newType) => {
   form.textColor = defaults.text
 })
 
-// Watch for locale changes to update default values
-// Watch for locale changes to update default values
 watch(locale, () => {
-  // Re-apply defaults based on current type
   if (!form.message || form.message === 'Your changes have been saved successfully.' || form.message === 'Değişiklikleriniz başarıyla kaydedildi.') {
       form.message = t(DEFAULT_CONFIG.message)
   }
 
-  // Update title based on current type
   const typeTitleKey = TYPE_TITLES[form.type]
   if (typeTitleKey) {
      form.title = t(typeTitleKey)
