@@ -43,13 +43,13 @@ const filters = [
 <style scoped>
 .preset-filters {
   display: flex;
-  gap: 0.375rem;
+  gap: 0.75rem;
   align-items: center;
 }
 
 .filter-dot {
-  width: 0.875rem;
-  height: 0.875rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   border: 0.0625rem solid var(--color-border-light, rgba(255, 255, 255, 0.1));
   cursor: pointer;
@@ -73,8 +73,8 @@ const filters = [
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 0.25rem;
-  height: 0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
   background: var(--color-button-text, #fff);
   border-radius: 50%;
   pointer-events: none;

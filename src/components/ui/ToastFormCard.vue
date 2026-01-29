@@ -8,19 +8,15 @@ import TextArea from './TextArea.vue'
 import Segment from './Segment.vue'
 import DurationSlider from './DurationSlider.vue'
 import ColorPicker from './ColorPicker.vue'
-import Checkbox from './Checkbox.vue'
 import NotificationTypeSelector from './NotificationTypeSelector.vue'
 import CustomIconInput from './CustomIconInput.vue'
 import OptionsGroup from './OptionsGroup.vue'
-import FormItemWrapper from './FormItemWrapper.vue'
 import FormSection from './FormSection.vue'
 import type { FormState } from '../../types/notification'
 import { useToastStore } from '../../composables/useToastStore'
 import {
   ANIMATION_OPTIONS,
   DEFAULT_CONFIG,
-  POSITION_OPTIONS,
-  TYPE_OPTIONS
 } from '../../constants/notification'
 
 interface Props {
@@ -103,7 +99,6 @@ const animationOptions = computed(() =>
           id="notification-type"
           name="type"
           test-id="type-selector"
-          tabindex="1"
           v-model="form.type" 
           :has-custom-icon="!!form.customIcon" 
 
@@ -114,7 +109,6 @@ const animationOptions = computed(() =>
           name="title"
           :label="t('form.labels.title')"
           test-id="title-input"
-          tabindex="2"
           v-model="form.title" 
           :placeholder="t('form.placeholders.title')" 
         />
@@ -123,7 +117,6 @@ const animationOptions = computed(() =>
           name="message"
           :label="t('form.labels.message')"
           test-id="message-input"
-          tabindex="3"
           v-model="form.message" 
           :placeholder="t('form.placeholders.message')" 
           :rows="3" 
@@ -132,7 +125,6 @@ const animationOptions = computed(() =>
           id="notification-duration"
           name="duration"
           test-id="duration-slider"
-          tabindex="4"
           v-model="form.duration" 
           :min="1" 
           :max="10" 
@@ -142,14 +134,12 @@ const animationOptions = computed(() =>
           :checkbox-label="t('form.labels.persistent')"
           v-model:checkbox-value="form.isPersistent"
           checkbox-test-id="persistent-checkbox"
-          checkbox-tabindex="5"
           :checkbox-disabled="!form.showCloseButton"
         />
         <PositionSelector
           id="position-selector"
           name="position"
           test-id="position-selector"
-          tabindex="6"
           v-model="form.position"
           :label="t('form.labels.position')"
         />
@@ -165,7 +155,6 @@ const animationOptions = computed(() =>
             id="bg-color-picker"
             name="backgroundColor"
             test-id="bg-color-picker"
-            tabindex="7"
             v-model="form.backgroundColor" 
             :label="t('form.labels.background')" 
           />
@@ -173,7 +162,6 @@ const animationOptions = computed(() =>
             id="text-color-picker"
             name="textColor"
             test-id="text-color-picker"
-            tabindex="8"
             v-model="form.textColor" 
             :label="t('form.labels.text_color')" 
           />
@@ -187,7 +175,6 @@ const animationOptions = computed(() =>
           name="customIcon"
           :label="t('form.labels.custom_icon')"
           test-id="custom-icon-input"
-          tabindex="11"
           v-model="form.customIcon"
           :placeholder="t('form.placeholders.custom_icon')"
           :rows="2"
@@ -199,7 +186,6 @@ const animationOptions = computed(() =>
         id="animation-segment"
         name="animation"
         test-id="animation-segment"
-        tabindex="12"
         v-model="form.animation" 
         :options="animationOptions"
         :label="t('form.labels.animation')"

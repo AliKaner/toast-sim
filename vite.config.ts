@@ -15,6 +15,14 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'pinia', 'vue-router', 'vue-i18n', 'zod'],
+          'syntax-highlight': ['highlight.js', '@highlightjs/vue-plugin']
+        }
+      }
+    }
   }
 })
