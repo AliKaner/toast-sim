@@ -22,8 +22,7 @@ const meta = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      presetName: '',
-      isPersistent: false,
+      createdAt: Date.now(),
     },
   },
 } satisfies Meta<typeof Toast>;
@@ -48,8 +47,7 @@ export const Error: Story = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      presetName: '',
-      isPersistent: false,
+      createdAt: Date.now(),
     },
   },
 };
@@ -69,8 +67,7 @@ export const Warning: Story = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      presetName: '',
-      isPersistent: false,
+      createdAt: Date.now(),
     },
   },
 };
@@ -90,8 +87,7 @@ export const Info: Story = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      presetName: '',
-      isPersistent: false,
+      createdAt: Date.now(),
     },
   },
 };
@@ -111,8 +107,7 @@ export const Persistent: Story = {
       showCloseButton: true,
       animation: 'slide',
       customIcon: '',
-      presetName: '',
-      isPersistent: true,
+      createdAt: Date.now(),
     },
   },
 };
