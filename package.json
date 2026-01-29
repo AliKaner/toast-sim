@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
@@ -17,7 +19,18 @@
     "jest-environment-jsdom": "^30.2.0",
     "ts-jest": "^29.4.6",
     "typescript": "~5.9.3",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "storybook": "^10.2.1",
+    "@storybook/vue3-vite": "^10.2.1",
+    "@chromatic-com/storybook": "^5.0.0",
+    "@storybook/addon-vitest": "^10.2.1",
+    "@storybook/addon-a11y": "^10.2.1",
+    "@storybook/addon-docs": "^10.2.1",
+    "@storybook/addon-onboarding": "^10.2.1",
+    "vitest": "^4.0.18",
+    "playwright": "^1.58.0",
+    "@vitest/browser-playwright": "^4.0.18",
+    "@vitest/coverage-v8": "^4.0.18"
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
