@@ -4,7 +4,7 @@ import CustomIconActions from './CustomIconActions.vue';
 import FormItemWrapper from './FormItemWrapper.vue';
 
 interface Props {
-  modelValue: string;
+  modelValue?: string;
   label?: string;
   placeholder?: string;
   rows?: number;

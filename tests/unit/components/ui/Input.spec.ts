@@ -4,7 +4,7 @@ import Input from '@/components/ui/Input.vue';
 
 describe('Input.vue', () => {
   it('renders correctly with default props', () => {
-    const wrapper = mount(Input);
+    const wrapper = mount(Input, { props: { modelValue: '' } });
     const input = wrapper.find('input');
     expect(input.exists()).toBe(true);
     expect(input.attributes('type')).toBe('text');
@@ -13,7 +13,7 @@ describe('Input.vue', () => {
   it('renders label when provided', () => {
     const label = 'Test Label';
     const wrapper = mount(Input, {
-      props: { label }
+      props: { label, modelValue: '' }
     });
     expect(wrapper.text()).toContain(label);
   });
@@ -28,7 +28,7 @@ describe('Input.vue', () => {
 
   it('applies disabled state', () => {
     const wrapper = mount(Input, {
-      props: { disabled: true }
+      props: { disabled: true, modelValue: '' }
     });
     const input = wrapper.find('input');
     expect(input.element.disabled).toBe(true);
@@ -36,7 +36,7 @@ describe('Input.vue', () => {
 
   it('applies error styling', () => {
     const wrapper = mount(Input, {
-      props: { error: 'Error' }
+      props: { error: 'Error', modelValue: '' }
     });
     const input = wrapper.find('input');
     expect(input.classes()).toContain('base-input--error');

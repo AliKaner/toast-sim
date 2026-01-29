@@ -4,7 +4,7 @@ import TextArea from '@/components/ui/TextArea.vue';
 
 describe('TextArea.vue', () => {
   it('renders correctly with default props', () => {
-    const wrapper = mount(TextArea);
+    const wrapper = mount(TextArea, { props: { modelValue: '' } });
     expect(wrapper.find('textarea').exists()).toBe(true);
     const textarea = wrapper.find('textarea');
     expect(textarea.classes()).toContain('base-textarea');
@@ -13,7 +13,7 @@ describe('TextArea.vue', () => {
   it('renders label when provided', () => {
     const label = 'Test Label';
     const wrapper = mount(TextArea, {
-      props: { label }
+      props: { label, modelValue: '' }
     });
     expect(wrapper.text()).toContain(label);
   });
@@ -21,7 +21,7 @@ describe('TextArea.vue', () => {
   it('renders placeholder when provided', () => {
     const placeholder = 'Enter text here';
     const wrapper = mount(TextArea, {
-      props: { placeholder }
+      props: { placeholder, modelValue: '' }
     });
     const textarea = wrapper.find('textarea');
     expect(textarea.attributes('placeholder')).toBe(placeholder);
@@ -40,7 +40,7 @@ describe('TextArea.vue', () => {
   it('applies error styling and aria attributes when error is provided', () => {
     const error = 'Error message';
     const wrapper = mount(TextArea, {
-      props: { error }
+      props: { error, modelValue: '' }
     });
     const textarea = wrapper.find('textarea');
     expect(textarea.classes()).toContain('base-textarea--error');
@@ -49,7 +49,7 @@ describe('TextArea.vue', () => {
 
   it('applies disabled state', () => {
     const wrapper = mount(TextArea, {
-      props: { disabled: true }
+      props: { disabled: true, modelValue: '' }
     });
     const textarea = wrapper.find('textarea');
     expect(textarea.element.disabled).toBe(true);
@@ -58,7 +58,7 @@ describe('TextArea.vue', () => {
 
   it('applies readonly state', () => {
     const wrapper = mount(TextArea, {
-      props: { readonly: true }
+      props: { readonly: true, modelValue: '' }
     });
     const textarea = wrapper.find('textarea');
     expect(textarea.element.readOnly).toBe(true);
