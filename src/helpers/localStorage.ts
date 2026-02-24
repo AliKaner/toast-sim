@@ -19,6 +19,7 @@ export function cleanupExpiredItems(): void {
           window.localStorage.removeItem(key)
         }
       } catch {
+        // JSON parse hatası - geçersiz item, atla
       }
     }
   } catch (error) {

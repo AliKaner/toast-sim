@@ -10,7 +10,7 @@ defineEmits<{
 <template>
   <header class="app-header">
     <div class="header-left">
-      <img src="/faviconV2.png" alt="Logo" class="header-logo" />
+      <img src="/favicon.svg" alt="Logo" class="header-logo" />
       <div class="header-content">
         <slot />
       </div>
