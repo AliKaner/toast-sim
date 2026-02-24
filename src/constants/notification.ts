@@ -48,5 +48,8 @@ export const DEFAULT_CONFIG = {
   textColor: '#FFFFFF',
   showIcon: true,
   showCloseButton: true,
-  animation: 'slide' as AnimationType
+  animation: 'slide' as AnimationType,
+  presetName: '',
+  customIcon: '',
+  isPersistent: false,
 }

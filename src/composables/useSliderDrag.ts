@@ -29,7 +29,7 @@ export function useSliderDrag(options: UseSliderDragOptions) {
 
     const percent = relativeX / trackWidth
     const range = max.value - min.value
-    const newValue = Math.round(min.value + percent * range)
+    const newValue =  Math.round(min.value + percent * range)
 
     onValueChange(newValue)
   }

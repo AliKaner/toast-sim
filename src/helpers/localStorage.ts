@@ -19,7 +19,6 @@ export function cleanupExpiredItems(): void {
           window.localStorage.removeItem(key)
         }
       } catch {
-        // ignore
       }
     }
   } catch (error) {

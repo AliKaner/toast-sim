@@ -26,26 +26,19 @@ const { t, locale } = useI18n()
 const { startTour } = useTour()
 
 onMounted(() => {
+  //burada on mounted kullandım çünkü vue'da direkt olarak life cycle metodları kullanılabiliyormuş
+  //ben de dedim ki neden olmasın page tamamen yüklendiği zaman bu
+  //açılsın
   startTour()
 })
 
+// Presetlerin ve toastların store'ları çağırılıyor 
 const toastStore = useToastStore()
 const presetStore = usePresetStore()
 
+//burada aldıklarımı 
 const form = reactive<FormState>({
-  type: DEFAULT_CONFIG.type,
-  title: t(DEFAULT_CONFIG.title),
-  message: t(DEFAULT_CONFIG.message),
-  duration: DEFAULT_CONFIG.duration,
-  isPersistent: false,
-  position: DEFAULT_CONFIG.position,
-  backgroundColor: DEFAULT_CONFIG.backgroundColor,
-  textColor: DEFAULT_CONFIG.textColor,
-  showIcon: DEFAULT_CONFIG.showIcon,
-  showCloseButton: DEFAULT_CONFIG.showCloseButton,
-  animation: DEFAULT_CONFIG.animation,
-  presetName: '',
-  customIcon: ''
+...DEFAULT_CONFIG
 })
 
 function handleTypeChange(newType: NotificationType) {

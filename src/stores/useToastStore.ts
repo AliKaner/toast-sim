@@ -28,6 +28,9 @@ export const useToastStore = defineStore('toast', () => {
       createdAt: Date.now()
     }
 
+    if(notificationsByPosition.value[config.position].length >= 3) {
+      removeNotification(notificationsByPosition.value[config.position][0].id)
+    }
     notifications.value.push(activeNotification)
 
     if (config.duration > 0) {
@@ -40,10 +43,7 @@ export const useToastStore = defineStore('toast', () => {
   }
 
   function removeNotification(id: string) {
-    const index = notifications.value.findIndex((n) => n.id === id)
-    if (index !== -1) {
-      notifications.value.splice(index, 1)
-    }
+    notifications.value = notifications.value.filter((n) => n.id !== id)
   }
 
   //could be used later

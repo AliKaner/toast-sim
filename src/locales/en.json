@@ -89,7 +89,7 @@
   },
   "tour": {
     "welcome": {
-      "title": "Welcome to Insider Toast Builder!",
+      "title": "Welcome to Toast Simulator!",
       "description": "Let's take a quick tour to help you get started with creating beautiful toast notifications."
     },
     "configuration": {

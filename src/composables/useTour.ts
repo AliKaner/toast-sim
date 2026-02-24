@@ -6,7 +6,7 @@ export function useTour() {
   const { t } = useI18n()
 
   function startTour(force = false) {
-    const hasSeenDemo = localStorage.getItem('insider_demo_seen')
+    const hasSeenDemo = localStorage.getItem('toast_sim_demo_seen')
 
     if (!hasSeenDemo || force) {
       const tourDriver = driver({
@@ -17,7 +17,7 @@ export function useTour() {
         nextBtnText: t('tour.buttons.next'),
         prevBtnText: t('tour.buttons.prev'),
         onDestroyed: () => {
-          localStorage.setItem('insider_demo_seen', 'true')
+          localStorage.setItem('toast_sim_demo_seen', 'true')
         },
         steps: [
           {

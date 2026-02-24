@@ -5,7 +5,7 @@ A premium, highly customizable toast notification configuration tool built with 
 ## 🚀 Live Demo & Visuals
 
 > [!TIP]
-> **Live Demo:** [Check it out here!](https://insider-js-case.vercel.app/)
+> **Live Demo:** [Check it out here!](https://toast-sim.vercel.app/)
 
 ### � Walkthrough Video
 https://github.com/user-attachments/assets/4f222759-2142-4294-8c33-e84d029a65b7

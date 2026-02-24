@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import type { Preset, NotificationConfig } from '../types/notification'
 import { nanoid } from 'nanoid'
+import { randomId } from '@/utils/random'
 
 const STORAGE_KEY = 'toast-presets'
 
@@ -32,7 +33,7 @@ export const usePresetStore = defineStore('presets', () => {
 
   function addPreset(name: string, config: Omit<NotificationConfig, 'id'>) {
     const preset: Preset = {
-      id: nanoid(),
+      id: randomId(),
       name,
       config,
       createdAt: new Date().toISOString()

@@ -89,7 +89,7 @@
   },
   "tour": {
     "welcome": {
-      "title": "Insider Toast Builder'a Hoş Geldiniz!",
+      "title": "Toast Simulator'a Hoş Geldiniz!",
       "description": "Güzel toast bildirimleri oluşturmaya başlamanıza yardımcı olmak için kısa bir tura çıkalım."
     },
     "configuration": {
